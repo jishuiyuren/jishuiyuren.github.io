@@ -1,492 +1,924 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-
 <head><meta name="generator" content="Hexo 3.8.0">
-	<link rel="bookmark" type="image/x-icon" href="/img/logo_miccall.png">
-	<link rel="shortcut icon" href="/img/logo_miccall.png">
-	
-			    <title>
-    吉水于人随笔
-    </title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="/css/mic_main.css">
-    <link rel="stylesheet" href="/css/dropdownMenu.css">
-    <meta name="keywords" content="miccall">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="jishuiyuren">
     
-    	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-	 
-    <noscript>
-        <link rel="stylesheet" href="/css/noscript.css">
-    </noscript>
-    <style type="text/css">
-        body:before {
-          content: ' ';
-          position: fixed;
-          top: 0;
-          background: url('/img/bg.jpg') center 0 no-repeat;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          background-size: cover; 
+    
+    
+    
+    
+    
+    <title>吉水于人随笔</title>
+    <!-- inject:style -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <!-- endinject -->
+    <style>
+        .cube-loading {
+            top: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('/images/lg/loading.gif') no-repeat center center;
+            background-color: rgba(0,0,0,.7);
+        }
+
+        .cube-loading.out {
+            display: none;
+        }
+
+        .cube-loading:before {
+            display: block;
+            content: 'Loading';
+            position: relative;
+            width: 100%;
+            top: 50%;
+            right: -50%;
+            color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .cube-loading:before {
+                font-size: 1.2em;
+                transform: translate(-24px,20px);
+                -webkit-transform: translate(-24px,20px);
+                -o-transform: translate(-24px,20px);
+                -ms-transform: translate(-24px,20px);
+            }
+        }
+
+        @media(min-width: 768px) {
+            .cube-loading:before {
+
+            }
         }
     </style>
-
-			    
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  
-
-
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/jquery.scrollex.min.js"></script>
-    <script src="/js/jquery.scrolly.min.js"></script>
-    <script src="/js/skel.min.js"></script>
-    <script src="/js/util.js"></script>
-    <script src="/js/main.js"></script>
-	
-</head>
     
-		<body class="is-loading">
-    <!-- Wrapper 外包 s-->
-    <div id="wrapper" class="fade-in overlay">
-        <!-- Intro 头部显示 s -->
-                <div id="intro">
-            <h1>This is<br>
-                        MICCALL </h1>
-            <p> Whatever is worth doing is worth doing well <br> I'll think of you every step of the way
-            </p>
-            <ul class="actions">
-                <li><a href="#header" class="button icon solo fa-arrow-down scrolly">Continue</a></li>
-            </ul>
-        </div>
-        <!-- Intro 头部显示 e -->
-        <!-- Header 头部logo start -->
-        <header id="header">
-    <a href="/" class="logo">爱花爱草爱生活</a>
-</header>
-        <!-- Header 头部logo end -->
-        <!-- Nav 导航条 start -->
-        <nav id="nav" class="special">
-            <ul class="menu links">
-			<!-- Homepage  主页  --> 
-			<li>
-	            <a href="/" rel="nofollow">主页</a>
-	        </li>
-			<!-- categories_name  分类   --> 
-	        
-	        <li class="active">
-	            <a href="#s1">分类</a>
-	                    <ul class="submenu">
-	                        <li>
-	                        
-	                    </li></ul>
-	        </li>
-	        
-	        <!-- archives  归档   --> 
-	        
-	        
-		        <!-- Pages 自定义   -->
-		        
-		        <li>
-		            <a href="/about/" title="简历">
-		                简历
-		            </a>
-		        </li>
-		        
-		        <li>
-		            <a href="/group/" title="团队">
-		                团队
-		            </a>
-		        </li>
-		        
-		        <li>
-		            <a href="/gallery/" title="图库">
-		                图库
-		            </a>
-		        </li>
-		        
-		        <li>
-		            <a href="/tag/" title="标签">
-		                标签
-		            </a>
-		        </li>
-		        
-
-
-            </ul>
-            <!-- icons 图标   -->
-			<ul class="icons">
-                    
-                    <li>
-                        <a title="github" href="https://github.com/miccall" target="_blank" rel="noopener">
-                            <i class="icon fa fa-github"></i>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a title="500px" href="http://500px.com" target="_blank" rel="noopener">
-                            <i class="icon fa fa-500px"></i>
-                        </a>
-                    </li>
-                    
-			</ul>
+</head></html>
+<body>
+<div class="cube-body">
+    <nav id="cube-top-memu" class="cube-menu">
+    <ul class="cube-menu-collapse">
+        
+        <li>
+            <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
+            <a href="/">首页</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-tags" aria-hidden="true"></i>
+            <a href="/tags">标签</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
+            <a href="/about-me">关于我</a>
+        </li>
+        
+    </ul>
 </nav>
-        <!-- Nav 导航条 end -->
-        <!-- Main 主要部分 start -->
+<nav class="cube-side-menu" id="cube-side-menu">
+    <ul class="cube-menu-list">
         
-        <!-- Main-first -->
-                    <div id="main">
-            <!-- Main first s-->
-            <article id="me" class="panel">
-                <header style="color: #000000">
-                    <h1>吉 水 于 人</h1>
-                    <p>一不小心做了，就勇往直前</p>
-                </header>
-                <a href class="jumplink pic">
-                    <span class="arrow icon fa-chevron-right"><span></span></span>
-                    <img src="/images/me.jpg" alt>
-                </a>
-            </article>
-            <!-- Main first e-->
-        </div>
-
+        <li>
+            <a class="lrc-control">Open Lyrics</a>
+        </li>
         
-        <!-- 文章列表   s -->
-        <div id="main" style="background-color: transparent; padding:0;">
-        <section class="link_container" style="margin-top: 0; background-color: transparent; ">
-            <div class="link_row">
-                <!-- 文章sample  s-->
-
-                
-                <div class="6u 12u(narrower)">
-                    <section class="link_box special">
-                       <a href="/2019/03/18/article13/">
-                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
-                            <!--标题-->
-                            <h2 class="page_title_text"> article13 </h2>
-                            <!--段落-->
-                        </div>
-                        </a>
-                        <div class="home-post-info">
-                            <!-- Author Avatar -->
-                            <div class="home-post-info-author-avatar">
-                                <h6><span class="home-post-info-data">2019-03-18</span></h6>
-                                <div class="home-post-info-Category">
-                                    <!-- Category -->
-                                    <span>
-                            <h6>
-                            <a class="post_category-link" href="http://localhost:4000/categories/Algorithm/">
-                                </a>
-                            </h6>
-                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <!-- 文章sample  e-->
-            
-                <div class="6u 12u(narrower)">
-                    <section class="link_box special">
-                       <a href="/2019/03/18/article12/">
-                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
-                            <!--标题-->
-                            <h2 class="page_title_text"> 当MVVM遇上AMD </h2>
-                            <!--段落-->
-                        </div>
-                        </a>
-                        <div class="home-post-info">
-                            <!-- Author Avatar -->
-                            <div class="home-post-info-author-avatar">
-                                <h6><span class="home-post-info-data">2019-03-18</span></h6>
-                                <div class="home-post-info-Category">
-                                    <!-- Category -->
-                                    <span>
-                            <h6>
-                            <a class="post_category-link" href="http://localhost:4000/categories/Algorithm/">
-                                </a>
-                            </h6>
-                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <!-- 文章sample  e-->
-            
-                <div class="6u 12u(narrower)">
-                    <section class="link_box special">
-                       <a href="/2019/03/18/article11/">
-                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
-                            <!--标题-->
-                            <h2 class="page_title_text"> 我理解的原型链 </h2>
-                            <!--段落-->
-                        </div>
-                        </a>
-                        <div class="home-post-info">
-                            <!-- Author Avatar -->
-                            <div class="home-post-info-author-avatar">
-                                <h6><span class="home-post-info-data">2019-03-18</span></h6>
-                                <div class="home-post-info-Category">
-                                    <!-- Category -->
-                                    <span>
-                            <h6>
-                            <a class="post_category-link" href="http://localhost:4000/categories/Algorithm/">
-                                </a>
-                            </h6>
-                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <!-- 文章sample  e-->
-            
-                <div class="6u 12u(narrower)">
-                    <section class="link_box special">
-                       <a href="/2019/03/18/article10/">
-                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
-                            <!--标题-->
-                            <h2 class="page_title_text"> js异步请求总结 </h2>
-                            <!--段落-->
-                        </div>
-                        </a>
-                        <div class="home-post-info">
-                            <!-- Author Avatar -->
-                            <div class="home-post-info-author-avatar">
-                                <h6><span class="home-post-info-data">2019-03-18</span></h6>
-                                <div class="home-post-info-Category">
-                                    <!-- Category -->
-                                    <span>
-                            <h6>
-                            <a class="post_category-link" href="http://localhost:4000/categories/Algorithm/">
-                                </a>
-                            </h6>
-                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <!-- 文章sample  e-->
-            
-                <div class="6u 12u(narrower)">
-                    <section class="link_box special">
-                       <a href="/2019/03/18/article9/">
-                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
-                            <!--标题-->
-                            <h2 class="page_title_text"> 接口请求方式详解 </h2>
-                            <!--段落-->
-                        </div>
-                        </a>
-                        <div class="home-post-info">
-                            <!-- Author Avatar -->
-                            <div class="home-post-info-author-avatar">
-                                <h6><span class="home-post-info-data">2019-03-18</span></h6>
-                                <div class="home-post-info-Category">
-                                    <!-- Category -->
-                                    <span>
-                            <h6>
-                            <a class="post_category-link" href="http://localhost:4000/categories/Algorithm/">
-                                </a>
-                            </h6>
-                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <!-- 文章sample  e-->
-            
-                <div class="6u 12u(narrower)">
-                    <section class="link_box special">
-                       <a href="/2019/03/18/article8/">
-                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
-                            <!--标题-->
-                            <h2 class="page_title_text"> 地图导出 </h2>
-                            <!--段落-->
-                        </div>
-                        </a>
-                        <div class="home-post-info">
-                            <!-- Author Avatar -->
-                            <div class="home-post-info-author-avatar">
-                                <h6><span class="home-post-info-data">2019-03-18</span></h6>
-                                <div class="home-post-info-Category">
-                                    <!-- Category -->
-                                    <span>
-                            <h6>
-                            <a class="post_category-link" href="http://localhost:4000/categories/Algorithm/">
-                                </a>
-                            </h6>
-                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <!-- 文章sample  e-->
-            
-                <div class="6u 12u(narrower)">
-                    <section class="link_box special">
-                       <a href="/2019/03/17/article7/">
-                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
-                            <!--标题-->
-                            <h2 class="page_title_text"> 关于微信登录 </h2>
-                            <!--段落-->
-                        </div>
-                        </a>
-                        <div class="home-post-info">
-                            <!-- Author Avatar -->
-                            <div class="home-post-info-author-avatar">
-                                <h6><span class="home-post-info-data">2019-03-17</span></h6>
-                                <div class="home-post-info-Category">
-                                    <!-- Category -->
-                                    <span>
-                            <h6>
-                            <a class="post_category-link" href="http://localhost:4000/categories/Algorithm/">
-                                </a>
-                            </h6>
-                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <!-- 文章sample  e-->
-            
-                <div class="6u 12u(narrower)">
-                    <section class="link_box special">
-                       <a href="/2019/03/17/article6/">
-                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
-                            <!--标题-->
-                            <h2 class="page_title_text"> 制作一个添加工作经验的功能 </h2>
-                            <!--段落-->
-                        </div>
-                        </a>
-                        <div class="home-post-info">
-                            <!-- Author Avatar -->
-                            <div class="home-post-info-author-avatar">
-                                <h6><span class="home-post-info-data">2019-03-17</span></h6>
-                                <div class="home-post-info-Category">
-                                    <!-- Category -->
-                                    <span>
-                            <h6>
-                            <a class="post_category-link" href="http://localhost:4000/categories/Algorithm/">
-                                </a>
-                            </h6>
-                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <!-- 文章sample  e-->
-            
-                <div class="6u 12u(narrower)">
-                    <section class="link_box special">
-                       <a href="/2019/03/16/article5/">
-                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
-                            <!--标题-->
-                            <h2 class="page_title_text"> ES6常用总结 </h2>
-                            <!--段落-->
-                        </div>
-                        </a>
-                        <div class="home-post-info">
-                            <!-- Author Avatar -->
-                            <div class="home-post-info-author-avatar">
-                                <h6><span class="home-post-info-data">2019-03-16</span></h6>
-                                <div class="home-post-info-Category">
-                                    <!-- Category -->
-                                    <span>
-                            <h6>
-                            <a class="post_category-link" href="http://localhost:4000/categories/Algorithm/">
-                                </a>
-                            </h6>
-                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <!-- 文章sample  e-->
-            
-                <div class="6u 12u(narrower)">
-                    <section class="link_box special">
-                       <a href="/2019/03/15/article4/">
-                        <div class="page_title" style="background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;">
-                            <!--标题-->
-                            <h2 class="page_title_text"> 正则表达式化整为零 </h2>
-                            <!--段落-->
-                        </div>
-                        </a>
-                        <div class="home-post-info">
-                            <!-- Author Avatar -->
-                            <div class="home-post-info-author-avatar">
-                                <h6><span class="home-post-info-data">2019-03-15</span></h6>
-                                <div class="home-post-info-Category">
-                                    <!-- Category -->
-                                    <span>
-                            <h6>
-                            <a class="post_category-link" href="http://localhost:4000/categories/Algorithm/">
-                                </a>
-                            </h6>
-                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
-                <!-- 文章sample  e-->
-            
-            </div>
-        </section>
-        </div>
-        <!-- 文章列表   end -->
-        <!-- Main 主要部分 end -->
-        <!-- footer  页码 start-->
-        <footer style="text-align: center; padding-top: 2em;">
-  
-    <div class="pagination">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">nex</a>
-    </div>  
+        <li>
+            <a class="scroll-to-top">Top</a>
+        </li>
+    </ul>
+</nav>
+    <header class="cube-header" id="cube-header">
+    <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
     
-</footer>
-
-        <!-- footer  页码 end-->
-        <!-- Copyright 版权 start -->
-                <div id="copyright">
-            <ul>
-                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
-                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
-            </ul>
-            
-                <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
-			
-        </div>
-        <!-- Copyright 版权 end -->
+    <div class="cube-type">
+        <span class="cube-typed-title">吉水于人的博客</span>
+        <span class="cube-typed-cursor">|</span>
     </div>
-    <!-- Wrapper 外包 e-->
-    <!-- Scripts -->
-</body>
+    
+</header>
 
- 	
+    <style>
+        nav.cube-menu:before {
+            content: '';
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 44px;
+        
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        
+            z-index: -1;
+            background-image: url('/images/bg.jpg');
+            background-repeat: no-repeat;
+            background-position: center 44px;
+            background-size: cover;
+            background-color: transparent;
+        }
+
+        header.cube-background.cube-header-background {
+            visibility: hidden;
+            background-image: url('/images/bg.jpg');
+            background-position: center 0;
+        }
+    </style>
+    <header class="cube-background cube-header-background">
+        
+        <div class="cube-type">
+            <span class="cube-typed-title">吉水于人的博客</span>
+            <span class="cube-typed-cursor">|</span>
+        </div>
+        
+    </header>
+    <div class="load-header-background"></div>
+    <script>
+        (function (window) {
+
+            window.headerModule = {}
+            window.headerModule.image = {
+                width: '2000',
+                height: '1414'
+            }
+
+        })(window)
+    </script>
+    
+    <div class="cube-content">
+        <div class="cube-left">
+            
+<div class="cube-excerpt" id="cube-excerpt-article13">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/03/18/article13/">article13</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-03-18
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/03/18/article13/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-arcgis + webpack前端工程化开发">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/03/18/article12/">arcgis + webpack前端工程化开发</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-03-18
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>公司里的项目都涉及到地图方面到开发，使用到是Arcgis api for js框架，目前Arcgis api for js采用到是dojo框架开发，内部采用AMD加载方式和模块管理机制。项目内的组件利用dojo的widget进行开发，其中dojo的模块使用require([])按需加载。本来使用dojo开发一张图系统就可以，但是这种模式开发，不免让我们错失了许多的MVVM模式开发带来的优势。</p>
+<ul>
+<li>无法使用ES6</li>
+<li>没有部署模块热加载功能，代码存在缓存，常常需要清除缓存后手动进行刷新加载</li>
+<li>没有采用eslint代码规范工具，无法统一代码的风格</li>
+<li>部署的时候，必须手动修改版本信息，才能达到清除缓存的效果</li>
+<li>代码上传时没有经过压缩，导致首屏加载时间较长</li>
+<li>跨组件之通信过多采用dojo/Topic,window变量，容易引起命名冲突，不好管理</li>
+<li>没有采用CSS预加载器(less,sass,stylus…)，写css比较费力，难以复用和管理</li>
+</ul>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/03/18/article12/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-我理解的原型链">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/03/18/article11/">我理解的原型链</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-03-18
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/03/18/article11/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-js异步请求总结">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/03/18/article10/">js异步请求总结</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-03-18
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/03/18/article10/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-接口请求方式详解">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/03/18/article9/">接口请求方式详解</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-03-18
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/03/18/article9/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-地图导出">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/03/18/article8/">地图导出</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-03-18
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>gis开发侧重于专业知识，相比于其他的前端开发领域，gis功能开发的资料相对较少，我会根据自己的日常项目和学习逐一进行整理，丰富开发资料。由于esri提供的api是用dojo框架开发的，所以在我的博客里涉及到gis开发例子的将是使用dojo语法。今天要给大家介绍一下地图导出模块核心代码。</p>
+<p>导出地图需要以下参数：center（地图中心）、scale（导出地图比例尺）、WMTSLayers（WMTS图层）、ArcLayers（arcMap图层）、dpi（像素）、width（地图宽度）、height（地图高度）、extent（当前地图显示范围）、proxyUrl(代理地址)。<br>根据上面的参数，我们需要封装一个ExportMapImg类，包含初始化地图、加载图层、初始化图层导出坐标系、打印几个方法。<br>
+        
+    </p></article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/03/18/article8/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-关于微信登录">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/03/17/article7/">关于微信登录</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-03-17
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>做微信小程序也有小一个月了，整体来说，做的比较顺利，没有遇到特别难搞的坑，这里还是得感谢腾讯为开发者提供资料齐全的开发文档。想速度上手微信小程序的小伙伴们，戳这里，<a href="https://developers.weixin.qq.com/miniprogram/dev/api/" target="_blank" rel="noopener">微信小程序开发者文档</a></p>
+<p>微信小程序开发中，我们常常需要获取用户信息，我写小程序时是1月份，开始我并不知道接口已经做了调整，然后就直接使用<code>button</code>去获取用户信息，然而，调试时，出现以下提示。<br><img src="../article7/1.png" alt><br>当我去官方文档上查阅获取用户信息接口时，发现其已经做了一些的调整。相信大家都知道，我们在第一次使用某个小程序时会弹出一个授权框，询问用户是否允许获取用户信息。如今接口调整为在用户未授权过的情况下调用此接口，将不再出现授权弹窗，会直接进入 fail 回调。在用户已授权的情况下调用此接口，可成功获取用户信息。</p>
+<p>竟然不再出现授权窗口了，那我们就需要使用button进行引导。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token operator">&lt;</span>button class<span class="token operator">=</span><span class="token string">'wexin-login'</span> open-type<span class="token operator">=</span><span class="token string">"getUserInfo"</span> lang<span class="token operator">=</span><span class="token string">"zh_CN"</span> bindgetuserinfo<span class="token operator">=</span><span class="token string">"onGotUserInfo"</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>image class<span class="token operator">=</span><span class="token string">'wexin-icon'</span> src<span class="token operator">=</span><span class="token string">'/assets/images/content/share_wechat.png'</span> /<span class="token operator">></span>
+  <span class="token operator">&lt;</span>text class<span class="token operator">=</span><span class="token string">'wexin-text'</span> open-type<span class="token operator">=</span><span class="token string">"getUserInfo"</span> bindgetuserinfo<span class="token operator">=</span><span class="token string">"onGotUserInfo"</span> lang<span class="token operator">=</span><span class="token string">"zh_CN"</span><span class="token operator">></span>微信登录<span class="token operator">&lt;</span>/text<span class="token operator">></span>
+<span class="token operator">&lt;</span>/button<span class="token operator">></span>
+</code></pre>
+<p>逻辑部分处理为:</p>
+<pre class=" language-bash"><code class="language-bash">  getWXCode: function<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var that <span class="token operator">=</span> this<span class="token punctuation">;</span>
+    wx.login<span class="token punctuation">(</span><span class="token punctuation">{</span>
+      success: function<span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        api.post<span class="token punctuation">(</span><span class="token string">'/edu/user/WechatAPPLogin'</span>, <span class="token punctuation">{</span>
+            encryptedData: that.data.userInfo.encryptedData,
+            iv: that.data.userInfo.iv,
+            code: res.code
+          <span class="token punctuation">}</span>,
+          function<span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            that.onBack<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            getApp<span class="token punctuation">(</span><span class="token punctuation">)</span>.globalData.userId <span class="token operator">=</span> res.content.userInfo.id
+          <span class="token punctuation">}</span>.bind<span class="token punctuation">(</span>this<span class="token punctuation">)</span>,
+          function<span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            wx.showToast<span class="token punctuation">(</span><span class="token punctuation">{</span>
+              title: res.msg,
+              icon: <span class="token string">'none'</span>,
+              duration: 2000
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+          <span class="token punctuation">}</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/03/17/article7/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-制作一个添加工作经验的功能">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/03/17/article6/">制作一个添加工作经验的功能</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-03-17
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>前几天给一个app做项目经验添加功能时，自己犯了几个错误，于是决定总结一下，算是写成一个demo，给大家参考一下吧。</p>
+<p><img src="../article6/1.png" alt><br>添加工作经验的页面如图1，这是一个用户的详情页面，每条工作经验的右上角，添加了删除按钮，区域的下方有继续添加经历的按钮。说白了，这个功能就是实现对表单数据的增、删、改功能。首先，我从后端接口中获取到用户的工作经验数据（也可能是一个空数组），这块的逻辑我们很容易写出来，就是根据获取到的值进行遍历即可。</p>
+<pre class=" language-bash"><code class="language-bash">    <span class="token operator">&lt;</span>div v-for<span class="token operator">=</span><span class="token string">"(item, index) in experiences"</span> :key<span class="token operator">=</span><span class="token string">"item.id"</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">"detail"</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>image class<span class="token operator">=</span><span class="token string">"closeIcon"</span> :src<span class="token operator">=</span><span class="token string">"iconPath('icon_gb_small')"</span>
+                   @click<span class="token operator">=</span><span class="token string">"removeExperience(item.id)"</span><span class="token operator">></span><span class="token operator">&lt;</span>/image<span class="token operator">></span>
+            <span class="token operator">&lt;</span>text class<span class="token operator">=</span><span class="token string">"unselect-txt"</span><span class="token operator">></span>开始时间<span class="token operator">&lt;</span>/text<span class="token operator">></span>
+            <span class="token operator">&lt;</span>input class<span class="token operator">=</span><span class="token string">"input"</span> type<span class="token operator">=</span><span class="token string">"date"</span>
+                   v-model<span class="token operator">=</span><span class="token string">"item.startDate"</span><span class="token operator">></span><span class="token operator">&lt;</span>/input<span class="token operator">></span>
+            <span class="token operator">&lt;</span>image class<span class="token operator">=</span><span class="token string">"icon"</span> :src<span class="token operator">=</span><span class="token string">"iconPath('icon_pen')"</span><span class="token operator">></span><span class="token operator">&lt;</span>/image<span class="token operator">></span>
+        <span class="token operator">&lt;</span>/div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">"detail"</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>text class<span class="token operator">=</span><span class="token string">"unselect-txt"</span><span class="token operator">></span>结束时间<span class="token operator">&lt;</span>/text<span class="token operator">></span>
+            <span class="token operator">&lt;</span>input class<span class="token operator">=</span><span class="token string">"input"</span> type<span class="token operator">=</span><span class="token string">"date"</span>
+                   v-model<span class="token operator">=</span><span class="token string">"item.endDate"</span><span class="token operator">></span><span class="token operator">&lt;</span>/input<span class="token operator">></span>
+            <span class="token operator">&lt;</span>image class<span class="token operator">=</span><span class="token string">"icon"</span> :src<span class="token operator">=</span><span class="token string">"iconPath('icon_pen')"</span><span class="token operator">></span><span class="token operator">&lt;</span>/image<span class="token operator">></span>
+        <span class="token operator">&lt;</span>/div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">"detail2"</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>text class<span class="token operator">=</span><span class="token string">"unselect-txt"</span><span class="token operator">></span>从业说明：<span class="token operator">&lt;</span>/text<span class="token operator">></span>
+            <span class="token operator">&lt;</span>textarea  v-model<span class="token operator">=</span><span class="token string">"item.introduction"</span> class<span class="token operator">=</span><span class="token string">"textarea"</span><span class="token operator">></span><span class="token operator">&lt;</span>/textarea<span class="token operator">></span>
+        <span class="token operator">&lt;</span>/div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">"list-gap"</span><span class="token operator">></span><span class="token operator">&lt;</span>/div<span class="token operator">></span>
+    <span class="token operator">&lt;</span>/div<span class="token operator">></span>
+
+    <span class="token operator">&lt;</span>div<span class="token operator">></span>
+        <span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">"next-btn"</span> @click<span class="token operator">=</span><span class="token string">"addNextExperience"</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>text class<span class="token operator">=</span><span class="token string">"next-button"</span><span class="token operator">></span>继续添加经历<span class="token operator">&lt;</span>/text<span class="token operator">></span>
+        <span class="token operator">&lt;</span>/div<span class="token operator">></span>
+    <span class="token operator">&lt;</span>/div<span class="token operator">></span> 
+    <span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">"btn"</span> @click<span class="token operator">=</span><span class="token string">"addUserMaterial"</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>text style<span class="token operator">=</span><span class="token string">"font-size: 28px;color: #ffffff;"</span><span class="token operator">></span>完成<span class="token operator">&lt;</span>/text<span class="token operator">></span>
+    <span class="token operator">&lt;</span>/div<span class="token operator">></span>                          
+</code></pre>
+<p>我们在<code>input</code>和<code>textarea</code>中使用v-model进行数据的双向绑定。我们都知道，vue实现了一套虚拟的DOM，我们不需要直接操作DOM元素，只需要操作数据就可重新渲染页面。而背后的原理得益于高效的Diff算法，具体的原理我不在这阐述。key的作用是为了高效的更新虚拟DOM。所以为了让vue可以区分他们，我们在做循环或相同标签元素的过渡切换时，都有必要使用到key属性，所以在上述循环中我们指定项目经验的id为key值。下面我们开始写新增事件和删除事件。<br>新增</p>
+<pre class=" language-bash"><code class="language-bash">    addNextExperience<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            this.experienceId++
+            this.experiences.push<span class="token punctuation">(</span><span class="token punctuation">{</span>id: this.experienceId, startDate: <span class="token string">''</span>, endDate: <span class="token string">''</span>, introduction: <span class="token string">''</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+</code></pre>
+<p>删除</p>
+<pre class=" language-bash"><code class="language-bash">        removeExperience<span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            this.experiences <span class="token operator">=</span> this.experiences.filter<span class="token punctuation">(</span>function <span class="token punctuation">(</span>experience<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> <span class="token punctuation">(</span>index <span class="token operator">!=</span><span class="token operator">=</span> experience.id<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+</code></pre>
+<p>新增事件我使用了一个全局变量experienceId为id赋值，这个experienceId的值为多少合适呢。我们上面通过接口拿到了当前用户的工作经验值，每条工作经验都有一个id号，我首先想到的就是，在我新增时，这个id号的起始值应该为当前用户的工作经验的id号的最大值+1，这样做的原因是为了保证从后端接口取出的id号和我任意一条新增数据的id号都不会相同，这样一来，每一条工作经验的id号才不会出现重复的情况。</p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/03/17/article6/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-ES6常用总结">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/03/16/article5/">ES6常用总结</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-03-16
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>文章参考来源:<a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">[ECMAScript 6 入门]</a>  </p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/03/16/article5/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-正则表达式化整为零">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/03/15/article4/">正则表达式化整为零</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-03-15
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>写代码也有一段时间了，正则表达式是经常会用得到，每次遇到一些匹配时，就上网找，因为自己一直都在排斥学正则表达式，但是拖着不是程序猿的好习惯，那今天就来好好整理下。不求全部学会，只求见到认识。<br>正则表达式常用的几种操作方法有：match、search、split、findall、sub、replace。</p>
+<h3 id="基本字符"><a href="#基本字符" class="headerlink" title="基本字符"></a>基本字符</h3><p>特殊字符<br>特殊字符就是具有特殊含义的字符。在正则表达式中，这些特殊字符匹配的意义各有不同，如果需要在字符串中查找这些特殊符号，就需要在其前面加一个<code>\</code>进行转义。</p>
+<table>
+<thead>
+<tr>
+<th>特殊字符</th>
+<th>含义  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> $</td>
+<td>匹配输入字符串的结尾 </td>
+</tr>
+<tr>
+<td> （）</td>
+<td>标记一个子表达的开始和结束位置</td>
+</tr>
+<tr>
+<td> *</td>
+<td>匹配前面的表达式零次或多次</td>
+</tr>
+<tr>
+<td> +</td>
+<td>匹配前面的子表达式一次或多次</td>
+</tr>
+<tr>
+<td> .</td>
+<td>匹配除换行符\n 之外的任何单字符</td>
+</tr>
+<tr>
+<td> [</td>
+<td>标记一个中括号表达式的开始</td>
+</tr>
+<tr>
+<td> ？</td>
+<td>匹配前面的子表达式零次或一次</td>
+</tr>
+<tr>
+<td> \</td>
+<td>将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符</td>
+</tr>
+<tr>
+<td> ^</td>
+<td>匹配输入字符串的开始位置，除非在方括号表达式中使用，此时它表示不接受该字符集合</td>
+</tr>
+<tr>
+<td> {</td>
+<td>标记限定符表达式的开始</td>
+</tr>
+<tr>
+<td></td>
+<td>指明两项之间的一个选择</td>
+</tr>
+</tbody>
+</table>
+<p> 贪婪和非贪婪<br> 在上表中列举的<code>*</code>、<code>+</code>限定符都是贪婪的，因为它们会尽可能多的匹配文字，只有在它们的后面加上一个<code>?</code>就可以实现非贪婪或最小匹配。</p>
+<p>定位符<br>定位符用来描述字符串或单词的边界，其中<code>^</code>和<code>$</code>分别指字符串的开始与结束，<code>\b</code> 描述单词的前或后边界，<code>\B</code>表示非单词边界。</p>
+<p>Tip：不能将限定符和定位符一起使用。</p>
+<p>带反斜杠的元字符<br>普通字符前加反斜杠还是普通字符，但是有些字符加上反斜杠之后就会变成元字符</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>1.检索字符<br>我们既可以检索普通字符也可以检索表情符号，因为表情符其实也是一个字符，使用match方法可以返回一个数组，包含检索字符内容，被检索到到索引号。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'hello world'</span>.match<span class="token punctuation">(</span>/w/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> <span class="token punctuation">[</span><span class="token string">"w"</span>, index: 6, input: <span class="token string">"hello world"</span>, groups: undefined<span class="token punctuation">]</span>
+
+<span class="token string">'hello 😀world'</span>.match<span class="token punctuation">(</span>/😀/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> <span class="token punctuation">[</span><span class="token string">"😀"</span>, index: 6, input: <span class="token string">"hello 😀world"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>2.匹配文本开始和结束<br>我们用<code>^</code>匹配文本的开始，用<code>$</code>匹配文本的结束。匹配文本的第一个字符时，必须是匹配文本的第一个字符，否则匹配不成功。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'hello'</span>.match<span class="token punctuation">(</span>/^h/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> <span class="token punctuation">[</span><span class="token string">"h"</span>, index: 0, input: <span class="token string">"hello"</span>, groups: undefined<span class="token punctuation">]</span>
+
+<span class="token string">'hello'</span>.match<span class="token punctuation">(</span>/a^h/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> null
+
+<span class="token string">'hello'</span>.match<span class="token punctuation">(</span>/o$/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> <span class="token punctuation">[</span><span class="token string">"o"</span>, index: 4, input: <span class="token string">"hello"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>3.元字符</p>
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\b</td>
+<td>匹配一个单词边界</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>匹配一个非单词边界</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配一个数字字符</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配一个非数字字符</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配一个空白字符</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配一个非空白字符</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配一个字母或一个数字或一个下划线</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配一个字母、数字和下划线之外的字符</td>
+</tr>
+</tbody>
+</table>
+<p>元字符上述表格中已列举出来了，元字符的大写相当于取反。匹配单词边界的对中文边界是无效的。</p>
+<pre class=" language-bash"><code class="language-bash">// \b 匹配单词边界
+<span class="token string">'hello world'</span>.match<span class="token punctuation">(</span>/\bworld$/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> <span class="token punctuation">[</span><span class="token string">"world"</span>, index: 6, input: <span class="token string">"hello world"</span>, groups: undefined<span class="token punctuation">]</span>
+
+<span class="token string">'你 好'</span>.match<span class="token punctuation">(</span>/\B好$/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"好"</span>, index: 2, input: <span class="token string">"你 好"</span>, groups: undefined<span class="token punctuation">]</span>
+
+// \d 匹配数字边界
+<span class="token string">'123'</span>.match<span class="token punctuation">(</span>/\d2/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"12"</span>, index: 0, input: <span class="token string">"123"</span>, groups: undefined<span class="token punctuation">]</span>
+
+// \s匹配单个空白字符
+<span class="token string">'a b'</span>.match<span class="token punctuation">(</span>/\s/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">" "</span>, index: 1, input: <span class="token string">"a b"</span>, groups: undefined<span class="token punctuation">]</span>
+
+// \w匹配单个字母数字下划线
+<span class="token string">'a b'</span>.match<span class="token punctuation">(</span>/\w/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"a"</span>, index: 0, input: <span class="token string">"a b"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>4.量词<br>限定符用来指定正则表达式的一个给定组件必须要出现多次才能匹配</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式零次或多次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次</td>
+</tr>
+<tr>
+<td>？</td>
+<td>匹配前面的子表达式零次或一次</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>n是一个非负整数。匹配确定的n次</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>至少匹配n次</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>n&lt;=m，最少匹配n次最多匹配m次</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-bash"><code class="language-bash">// 非贪婪模式
+<span class="token string">'https'</span>.match<span class="token punctuation">(</span>/http<span class="token punctuation">(</span>s<span class="token punctuation">)</span>?/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"https"</span>, <span class="token string">"s"</span>, index: 0, input: <span class="token string">"https"</span>, groups: undefined<span class="token punctuation">]</span>
+
+<span class="token string">'gooooogle'</span>.match<span class="token punctuation">(</span>/go<span class="token punctuation">{</span>2,5<span class="token punctuation">}</span>gle/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"gooooogle"</span>, index: 0, input: <span class="token string">"gooooogle"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>5.字符组<br>方括号在正则中表示一个区间,我们称之为字符组。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'grey or gray'</span>.match<span class="token punctuation">(</span>/gr<span class="token punctuation">[</span>ae<span class="token punctuation">]</span>y/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"grey"</span>, index: 0, input: <span class="token string">"grey or gray"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>6.捕获组和非捕获组[ES2018]<br>圆括号的意思是将它其中的字符集合打包成一个整体,然后量词就可以操作这个整体了。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'i love you very very very much'</span>.match<span class="token punctuation">(</span>/i love you <span class="token punctuation">(</span>very <span class="token punctuation">)</span>+much/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"i love you very very very much"</span>, <span class="token string">"very "</span>, index: 0, input: <span class="token string">"i love you very very very much"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>7.正则内捕获<br>正则内捕获使用<code>\数字</code>的形式根据对应前面的圆括号捕获内容，这种捕获的引用也称为反向引用。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'&lt;span>hello world&lt;/span>'</span>.match<span class="token punctuation">(</span>/<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token punctuation">[</span>a-zA-Z<span class="token punctuation">]</span>+<span class="token punctuation">)</span><span class="token operator">></span>.*<span class="token operator">&lt;</span>\/\1<span class="token operator">></span>/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> <span class="token punctuation">[</span><span class="token string">"&lt;span>hello world&lt;/span>"</span>, <span class="token string">"span"</span>, index: 0, input: <span class="token string">"&lt;span>hello world&lt;/span>"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>8.正则外捕获</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'hello **world**'</span>.replace<span class="token punctuation">(</span>/\*<span class="token punctuation">{</span>2<span class="token punctuation">}</span><span class="token punctuation">(</span>.*<span class="token punctuation">)</span>\*<span class="token punctuation">{</span>2<span class="token punctuation">}</span>/, <span class="token string">'&lt;strong><span class="token variable">$1</span>&lt;/strong>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token string">"hello &lt;strong>world&lt;/strong>"</span>
+</code></pre>
+<p>9.非捕获组<br>当我们需要匹配捕获组,但是又不需要捕获组结果时,我们可以使用非捕获组(?:pattern)</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'industry'</span>.match<span class="token punctuation">(</span>/industr<span class="token punctuation">(</span>?:y<span class="token operator">|</span>ies<span class="token punctuation">)</span>/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"industry"</span>, index: 0, input: <span class="token string">"industry"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>10.或</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'aA'</span>.match<span class="token punctuation">(</span>/a<span class="token operator">|</span>A/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"a"</span>, index: 0, input: <span class="token string">"aA"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>11.零宽断言<br>零宽断言<br>零宽：匹配一个位置，本身没有宽度；断言：断言之前或者之后应该有什么或没有什么<br>（1）零宽肯定先行断言(?=)[正向肯定预查]</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'TypeScript JavaScript javascript'</span>.match<span class="token punctuation">(</span>/\b\w<span class="token punctuation">{</span>4<span class="token punctuation">}</span><span class="token punctuation">(</span>?<span class="token operator">=</span>Script\b<span class="token punctuation">)</span>/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"Type"</span>, index: 0, input: <span class="token string">"TypeScript JavaScript javascript"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>（2）零宽肯定后行断言(?&lt;=)[ES2018] [反向肯定预查]</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'演员高圆圆 将军霍去病 演员霍思燕'</span>.match<span class="token punctuation">(</span>/<span class="token punctuation">(</span>?<span class="token operator">&lt;=</span>演员<span class="token punctuation">)</span>霍\S+/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"霍思燕"</span>, index: 14, input: <span class="token string">"演员高圆圆 将军霍去病 演员霍思燕"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>（3）零宽否定先行断言(?!)[正向否定预查]<br>否定就是没有,就是要求一段文本,后面一定不要紧跟一段指定文本</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'TypeScript Perl JavaScript'</span>.match<span class="token punctuation">(</span>/\b\w<span class="token punctuation">{</span>4<span class="token punctuation">}</span><span class="token punctuation">(</span>?<span class="token operator">!</span>Script\b<span class="token punctuation">)</span>/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"Perl"</span>, index: 11, input: <span class="token string">"TypeScript Perl JavaScript"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>（4）零宽否定后行断言(?&lt;!)[ES2018] [反向否定预查]<br>要求一段文本,前面一定不跟某一段指定文本</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'演员高圆圆 将军霍去病 演员霍思燕'</span>.match<span class="token punctuation">(</span>/<span class="token punctuation">(</span>?<span class="token operator">&lt;</span><span class="token operator">!</span>演员<span class="token punctuation">)</span>霍\S+/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"霍去病"</span>, index: 8, input: <span class="token string">"演员高圆圆 将军霍去病 演员霍思燕"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p> 12.修饰符<br>（1）g修饰符(global)</p>
+<p>默认情况下,正则从左向右匹配,只要匹配到结果就会结束,g修饰符会开启全局匹配模式,找到所有的匹配结果<br>（2）i修饰符(ignoreCase)<br>默认情况话,正则是区分大小写的,i修饰符的作用是可以全局忽略大小写.<br>（3）m修饰符(multiline)<br>默认情况下，^和$匹配的是文本的开始和结束，加上m修饰符，它们的含义就变成了多行的行首和行尾,支持多行搜索<br>（4）y修饰符(sticky粘连)[ES6]<br>y修饰符有和g修饰符重合的功能，它们都是全局匹配,不同在于,g修饰符只要剩余位置中存在匹配就可，而y修饰符确保匹配必须从剩余的第一个位置开始，这也就是“粘连”的涵义</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'a bag with a tag has a mag'</span>.match<span class="token punctuation">(</span>/\wag/g<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"bag"</span>, <span class="token string">"tag"</span>, <span class="token string">"mag"</span><span class="token punctuation">]</span>
+
+<span class="token string">'a bag with a tag has a mag'</span>.match<span class="token punctuation">(</span>/\wag/y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+null
+
+<span class="token string">'bagtagmag'</span>.match<span class="token punctuation">(</span>/\wag/y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"bag"</span>, index: 0, input: <span class="token string">"bagtagmag"</span>, groups: undefined<span class="token punctuation">]</span>
+
+<span class="token string">'bagtagmag'</span>.match<span class="token punctuation">(</span>/\wag/gy<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"bag"</span>, <span class="token string">"tag"</span>, <span class="token string">"mag"</span><span class="token punctuation">]</span>
+
+</code></pre>
+<p>（5）s修饰符(singleline)[ES2018]<br>s修饰符的作用是让.可以匹配任意单个字符。<br>（6）u修饰符(unicode)[ES6]<br>有些Unicode字符超过一个字节,正则无法正确识别,可用u修饰符来处理。</p>
+<h3 id="ES6变化"><a href="#ES6变化" class="headerlink" title="ES6变化"></a>ES6变化</h3><p>ES6中,将字符串的4个正则方法(match,replace,search,split)在语言内部全部调用RegExp的实例方法,从而做到所有与正则相关的方法,全部定义在RegExp对象上。</p>
+
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/03/15/article4/">Read More</a>
+    </footer>
+</div>
+
+
+
+<ul class="cube-pagination cube-pagination-6">
+    
+    <li class="cube-pagination-prev disabled">
+        <span>« Prev</span>
+    </li>
+    
+    
+        
+            
+            <li class="cube-pagination-index disabled">
+                <span>1</span>
+            </li>
+            
+        
+            
+            <li class="cube-pagination-index">
+                <a href="/page/2">2</a>
+            </li>
+            
+        
+    
+
+    
+    <li class="cube-pagination-next">
+        <a href="/page/2/">Next »</a>
+    </li>
+    
+</ul>
+
+<!--其他组件后续添加-->
+        </div>
+        <div class="cube-right">
+            
+<div class="cube-author cube-sidebar" id="cube-author">
+    
+    
+    <span>jishuiyuren</span>
+    
+    
+    <div class="count">
+        <a class="count articles"><span>13</span>Article</a>
+        <a class="count tags"><span>1</span>Tags</a>
+        <a class="count categories"><span>0</span>Categories</a>
+    </div>
+</div>
+
+
+
+<div class="cube-recent-posts cube-sidebar" id="cube-recent-posts">
+    <div class="title">
+        <a>Recent Posts</a>
+    </div>
+    <ul class="list">
+        
+        
+        <li>
+            <!-- TODO 如果文章要显示图片，那么在front-matter上添加preview属性(url or path) -->
+            
+            <div class="normal">
+                <p class="index first">
+                    <span>1</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/03/18/article13/" title="article13">article13</a>
+                </p>
+            </div>
+            
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>2</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/03/18/article12/" title="arcgis + webpack前端工程化开发">arcgis + webpack前端工程化开发</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>3</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/03/18/article11/" title="我理解的原型链">我理解的原型链</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>4</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/03/18/article10/" title="js异步请求总结">js异步请求总结</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>5</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/03/18/article9/" title="接口请求方式详解">接口请求方式详解</a>
+                </p>
+            </div>
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+
+
+
+<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
+    <div class="title">
+        <a href="/tags">Tagcloud</a>
+    </div>
+    <div class="cube-boxs">
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/内存优化/">#内存优化</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="cube-links cube-sidebar" id="cube-links">
+    <div class="title">
+        <a>Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            
+            
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/links/GitHub.png">
+            
+            <a href="https://github.com/jishuiyuren" target="_blank">GitHub</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+    </div>
+</div>
+<footer class="cube-footer">
+    
+© 2017 jishuiyuren
+
+<br>
+Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+</footer>
+<!-- inject:script -->
+<script src="/js/script.js"></script>
+<!-- endinject -->
+<div class="cube-loading out"></div>
+</body>
 </html>
