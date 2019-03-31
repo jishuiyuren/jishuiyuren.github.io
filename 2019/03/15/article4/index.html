@@ -1,0 +1,504 @@
+<!DOCTYPE HTML>
+<html>
+
+<head><meta name="generator" content="Hexo 3.8.0">
+	<link rel="bookmark" type="image/x-icon" href="/img/logo_miccall.png">
+	<link rel="shortcut icon" href="/img/logo_miccall.png">
+	
+			    <title>
+    吉水于人随笔
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="/css/mic_main.css">
+    <link rel="stylesheet" href="/css/dropdownMenu.css">
+    <meta name="keywords" content="miccall">
+    
+    	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	 
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css">
+    </noscript>
+    <style type="text/css">
+        body:before {
+          content: ' ';
+          position: fixed;
+          top: 0;
+          background: url('/img/bg.jpg') center 0 no-repeat;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-size: cover; 
+        }
+    </style>
+
+			    
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+</head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_coy.css">
+<link rel="stylesheet" href="/css/typo.css">
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">爱花爱草爱生活</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special">
+            <ul class="menu links">
+			<!-- Homepage  主页  --> 
+			<li>
+	            <a href="/" rel="nofollow">主页</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <li class="active">
+	            <a href="#s1">分类</a>
+	                    <ul class="submenu">
+	                        <li>
+	                        
+	                    </li></ul>
+	        </li>
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+		        <li>
+		            <a href="/about/" title="简历">
+		                简历
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/group/" title="团队">
+		                团队
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/gallery/" title="图库">
+		                图库
+		            </a>
+		        </li>
+		        
+		        <li>
+		            <a href="/tag/" title="标签">
+		                标签
+		            </a>
+		        </li>
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+                    
+                    <li>
+                        <a title="github" href="https://github.com/miccall" target="_blank" rel="noopener">
+                            <i class="icon fa fa-github"></i>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a title="500px" href="http://500px.com" target="_blank" rel="noopener">
+                            <i class="icon fa fa-500px"></i>
+                        </a>
+                    </li>
+                    
+			</ul>
+</nav>
+
+        <div id="main">
+            <div class="post_page_title_img" style="height: 25rem;background-image: url();background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;">
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2>正则表达式化整为零</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <p>写代码也有一段时间了，正则表达式是经常会用得到，每次遇到一些匹配时，就上网找，因为自己一直都在排斥学正则表达式，但是拖着不是程序猿的好习惯，那今天就来好好整理下。不求全部学会，只求见到认识。<br>正则表达式常用的几种操作方法有：match、search、split、findall、sub、replace。</p>
+<h3 id="基本字符"><a href="#基本字符" class="headerlink" title="基本字符"></a>基本字符</h3><p>特殊字符<br>特殊字符就是具有特殊含义的字符。在正则表达式中，这些特殊字符匹配的意义各有不同，如果需要在字符串中查找这些特殊符号，就需要在其前面加一个<code>\</code>进行转义。</p>
+<table>
+<thead>
+<tr>
+<th>特殊字符</th>
+<th>含义  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> $</td>
+<td>匹配输入字符串的结尾 </td>
+</tr>
+<tr>
+<td> （）</td>
+<td>标记一个子表达的开始和结束位置</td>
+</tr>
+<tr>
+<td> *</td>
+<td>匹配前面的表达式零次或多次</td>
+</tr>
+<tr>
+<td> +</td>
+<td>匹配前面的子表达式一次或多次</td>
+</tr>
+<tr>
+<td> .</td>
+<td>匹配除换行符\n 之外的任何单字符</td>
+</tr>
+<tr>
+<td> [</td>
+<td>标记一个中括号表达式的开始</td>
+</tr>
+<tr>
+<td> ？</td>
+<td>匹配前面的子表达式零次或一次</td>
+</tr>
+<tr>
+<td> \</td>
+<td>将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符</td>
+</tr>
+<tr>
+<td> ^</td>
+<td>匹配输入字符串的开始位置，除非在方括号表达式中使用，此时它表示不接受该字符集合</td>
+</tr>
+<tr>
+<td> {</td>
+<td>标记限定符表达式的开始</td>
+</tr>
+<tr>
+<td></td>
+<td>指明两项之间的一个选择</td>
+</tr>
+</tbody>
+</table>
+<p> 贪婪和非贪婪<br> 在上表中列举的<code>*</code>、<code>+</code>限定符都是贪婪的，因为它们会尽可能多的匹配文字，只有在它们的后面加上一个<code>?</code>就可以实现非贪婪或最小匹配。</p>
+<p>定位符<br>定位符用来描述字符串或单词的边界，其中<code>^</code>和<code>$</code>分别指字符串的开始与结束，<code>\b</code> 描述单词的前或后边界，<code>\B</code>表示非单词边界。</p>
+<p>Tip：不能将限定符和定位符一起使用。</p>
+<p>带反斜杠的元字符<br>普通字符前加反斜杠还是普通字符，但是有些字符加上反斜杠之后就会变成元字符</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>1.检索字符<br>我们既可以检索普通字符也可以检索表情符号，因为表情符其实也是一个字符，使用match方法可以返回一个数组，包含检索字符内容，被检索到到索引号。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'hello world'</span>.match<span class="token punctuation">(</span>/w/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> <span class="token punctuation">[</span><span class="token string">"w"</span>, index: 6, input: <span class="token string">"hello world"</span>, groups: undefined<span class="token punctuation">]</span>
+
+<span class="token string">'hello 😀world'</span>.match<span class="token punctuation">(</span>/😀/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> <span class="token punctuation">[</span><span class="token string">"😀"</span>, index: 6, input: <span class="token string">"hello 😀world"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>2.匹配文本开始和结束<br>我们用<code>^</code>匹配文本的开始，用<code>$</code>匹配文本的结束。匹配文本的第一个字符时，必须是匹配文本的第一个字符，否则匹配不成功。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'hello'</span>.match<span class="token punctuation">(</span>/^h/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> <span class="token punctuation">[</span><span class="token string">"h"</span>, index: 0, input: <span class="token string">"hello"</span>, groups: undefined<span class="token punctuation">]</span>
+
+<span class="token string">'hello'</span>.match<span class="token punctuation">(</span>/a^h/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> null
+
+<span class="token string">'hello'</span>.match<span class="token punctuation">(</span>/o$/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> <span class="token punctuation">[</span><span class="token string">"o"</span>, index: 4, input: <span class="token string">"hello"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>3.元字符</p>
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\b</td>
+<td>匹配一个单词边界</td>
+</tr>
+<tr>
+<td>\B</td>
+<td>匹配一个非单词边界</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>匹配一个数字字符</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配一个非数字字符</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配一个空白字符</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配一个非空白字符</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配一个字母或一个数字或一个下划线</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配一个字母、数字和下划线之外的字符</td>
+</tr>
+</tbody>
+</table>
+<p>元字符上述表格中已列举出来了，元字符的大写相当于取反。匹配单词边界的对中文边界是无效的。</p>
+<pre class=" language-bash"><code class="language-bash">// \b 匹配单词边界
+<span class="token string">'hello world'</span>.match<span class="token punctuation">(</span>/\bworld$/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> <span class="token punctuation">[</span><span class="token string">"world"</span>, index: 6, input: <span class="token string">"hello world"</span>, groups: undefined<span class="token punctuation">]</span>
+
+<span class="token string">'你 好'</span>.match<span class="token punctuation">(</span>/\B好$/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"好"</span>, index: 2, input: <span class="token string">"你 好"</span>, groups: undefined<span class="token punctuation">]</span>
+
+// \d 匹配数字边界
+<span class="token string">'123'</span>.match<span class="token punctuation">(</span>/\d2/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"12"</span>, index: 0, input: <span class="token string">"123"</span>, groups: undefined<span class="token punctuation">]</span>
+
+// \s匹配单个空白字符
+<span class="token string">'a b'</span>.match<span class="token punctuation">(</span>/\s/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">" "</span>, index: 1, input: <span class="token string">"a b"</span>, groups: undefined<span class="token punctuation">]</span>
+
+// \w匹配单个字母数字下划线
+<span class="token string">'a b'</span>.match<span class="token punctuation">(</span>/\w/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"a"</span>, index: 0, input: <span class="token string">"a b"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>4.量词<br>限定符用来指定正则表达式的一个给定组件必须要出现多次才能匹配</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>*</td>
+<td>匹配前面的子表达式零次或多次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配前面的子表达式一次或多次</td>
+</tr>
+<tr>
+<td>？</td>
+<td>匹配前面的子表达式零次或一次</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>n是一个非负整数。匹配确定的n次</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>至少匹配n次</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>n&lt;=m，最少匹配n次最多匹配m次</td>
+</tr>
+</tbody>
+</table>
+<pre class=" language-bash"><code class="language-bash">// 非贪婪模式
+<span class="token string">'https'</span>.match<span class="token punctuation">(</span>/http<span class="token punctuation">(</span>s<span class="token punctuation">)</span>?/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"https"</span>, <span class="token string">"s"</span>, index: 0, input: <span class="token string">"https"</span>, groups: undefined<span class="token punctuation">]</span>
+
+<span class="token string">'gooooogle'</span>.match<span class="token punctuation">(</span>/go<span class="token punctuation">{</span>2,5<span class="token punctuation">}</span>gle/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"gooooogle"</span>, index: 0, input: <span class="token string">"gooooogle"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>5.字符组<br>方括号在正则中表示一个区间,我们称之为字符组。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'grey or gray'</span>.match<span class="token punctuation">(</span>/gr<span class="token punctuation">[</span>ae<span class="token punctuation">]</span>y/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"grey"</span>, index: 0, input: <span class="token string">"grey or gray"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>6.捕获组和非捕获组[ES2018]<br>圆括号的意思是将它其中的字符集合打包成一个整体,然后量词就可以操作这个整体了。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'i love you very very very much'</span>.match<span class="token punctuation">(</span>/i love you <span class="token punctuation">(</span>very <span class="token punctuation">)</span>+much/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"i love you very very very much"</span>, <span class="token string">"very "</span>, index: 0, input: <span class="token string">"i love you very very very much"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>7.正则内捕获<br>正则内捕获使用<code>\数字</code>的形式根据对应前面的圆括号捕获内容，这种捕获的引用也称为反向引用。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'&lt;span>hello world&lt;/span>'</span>.match<span class="token punctuation">(</span>/<span class="token operator">&lt;</span><span class="token punctuation">(</span><span class="token punctuation">[</span>a-zA-Z<span class="token punctuation">]</span>+<span class="token punctuation">)</span><span class="token operator">></span>.*<span class="token operator">&lt;</span>\/\1<span class="token operator">></span>/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> <span class="token punctuation">[</span><span class="token string">"&lt;span>hello world&lt;/span>"</span>, <span class="token string">"span"</span>, index: 0, input: <span class="token string">"&lt;span>hello world&lt;/span>"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>8.正则外捕获</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'hello **world**'</span>.replace<span class="token punctuation">(</span>/\*<span class="token punctuation">{</span>2<span class="token punctuation">}</span><span class="token punctuation">(</span>.*<span class="token punctuation">)</span>\*<span class="token punctuation">{</span>2<span class="token punctuation">}</span>/, <span class="token string">'&lt;strong><span class="token variable">$1</span>&lt;/strong>'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token string">"hello &lt;strong>world&lt;/strong>"</span>
+</code></pre>
+<p>9.非捕获组<br>当我们需要匹配捕获组,但是又不需要捕获组结果时,我们可以使用非捕获组(?:pattern)</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'industry'</span>.match<span class="token punctuation">(</span>/industr<span class="token punctuation">(</span>?:y<span class="token operator">|</span>ies<span class="token punctuation">)</span>/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"industry"</span>, index: 0, input: <span class="token string">"industry"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>10.或</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'aA'</span>.match<span class="token punctuation">(</span>/a<span class="token operator">|</span>A/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"a"</span>, index: 0, input: <span class="token string">"aA"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>11.零宽断言<br>零宽断言<br>零宽：匹配一个位置，本身没有宽度；断言：断言之前或者之后应该有什么或没有什么<br>（1）零宽肯定先行断言(?=)[正向肯定预查]</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'TypeScript JavaScript javascript'</span>.match<span class="token punctuation">(</span>/\b\w<span class="token punctuation">{</span>4<span class="token punctuation">}</span><span class="token punctuation">(</span>?<span class="token operator">=</span>Script\b<span class="token punctuation">)</span>/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"Type"</span>, index: 0, input: <span class="token string">"TypeScript JavaScript javascript"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>（2）零宽肯定后行断言(?&lt;=)[ES2018] [反向肯定预查]</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'演员高圆圆 将军霍去病 演员霍思燕'</span>.match<span class="token punctuation">(</span>/<span class="token punctuation">(</span>?<span class="token operator">&lt;=</span>演员<span class="token punctuation">)</span>霍\S+/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"霍思燕"</span>, index: 14, input: <span class="token string">"演员高圆圆 将军霍去病 演员霍思燕"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>（3）零宽否定先行断言(?!)[正向否定预查]<br>否定就是没有,就是要求一段文本,后面一定不要紧跟一段指定文本</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'TypeScript Perl JavaScript'</span>.match<span class="token punctuation">(</span>/\b\w<span class="token punctuation">{</span>4<span class="token punctuation">}</span><span class="token punctuation">(</span>?<span class="token operator">!</span>Script\b<span class="token punctuation">)</span>/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"Perl"</span>, index: 11, input: <span class="token string">"TypeScript Perl JavaScript"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p>（4）零宽否定后行断言(?&lt;!)[ES2018] [反向否定预查]<br>要求一段文本,前面一定不跟某一段指定文本</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'演员高圆圆 将军霍去病 演员霍思燕'</span>.match<span class="token punctuation">(</span>/<span class="token punctuation">(</span>?<span class="token operator">&lt;</span><span class="token operator">!</span>演员<span class="token punctuation">)</span>霍\S+/<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"霍去病"</span>, index: 8, input: <span class="token string">"演员高圆圆 将军霍去病 演员霍思燕"</span>, groups: undefined<span class="token punctuation">]</span>
+</code></pre>
+<p> 12.修饰符<br>（1）g修饰符(global)</p>
+<p>默认情况下,正则从左向右匹配,只要匹配到结果就会结束,g修饰符会开启全局匹配模式,找到所有的匹配结果<br>（2）i修饰符(ignoreCase)<br>默认情况话,正则是区分大小写的,i修饰符的作用是可以全局忽略大小写.<br>（3）m修饰符(multiline)<br>默认情况下，^和$匹配的是文本的开始和结束，加上m修饰符，它们的含义就变成了多行的行首和行尾,支持多行搜索<br>（4）y修饰符(sticky粘连)[ES6]<br>y修饰符有和g修饰符重合的功能，它们都是全局匹配,不同在于,g修饰符只要剩余位置中存在匹配就可，而y修饰符确保匹配必须从剩余的第一个位置开始，这也就是“粘连”的涵义</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token string">'a bag with a tag has a mag'</span>.match<span class="token punctuation">(</span>/\wag/g<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"bag"</span>, <span class="token string">"tag"</span>, <span class="token string">"mag"</span><span class="token punctuation">]</span>
+
+<span class="token string">'a bag with a tag has a mag'</span>.match<span class="token punctuation">(</span>/\wag/y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+null
+
+<span class="token string">'bagtagmag'</span>.match<span class="token punctuation">(</span>/\wag/y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"bag"</span>, index: 0, input: <span class="token string">"bagtagmag"</span>, groups: undefined<span class="token punctuation">]</span>
+
+<span class="token string">'bagtagmag'</span>.match<span class="token punctuation">(</span>/\wag/gy<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token string">"bag"</span>, <span class="token string">"tag"</span>, <span class="token string">"mag"</span><span class="token punctuation">]</span>
+
+</code></pre>
+<p>（5）s修饰符(singleline)[ES2018]<br>s修饰符的作用是让.可以匹配任意单个字符。<br>（6）u修饰符(unicode)[ES6]<br>有些Unicode字符超过一个字节,正则无法正确识别,可用u修饰符来处理。</p>
+<h3 id="ES6变化"><a href="#ES6变化" class="headerlink" title="ES6变化"></a>ES6变化</h3><p>ES6中,将字符串的4个正则方法(match,replace,search,split)在语言内部全部调用RegExp的实例方法,从而做到所有与正则相关的方法,全部定义在RegExp对象上。</p>
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://yoursite.com/2019/03/15/article4/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://yoursite.com/2019/03/15/article4/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+                <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+
+ 	
+</html>
