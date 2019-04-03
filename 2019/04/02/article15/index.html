@@ -10,7 +10,7 @@
     
     
     
-    <title>ES6常用总结 | 吉水于人随笔</title>
+    <title>视频播放进度记录 | 吉水于人随笔</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -156,13 +156,13 @@
     <div class="cube-content">
         <div class="cube-left">
             <div class="cube-article">
-    <h1 class="title">ES6常用总结</h1>
+    <h1 class="title">视频播放进度记录</h1>
     
     <div class="cube-article-header">
         <div class="cube-article-date">
             <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
             <!-- moment.js对象 -->
-            2019-03-16
+            2019-04-02
         </div>
         <div class="cube-article-tags">
     <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
@@ -172,7 +172,33 @@
     
     <div class="cube-article-content cube-markdown">
         
-        <p>文章参考来源:<a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">[ECMAScript 6 入门]</a>  </p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>微信小程序提供一个<code>video</code>组件支持视频播放，开发者文档上可以看到，该组件提供了很多可选属性，具体的可查阅微信小程序开发文档。</p>
+<a id="more"></a>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p>为了有效记录视频的播放进度，我准备在视频播放过程中每十秒一周期、视频暂停时、视频播放结束时上报一次当前时间。使用<code>initial-time</code>让视频从当前时间开始进行播放。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token operator">&lt;</span>video class<span class="token operator">=</span><span class="token string">"video"</span> autoplay<span class="token operator">=</span><span class="token string">"true"</span> src<span class="token operator">=</span><span class="token string">"{{url}}"</span> controls bindtimeupdate<span class="token operator">=</span><span class="token string">'bindtimeupdate'</span> bindpause<span class="token operator">=</span><span class="token string">'bindpause'</span> bindended<span class="token operator">=</span><span class="token string">'bindended'</span> controls initial-time<span class="token operator">=</span><span class="token string">"{{currentTime}}"</span><span class="token operator">></span><span class="token operator">&lt;</span>/video<span class="token operator">></span>
+</code></pre>
+<p>bindtimeupdate事件可以直接获取到播放视频的当前时间和总时长。每隔十秒去请求一次接口，将时间存储下来。</p>
+<pre class=" language-bash"><code class="language-bash">  bindtimeupdate<span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    this.data.currentTime <span class="token operator">=</span> parseInt<span class="token punctuation">(</span>res.detail.currentTime<span class="token punctuation">)</span> // 当前时间
+    this.data.duration <span class="token operator">=</span> parseInt<span class="token punctuation">(</span>res.detail.duration<span class="token punctuation">)</span>  // 总时长
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>this.data.flag<span class="token punctuation">)</span>
+      <span class="token keyword">return</span>
+    this.data.flag <span class="token operator">=</span> setInterval<span class="token punctuation">(</span>this.getPlayTime, 10000<span class="token punctuation">)</span><span class="token punctuation">;</span> // 十秒上报一次
+  <span class="token punctuation">}</span>
+</code></pre>
+<p>暂停时记录一次当前时间，并清除<code>setInterval</code>事件，防止持续上报。bindended与bindpause事件逻辑一致。</p>
+<pre class=" language-bash"><code class="language-bash">  bindpause<span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>this.data.currentTime <span class="token operator">!=</span><span class="token operator">=</span> this.data.duration<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      this.data.isEnd <span class="token operator">=</span> <span class="token boolean">false</span>
+    <span class="token punctuation">}</span>
+    this.getPlayTime<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>this.data.flag<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      clearInterval<span class="token punctuation">(</span>this.data.flag<span class="token punctuation">)</span>
+      this.data.flag <span class="token operator">=</span> null
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+<h3 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h3><p>在我的学习页面，可以看到每个视频的已播放进度条。<br><img src="../article15/1.png" alt><br>进入视频，视频从当前视频时间继续播放。<br><img src="../article15/2.jpeg" alt></p>
 
     </div>
 </div>
@@ -180,17 +206,10 @@
 <div class="cube-article-nav">
     <ul>
         
-        <li class="prev">
-            <a href="/2019/03/17/article6/">
-                <i class="cube-icon cube-prev" aria-hidden="true"></i>
-                制作一个添加工作经验的功能
-            </a>
-        </li>
-        
         
         <li class="next">
-            <a href="/2019/03/15/article4/">
-                正则表达式化整为零
+            <a href="/2019/04/02/article14/">
+                微信小程序的上拉加载功能
                 <i class="cube-icon cube-next" aria-hidden="true"></i>
             </a>
         </li>

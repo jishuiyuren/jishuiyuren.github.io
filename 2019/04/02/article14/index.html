@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="jishuiyuren">
+    
+    
+    
+    
+    
+    
+    <title>微信小程序的上拉加载功能 | 吉水于人随笔</title>
+    <!-- inject:style -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <!-- endinject -->
+    <style>
+        .cube-loading {
+            top: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('/images/lg/loading.gif') no-repeat center center;
+            background-color: rgba(0,0,0,.7);
+        }
+
+        .cube-loading.out {
+            display: none;
+        }
+
+        .cube-loading:before {
+            display: block;
+            content: 'Loading';
+            position: relative;
+            width: 100%;
+            top: 50%;
+            right: -50%;
+            color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .cube-loading:before {
+                font-size: 1.2em;
+                transform: translate(-24px,20px);
+                -webkit-transform: translate(-24px,20px);
+                -o-transform: translate(-24px,20px);
+                -ms-transform: translate(-24px,20px);
+            }
+        }
+
+        @media(min-width: 768px) {
+            .cube-loading:before {
+
+            }
+        }
+    </style>
+    
+</head></html>
+<body>
+<div class="cube-body">
+    <nav id="cube-top-memu" class="cube-menu">
+    <ul class="cube-menu-collapse">
+        
+        <li>
+            <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
+            <a href="/">首页</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
+            <a href="/archives">归档</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
+            <a href="/categories">分类</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
+            <a href="/about-me">关于我</a>
+        </li>
+        
+    </ul>
+</nav>
+<nav class="cube-side-menu" id="cube-side-menu">
+    <ul class="cube-menu-list">
+        
+        <li>
+            <a class="lrc-control">Open Lyrics</a>
+        </li>
+        
+        <li>
+            <a class="scroll-to-top">Top</a>
+        </li>
+    </ul>
+</nav>
+    <header class="cube-header" id="cube-header">
+    <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
+    
+    <div class="cube-type">
+        <span class="cube-typed-title">吉水于人的博客</span>
+        <span class="cube-typed-cursor">|</span>
+    </div>
+    
+</header>
+
+    <style>
+        nav.cube-menu:before {
+            content: '';
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 44px;
+        
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        
+            z-index: -1;
+            background-image: url('/images/bg.jpg');
+            background-repeat: no-repeat;
+            background-position: center 44px;
+            background-size: cover;
+            background-color: transparent;
+        }
+
+        header.cube-background.cube-header-background {
+            visibility: hidden;
+            background-image: url('/images/bg.jpg');
+            background-position: center 0;
+        }
+    </style>
+    <header class="cube-background cube-header-background">
+        
+        <div class="cube-type">
+            <span class="cube-typed-title">吉水于人的博客</span>
+            <span class="cube-typed-cursor">|</span>
+        </div>
+        
+    </header>
+    <div class="load-header-background"></div>
+    <script>
+        (function (window) {
+
+            window.headerModule = {}
+            window.headerModule.image = {
+                width: '2000',
+                height: '1414'
+            }
+
+        })(window)
+    </script>
+    
+    <div class="cube-content">
+        <div class="cube-left">
+            <div class="cube-article">
+    <h1 class="title">微信小程序的上拉加载功能</h1>
+    
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2019-04-02
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+</div>
+    </div>
+    
+    <div class="cube-article-content cube-markdown">
+        
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这段时间一直在弄智荟那个微信小程序，发现，很多地方的列表加载都需要用到上拉加载更多这个功能，一开始，看了官方文档觉得蛮简单的，但是在实际写的过程中还是踩了一点的坑，所以就在这做一个简单的总结。</p>
+<a id="more"></a>
+<h3 id="前端页面"><a href="#前端页面" class="headerlink" title="前端页面"></a>前端页面</h3><p>在前端页面中，我们使用<code>scroll-view</code>组件去实现这个上拉加载的功能。用<code>bindscrolltolower</code>去触发加载更多事件。</p>
+<pre class=" language-bash"><code class="language-bash">    <span class="token operator">&lt;</span>scroll-view bindscrolltolower<span class="token operator">=</span><span class="token string">"loadMore"</span> scroll-y<span class="token operator">=</span><span class="token string">"true"</span> class<span class="token operator">=</span><span class="token string">'scroll-content'</span> style<span class="token operator">=</span><span class="token string">"height:{{scrollHeight}}px;"</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>view wx:for<span class="token operator">=</span><span class="token string">'{{results}}'</span> wx:key<span class="token operator">=</span><span class="token string">'{{index}}'</span> bindtap<span class="token operator">=</span><span class="token string">'onDetail'</span> data-item<span class="token operator">=</span><span class="token string">'{{item}}'</span><span class="token operator">></span>
+        <span class="token operator">&lt;</span>view class<span class="token operator">=</span><span class="token string">'search-items'</span><span class="token operator">></span>
+          <span class="token operator">&lt;</span>view class<span class="token operator">=</span><span class="token string">'content-detail'</span><span class="token operator">></span>
+            <span class="token operator">&lt;</span>image class<span class="token operator">=</span><span class="token string">'search-img'</span> resize<span class="token operator">=</span><span class="token string">"cover"</span> src<span class="token operator">=</span><span class="token string">'{{item.image}}'</span> /<span class="token operator">></span>
+            <span class="token operator">&lt;</span>view class<span class="token operator">=</span><span class="token string">'search-content'</span><span class="token operator">></span>
+              <span class="token operator">&lt;</span>text class<span class="token operator">=</span><span class="token string">'search-title'</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">{</span>item.name<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span>/text<span class="token operator">></span>
+              <span class="token operator">&lt;</span>view class<span class="token operator">=</span><span class="token string">'cell-gap'</span><span class="token operator">></span><span class="token operator">&lt;</span>/view<span class="token operator">></span>
+              <span class="token operator">&lt;</span>text class<span class="token operator">=</span><span class="token string">'search-type'</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">{</span>type<span class="token punctuation">[</span>item.type-1<span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span>/text<span class="token operator">></span>
+            <span class="token operator">&lt;</span>/view<span class="token operator">></span>
+          <span class="token operator">&lt;</span>/view<span class="token operator">></span>
+        <span class="token operator">&lt;</span>/view<span class="token operator">></span>
+      <span class="token operator">&lt;</span>/view<span class="token operator">></span>
+      <span class="token operator">&lt;</span>loading-cell status<span class="token operator">=</span><span class="token string">"{{loadingStatus}}"</span><span class="token operator">></span><span class="token operator">&lt;</span>/loading-cell<span class="token operator">></span>
+    <span class="token operator">&lt;</span>/scroll-view<span class="token operator">></span>
+</code></pre>
+<p>在<code>scroll-view</code>中我动态的改变了其高度，而初始该高度的获取，我使用了微信提供的<code>getSystemInfo</code>来获取。其实，一开始我踩了一个坑，就是这里并没有去这样拿高度，而是根据页面的情况，自己写死了一个高度，以至于一直没有实现效果。</p>
+<pre class=" language-bash"><code class="language-bash">  onLoad: function<span class="token punctuation">(</span>options<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    var that <span class="token operator">=</span> this<span class="token punctuation">;</span>
+    wx.getSystemInfo<span class="token punctuation">(</span><span class="token punctuation">{</span>
+      success: function<span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        that.setData<span class="token punctuation">(</span><span class="token punctuation">{</span>
+          scrollHeight: res.windowHeight
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+<p>我申明了三个变量：pageNo（页码）、pageCount（总页数）、scrollHeight（滚动高度）。</p>
+<pre class=" language-bash"><code class="language-bash">  data: <span class="token punctuation">{</span>
+    pageNo: 1,
+    pageCount: 0,
+    scrollHeight: 0
+  <span class="token punctuation">}</span>,
+</code></pre>
+<p>loadMore监听页数的变化，当前页码小于总页数时，请求接口，获取结果。</p>
+<pre class=" language-bash"><code class="language-bash">  loadMore<span class="token punctuation">(</span>e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>this.data.pageNo <span class="token operator">&lt;</span> this.data.pageCount<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      this.data.pageNo++
+      this.getSearchResults<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+<p>请求接口，获取数据。在请求完成的回调中，判断加载状态。</p>
+<pre class=" language-bash"><code class="language-bash">getSearchResults<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">let</span> url <span class="token operator">=</span> <span class="token string">'/edu/course/getCourseListByPage'</span>
+    <span class="token keyword">let</span> self <span class="token operator">=</span> this
+    api.get<span class="token punctuation">(</span>url, <span class="token punctuation">{</span>
+        condition: self.data.searchContent,
+        status: 2,
+        pageNo: self.data.pageNo,
+        pageCount: 10
+      <span class="token punctuation">}</span>,
+      function<span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token punctuation">..</span>.
+      <span class="token keyword">let</span> array <span class="token operator">=</span> self.data.results
+      array <span class="token operator">=</span> array.concat<span class="token punctuation">(</span>res.content.records<span class="token punctuation">)</span> // 这里记住要拼接数组
+
+      self.data.pageCount <span class="token operator">=</span> res.content.pages // 获取pageCount的值
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>self.data.pageNo <span class="token operator">!=</span><span class="token operator">=</span> res.content.pages<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           self.setData<span class="token punctuation">(</span><span class="token punctuation">{</span>
+             loadingStatus: 1
+           <span class="token punctuation">}</span><span class="token punctuation">)</span>
+         <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+           self.setData<span class="token punctuation">(</span><span class="token punctuation">{</span>
+             loadingStatus: 2
+           <span class="token punctuation">}</span><span class="token punctuation">)</span>
+         <span class="token punctuation">}</span>           
+      <span class="token punctuation">}</span>, null<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>,
+
+</code></pre>
+<p>为了实现几种加载的动画效果，我写了一个组件<code>loading-cell</code>，根据<code>loadingStatus</code>的值，实现一个动画效果。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token operator">&lt;</span>view class<span class="token operator">=</span><span class="token string">'wrapper'</span> wx:if<span class="token operator">=</span><span class="token string">"{{status == 1 || status == 3 || status == 4}}"</span><span class="token operator">></span>
+  <span class="token operator">&lt;</span>image class<span class="token operator">=</span><span class="token string">'loading'</span> src<span class="token operator">=</span><span class="token string">"/assets/images/loading.gif"</span> wx:if<span class="token operator">=</span><span class="token string">"{{status == 1}}"</span><span class="token operator">></span><span class="token operator">&lt;</span>/image<span class="token operator">></span>
+  <span class="token operator">&lt;</span>image class<span class="token operator">=</span><span class="token string">'no-data'</span> src<span class="token operator">=</span><span class="token string">"/assets/images/a01.png"</span> wx:if<span class="token operator">=</span><span class="token string">"{{status == 4}}"</span><span class="token operator">></span><span class="token operator">&lt;</span>/image<span class="token operator">></span>
+  <span class="token operator">&lt;</span>view class<span class="token operator">=</span><span class="token string">'status-label'</span><span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">{</span>util.statusString<span class="token punctuation">(</span>status<span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span>/view<span class="token operator">></span>
+<span class="token operator">&lt;</span>/view<span class="token operator">></span>
+</code></pre>
+<h3 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h3><p>整个自定义的一个上拉加载更多效果就做好了，其实，我们还可以采用一次请求后端接口，获取所有的数据，通过改变pageNo的值，按需从所有结果中拿取数据，避免加载一次请求一次结果。</p>
+
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        <li class="prev">
+            <a href="/2019/04/02/article15/">
+                <i class="cube-icon cube-prev" aria-hidden="true"></i>
+                视频播放进度记录
+            </a>
+        </li>
+        
+        
+        <li class="next">
+            <a href="/2019/03/18/article13/">
+                article13
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+
+        </div>
+        <div class="cube-right">
+            
+<div class="cube-author cube-sidebar" id="cube-author">
+    
+    
+    <span>jishuiyuren</span>
+    
+    
+    <div class="count">
+        <a class="count articles"><span>15</span>Article</a>
+        <a class="count tags"><span>1</span>Tags</a>
+        <a class="count categories"><span>0</span>Categories</a>
+    </div>
+</div>
+
+
+
+<div class="cube-recent-posts cube-sidebar" id="cube-recent-posts">
+    <div class="title">
+        <a>Recent Posts</a>
+    </div>
+    <ul class="list">
+        
+        
+        <li>
+            <!-- TODO 如果文章要显示图片，那么在front-matter上添加preview属性(url or path) -->
+            
+            <div class="normal">
+                <p class="index first">
+                    <span>1</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/04/02/article15/" title="视频播放进度记录">视频播放进度记录</a>
+                </p>
+            </div>
+            
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>2</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/04/02/article14/" title="微信小程序的上拉加载功能">微信小程序的上拉加载功能</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>3</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/03/18/article13/" title="article13">article13</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>4</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/03/18/article12/" title="arcgis api + webpack前端工程化开发">arcgis api + webpack前端工程化开发</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>5</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/03/18/article11/" title="我理解的原型链">我理解的原型链</a>
+                </p>
+            </div>
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+
+
+
+<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
+    <div class="title">
+        <a href="/tags">Tagcloud</a>
+    </div>
+    <div class="cube-boxs">
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/内存优化/">#内存优化</a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="cube-links cube-sidebar" id="cube-links">
+    <div class="title">
+        <a>Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            
+            
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/links/GitHub.png">
+            
+            <a href="https://github.com/jishuiyuren" target="_blank">吉水于人的GitHub</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+    </div>
+</div>
+<footer class="cube-footer">
+    
+© 2017 jishuiyuren
+
+<br>
+Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+</footer>
+<!-- inject:script -->
+<script src="/js/script.js"></script>
+<!-- endinject -->
+<div class="cube-loading out"></div>
+</body>
+</html>
