@@ -99,7 +99,7 @@
     <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
     
     <div class="cube-type">
-        <span class="cube-typed-title">吉水于人的博客</span>
+        <span class="cube-typed-title">吉水于人</span>
         <span class="cube-typed-cursor">|</span>
     </div>
     
@@ -135,7 +135,7 @@
     <header class="cube-background cube-header-background">
         
         <div class="cube-type">
-            <span class="cube-typed-title">吉水于人的博客</span>
+            <span class="cube-typed-title">吉水于人</span>
             <span class="cube-typed-cursor">|</span>
         </div>
         
@@ -172,8 +172,10 @@
     
     <div class="cube-article-content cube-markdown">
         
-        <p>做微信小程序也有小一个月了，整体来说，做的比较顺利，没有遇到特别难搞的坑，这里还是得感谢腾讯为开发者提供资料齐全的开发文档。想速度上手微信小程序的小伙伴们，戳这里，<a href="https://developers.weixin.qq.com/miniprogram/dev/api/" target="_blank" rel="noopener">微信小程序开发者文档</a></p>
-<p>微信小程序开发中，我们常常需要获取用户信息，我写小程序时是1月份，开始我并不知道接口已经做了调整，然后就直接使用<code>button</code>去获取用户信息，然而，调试时，出现以下提示。<br><img src="../article7/1.png" alt><br>当我去官方文档上查阅获取用户信息接口时，发现其已经做了一些的调整。相信大家都知道，我们在第一次使用某个小程序时会弹出一个授权框，询问用户是否允许获取用户信息。如今接口调整为在用户未授权过的情况下调用此接口，将不再出现授权弹窗，会直接进入 fail 回调。在用户已授权的情况下调用此接口，可成功获取用户信息。</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>做微信小程序也有小一个月了，整体来说，做的比较顺利，没有遇到特别难搞的坑，这里还是得感谢腾讯为开发者提供资料齐全的开发文档。想速度上手微信小程序的小伙伴们，戳这里，<a href="https://developers.weixin.qq.com/miniprogram/dev/api/" target="_blank" rel="noopener">微信小程序开发者文档</a></p>
+<a id="more"></a>
+<p>微信小程序开发中，我们常常需要获取用户信息，我写小程序时是1月份，开始我并不知道接口已经做了调整，然后就直接使用<code>button</code>去获取用户信息，然而，调试时，出现以下提示。<br><img src="../article7/1.png" alt></p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p>当我去官方文档上查阅获取用户信息接口时，发现其已经做了一些的调整。相信大家都知道，我们在第一次使用某个小程序时会弹出一个授权框，询问用户是否允许获取用户信息。如今接口调整为在用户未授权过的情况下调用此接口，将不再出现授权弹窗，会直接进入 fail 回调。在用户已授权的情况下调用此接口，可成功获取用户信息。</p>
 <p>竟然不再出现授权窗口了，那我们就需要使用button进行引导。</p>
 <pre class=" language-bash"><code class="language-bash"><span class="token operator">&lt;</span>button class<span class="token operator">=</span><span class="token string">'wexin-login'</span> open-type<span class="token operator">=</span><span class="token string">"getUserInfo"</span> lang<span class="token operator">=</span><span class="token string">"zh_CN"</span> bindgetuserinfo<span class="token operator">=</span><span class="token string">"onGotUserInfo"</span><span class="token operator">></span>
   <span class="token operator">&lt;</span>image class<span class="token operator">=</span><span class="token string">'wexin-icon'</span> src<span class="token operator">=</span><span class="token string">'/assets/images/content/share_wechat.png'</span> /<span class="token operator">></span>
@@ -246,7 +248,7 @@
     
     <div class="count">
         <a class="count articles"><span>15</span>Article</a>
-        <a class="count tags"><span>1</span>Tags</a>
+        <a class="count tags"><span>2</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
 </div>
@@ -321,7 +323,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article11/" title="我理解的原型链">我理解的原型链</a>
+                    <a href="/2019/03/18/article10/" title="js异步请求总结">js异步请求总结</a>
                 </p>
             </div>
         </li>
@@ -343,6 +345,11 @@
         
         <div class="cube-box ">
             <a href="/tags/内存优化/">#内存优化</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/原型链/">#原型链</a>
         </div>
         
     </div>

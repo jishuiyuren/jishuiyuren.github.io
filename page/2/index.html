@@ -99,7 +99,7 @@
     <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
     
     <div class="cube-type">
-        <span class="cube-typed-title">吉水于人的博客</span>
+        <span class="cube-typed-title">吉水于人</span>
         <span class="cube-typed-cursor">|</span>
     </div>
     
@@ -135,7 +135,7 @@
     <header class="cube-background cube-header-background">
         
         <div class="cube-type">
-            <span class="cube-typed-title">吉水于人的博客</span>
+            <span class="cube-typed-title">吉水于人</span>
             <span class="cube-typed-cursor">|</span>
         </div>
         
@@ -156,32 +156,6 @@
     <div class="cube-content">
         <div class="cube-left">
             
-<div class="cube-excerpt" id="cube-excerpt-ES6常用总结">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2019/03/16/article5/">ES6常用总结</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2019-03-16
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p>文章参考来源:<a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">[ECMAScript 6 入门]</a>  </p>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2019/03/16/article5/">Read More</a>
-    </footer>
-</div>
-
 <div class="cube-excerpt" id="cube-excerpt-正则表达式化整为零">
     <header class="cube-excerpt-header">
         <h1><a href="/2019/03/15/article4/">正则表达式化整为零</a></h1>
@@ -199,7 +173,7 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <p>写代码也有一段时间了，正则表达式是经常会用得到，每次遇到一些匹配时，就上网找，因为自己一直都在排斥学正则表达式，但是拖着不是程序猿的好习惯，那今天就来好好整理下。不求全部学会，只求见到认识。<br>正则表达式常用的几种操作方法有：match、search、split、findall、sub、replace。<br>
+           <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>写代码也有一段时间了，正则表达式是经常会用得到，每次遇到一些匹配时，就上网找，因为自己一直都在排斥学正则表达式，但是拖着不是程序猿的好习惯，那今天就来好好整理下。不求全部学会，只求见到认识。<br>正则表达式常用的几种操作方法有：match、search、split、findall、sub、replace。<br>
         
     </p></article>
     <footer class="cube-excerpt-footer">
@@ -226,7 +200,7 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <p>##内存泄漏<br>当程序持续无法释放其使用的临时内存时就会发生内存泄漏。<br>JavaScript提供<code>GC垃圾回收</code>进行自动内存管理，其机制是找出不再使用的变量，释放其占用的内存，但是这个内存不是实时的，因为其开销比较大，所以垃圾回收器会按照固定的时间间隔周期性的执行。</p>
+           <h2 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h2><p>当程序持续无法释放其使用的临时内存时就会发生内存泄漏。<br>JavaScript提供<code>GC垃圾回收</code>进行自动内存管理，其机制是找出不再使用的变量，释放其占用的内存，但是这个内存不是实时的，因为其开销比较大，所以垃圾回收器会按照固定的时间间隔周期性的执行。</p>
 <p>不再使用的变量就是生命周期结束的变量，即局部变量（全局变量的生命周期直到浏览器卸载才会结束）。局部变量只在函数的执行过程中存在，而在这个过程中会为局部变量在栈或堆上分配相应的空间，以存储它们的值，然后在函数中使用这些变量，直至函数结束。闭包中由于内部函数的原因，外部函数并不能算是结束。</p>
         
     </article>
@@ -350,6 +324,39 @@ printMap.execute<span class="token punctuation">(</span>params, lang.hitch<span 
     </footer>
 </div>
 
+<div class="cube-excerpt" id="cube-excerpt-我理解的原型链">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2018/03/18/article11/">我理解的原型链</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2018-03-18
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+                <a href="/tags/原型链/" class="cube-excerpt-tag-link">#原型链</a>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>原型链，开始看资料时觉得还能理解，到后面就有点绕晕了，在看了几篇文章之后，我将关键点剥离出来，进行整理，这样一来，整个原型链就得到了一个很好的理解。那么首先，我们要明确几个概念。</p>
+<ul>
+<li>函数（Function）拥有<code>prototype</code>属性，对象（除了null）拥有<code>__proto__</code></li>
+<li>除了<code>__proto__</code>属性，对象还拥有<code>constructor</code>属性，这个属性使得一个对象指向一个函数，即指向该对象的构造函数，每个对象都具有一个构造函数（本身拥有或继承而来），Function对象的构造函数是它本身，所有函数和对象最终都是由Function构造函数得来，所以constructor属性的终点就是Function函数。</li>
+<li>对象所拥有的<code>__proto__</code>是当访问一个对象当属性时，没有找到该属性，就会去它的<code>__proto__</code>属性所指向的那个对象（父对象）里找，一直寻找，直到<code>__proto__</code>属性的值为null，返回undefined，通过<code>__proto__</code>属性将对象连接起来的这条链路就是<code>原型链</code>。</li>
+<li>在js中一切都为对象，正是因为这个，函数也是一个对象，所以函数在作为对象时拥有<code>__proto__</code>和<code>constructor</code>，作为函数时又拥有<code>prototype</code>属性。</li>
+</ul>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2018/03/18/article11/">Read More</a>
+    </footer>
+</div>
+
 
 
 <ul class="cube-pagination cube-pagination-6">
@@ -393,7 +400,7 @@ printMap.execute<span class="token punctuation">(</span>params, lang.hitch<span 
     
     <div class="count">
         <a class="count articles"><span>15</span>Article</a>
-        <a class="count tags"><span>1</span>Tags</a>
+        <a class="count tags"><span>2</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
 </div>
@@ -468,7 +475,7 @@ printMap.execute<span class="token punctuation">(</span>params, lang.hitch<span 
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article11/" title="我理解的原型链">我理解的原型链</a>
+                    <a href="/2019/03/18/article10/" title="js异步请求总结">js异步请求总结</a>
                 </p>
             </div>
         </li>
@@ -490,6 +497,11 @@ printMap.execute<span class="token punctuation">(</span>params, lang.hitch<span 
         
         <div class="cube-box ">
             <a href="/tags/内存优化/">#内存优化</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/原型链/">#原型链</a>
         </div>
         
     </div>

@@ -99,7 +99,7 @@
     <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
     
     <div class="cube-type">
-        <span class="cube-typed-title">吉水于人的博客</span>
+        <span class="cube-typed-title">吉水于人</span>
         <span class="cube-typed-cursor">|</span>
     </div>
     
@@ -135,7 +135,7 @@
     <header class="cube-background cube-header-background">
         
         <div class="cube-type">
-            <span class="cube-typed-title">吉水于人的博客</span>
+            <span class="cube-typed-title">吉水于人</span>
             <span class="cube-typed-cursor">|</span>
         </div>
         
@@ -174,10 +174,10 @@
     
     <div class="cube-article-content cube-markdown">
         
-        <p>##内存泄漏<br>当程序持续无法释放其使用的临时内存时就会发生内存泄漏。<br>JavaScript提供<code>GC垃圾回收</code>进行自动内存管理，其机制是找出不再使用的变量，释放其占用的内存，但是这个内存不是实时的，因为其开销比较大，所以垃圾回收器会按照固定的时间间隔周期性的执行。</p>
+        <h2 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h2><p>当程序持续无法释放其使用的临时内存时就会发生内存泄漏。<br>JavaScript提供<code>GC垃圾回收</code>进行自动内存管理，其机制是找出不再使用的变量，释放其占用的内存，但是这个内存不是实时的，因为其开销比较大，所以垃圾回收器会按照固定的时间间隔周期性的执行。</p>
 <p>不再使用的变量就是生命周期结束的变量，即局部变量（全局变量的生命周期直到浏览器卸载才会结束）。局部变量只在函数的执行过程中存在，而在这个过程中会为局部变量在栈或堆上分配相应的空间，以存储它们的值，然后在函数中使用这些变量，直至函数结束。闭包中由于内部函数的原因，外部函数并不能算是结束。</p>
 <a id="more"></a>
-<p>##避免内存泄漏<br>(1)避免DOM节点创建中闪屏<br>IE中有一类典型的内存泄漏模式称为DOM插入顺序内存泄漏。当创建动态当DOM节点时，我们确保上层元素首先被附着，然后是底层。如果顺序反过来，可能导致内存泄漏。<br>当要创建的 DOM 树很大时，这种从上而下的创建 DOM 节点的方式可能会造成浏览器视图的闪烁。一个好的办法是在 DOM 树渲染期间通过样式”display:none”把最顶层父节点隐藏起来，直到整个 DOM 树都创建好之后，再把顶层父节点展现出来。</p>
+<h2 id="避免内存泄漏"><a href="#避免内存泄漏" class="headerlink" title="避免内存泄漏"></a>避免内存泄漏</h2><p>(1)避免DOM节点创建中闪屏<br>IE中有一类典型的内存泄漏模式称为DOM插入顺序内存泄漏。当创建动态当DOM节点时，我们确保上层元素首先被附着，然后是底层。如果顺序反过来，可能导致内存泄漏。<br>当要创建的 DOM 树很大时，这种从上而下的创建 DOM 节点的方式可能会造成浏览器视图的闪烁。一个好的办法是在 DOM 树渲染期间通过样式”display:none”把最顶层父节点隐藏起来，直到整个 DOM 树都创建好之后，再把顶层父节点展现出来。</p>
 <pre class=" language-bash"><code class="language-bash">var frameNode <span class="token operator">=</span> domCon.create<span class="token punctuation">(</span><span class="token string">'div'</span>, <span class="token punctuation">{</span>
                   <span class="token string">"style"</span><span class="token keyword">:</span> <span class="token punctuation">{</span>display: <span class="token string">"none"</span><span class="token punctuation">}</span>
               <span class="token punctuation">}</span>, this.domNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -218,8 +218,7 @@ refB<span class="token operator">=</span>null<span class="token punctuation">;</
 <span class="token punctuation">}</span><span class="token punctuation">;</span> 
 </code></pre>
 <p>应用程序之后删除了element节点，JavaScript 引用仍然会持有孤立节点。这个孤立节点将会造成内存泄露。<br>(5)定时器setTimeout setInterval<br>当不需要setInterval或者setTimeout时，定时器没有被clear，定时器的回调函数以及内部依赖的变量都不能被回收，造成内存泄漏。</p>
-<p>##ChromeDevTools工具</p>
-<p>以上介绍了几种内存泄漏的情况，那么我们在项目中如何发现可能存在内存泄漏的地方。</p>
+<h2 id="ChromeDevTools工具"><a href="#ChromeDevTools工具" class="headerlink" title="ChromeDevTools工具"></a>ChromeDevTools工具</h2><p>以上介绍了几种内存泄漏的情况，那么我们在项目中如何发现可能存在内存泄漏的地方。</p>
 <ul>
 <li><p>Performance<br>Performance按时间顺序展示页面加载过程及后续过程的网络请求、页面渲染过程、JS运行时长、页面帧率、CPU/GPU使用情况等<br>1，在timeline中观测页面资源加载情况（时长，顺序），降低页面加载时长。<br>2，在timeline中观测FPS情况，观测底下的JS执行耗时，能分析出哪部分耗时过长，导致帧率下降</p>
 </li>
@@ -237,8 +236,7 @@ refB<span class="token operator">=</span>null<span class="token punctuation">;</
 <span class="token punctuation">}</span>
 var b <span class="token operator">=</span> a<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<p>######正常情况下，a函数执行完毕 obj占用的内存会被回收，但是此处a函数返回了一个函数表达式，其中obj因为js的作用域的特殊性一直存在，所以我们可以说b引用了obj。每次访问b对象的时候都可以访问到obj，说明内存未被回收 所以对于obj来说直接占用内存[1,2,….n], 而b依赖obj，所obj是b的最大内存。</p>
-
+<h5 id="正常情况下，a函数执行完毕-obj占用的内存会被回收，但是此处a函数返回了一个函数表达式，其中obj因为js的作用域的特殊性一直存在，所以我们可以说b引用了obj。每次访问b对象的时候都可以访问到obj，说明内存未被回收-所以对于obj来说直接占用内存-1-2-…-n-而b依赖obj，所obj是b的最大内存。"><a href="#正常情况下，a函数执行完毕-obj占用的内存会被回收，但是此处a函数返回了一个函数表达式，其中obj因为js的作用域的特殊性一直存在，所以我们可以说b引用了obj。每次访问b对象的时候都可以访问到obj，说明内存未被回收-所以对于obj来说直接占用内存-1-2-…-n-而b依赖obj，所obj是b的最大内存。" class="headerlink" title="正常情况下，a函数执行完毕 obj占用的内存会被回收，但是此处a函数返回了一个函数表达式，其中obj因为js的作用域的特殊性一直存在，所以我们可以说b引用了obj。每次访问b对象的时候都可以访问到obj，说明内存未被回收 所以对于obj来说直接占用内存[1,2,….n], 而b依赖obj，所obj是b的最大内存。"></a>正常情况下，a函数执行完毕 obj占用的内存会被回收，但是此处a函数返回了一个函数表达式，其中obj因为js的作用域的特殊性一直存在，所以我们可以说b引用了obj。每次访问b对象的时候都可以访问到obj，说明内存未被回收 所以对于obj来说直接占用内存[1,2,….n], 而b依赖obj，所obj是b的最大内存。</h5>
     </div>
 </div>
 
@@ -279,7 +277,7 @@ var b <span class="token operator">=</span> a<span class="token punctuation">(</
     
     <div class="count">
         <a class="count articles"><span>15</span>Article</a>
-        <a class="count tags"><span>1</span>Tags</a>
+        <a class="count tags"><span>2</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
 </div>
@@ -354,7 +352,7 @@ var b <span class="token operator">=</span> a<span class="token punctuation">(</
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article11/" title="我理解的原型链">我理解的原型链</a>
+                    <a href="/2019/03/18/article10/" title="js异步请求总结">js异步请求总结</a>
                 </p>
             </div>
         </li>
@@ -376,6 +374,11 @@ var b <span class="token operator">=</span> a<span class="token punctuation">(</
         
         <div class="cube-box ">
             <a href="/tags/内存优化/">#内存优化</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/原型链/">#原型链</a>
         </div>
         
     </div>

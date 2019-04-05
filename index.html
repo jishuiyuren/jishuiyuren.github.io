@@ -99,7 +99,7 @@
     <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
     
     <div class="cube-type">
-        <span class="cube-typed-title">吉水于人的博客</span>
+        <span class="cube-typed-title">吉水于人</span>
         <span class="cube-typed-cursor">|</span>
     </div>
     
@@ -135,7 +135,7 @@
     <header class="cube-background cube-header-background">
         
         <div class="cube-type">
-            <span class="cube-typed-title">吉水于人的博客</span>
+            <span class="cube-typed-title">吉水于人</span>
             <span class="cube-typed-cursor">|</span>
         </div>
         
@@ -265,31 +265,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-我理解的原型链">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2019/03/18/article11/">我理解的原型链</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2019-03-18
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2019/03/18/article11/">Read More</a>
-    </footer>
-</div>
-
 <div class="cube-excerpt" id="cube-excerpt-js异步请求总结">
     <header class="cube-excerpt-header">
         <h1><a href="/2019/03/18/article10/">js异步请求总结</a></h1>
@@ -315,9 +290,9 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-接口请求方式详解">
+<div class="cube-excerpt" id="cube-excerpt-http请求">
     <header class="cube-excerpt-header">
-        <h1><a href="/2019/03/18/article9/">接口请求方式详解</a></h1>
+        <h1><a href="/2019/03/18/article9/">http请求</a></h1>
         <div class="cube-excerpt-header-msg">
             <div class="cube-excerpt-date">
                 <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
@@ -332,9 +307,9 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           
+           <h3 id="http请求"><a href="#http请求" class="headerlink" title="http请求"></a>http请求</h3><p>老生常谈的http请求，简单来说就是几个步骤：域名解析-&gt;发起TCP的3次握手-&gt;建立TCP连接后发起http请求-&gt;服务器响应请求，浏览器得到代码-&gt;浏览器解析代码，并请求html代码中的资源（js、css等）-&gt;浏览器对页面进行渲染呈现给用户。<br>
         
-    </article>
+    </p></article>
     <footer class="cube-excerpt-footer">
         <a class="cube-excerpt-more" href="/2019/03/18/article9/">Read More</a>
     </footer>
@@ -357,7 +332,7 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <p>gis开发侧重于专业知识，相比于其他的前端开发领域，gis功能开发的资料相对较少，我会根据自己的日常项目和学习逐一进行整理，丰富开发资料。由于esri提供的api是用dojo框架开发的，所以在我的博客里涉及到gis开发例子的将是使用dojo语法。今天要给大家介绍一下地图导出模块核心代码。</p>
+           <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>gis开发侧重于专业知识，相比于其他的前端开发领域，gis功能开发的资料相对较少，我会根据自己的日常项目和学习逐一进行整理，丰富开发资料。由于esri提供的api是用dojo框架开发的，所以在我的博客里涉及到gis开发例子的将是使用dojo语法。今天要给大家介绍一下地图导出模块核心代码。</p>
 <p>导出地图需要以下参数：center（地图中心）、scale（导出地图比例尺）、WMTSLayers（WMTS图层）、ArcLayers（arcMap图层）、dpi（像素）、width（地图宽度）、height（地图高度）、extent（当前地图显示范围）、proxyUrl(代理地址)。<br>根据上面的参数，我们需要封装一个ExportMapImg类，包含初始化地图、加载图层、初始化图层导出坐标系、打印几个方法。<br>
         
     </p></article>
@@ -383,40 +358,7 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <p>做微信小程序也有小一个月了，整体来说，做的比较顺利，没有遇到特别难搞的坑，这里还是得感谢腾讯为开发者提供资料齐全的开发文档。想速度上手微信小程序的小伙伴们，戳这里，<a href="https://developers.weixin.qq.com/miniprogram/dev/api/" target="_blank" rel="noopener">微信小程序开发者文档</a></p>
-<p>微信小程序开发中，我们常常需要获取用户信息，我写小程序时是1月份，开始我并不知道接口已经做了调整，然后就直接使用<code>button</code>去获取用户信息，然而，调试时，出现以下提示。<br><img src="../article7/1.png" alt><br>当我去官方文档上查阅获取用户信息接口时，发现其已经做了一些的调整。相信大家都知道，我们在第一次使用某个小程序时会弹出一个授权框，询问用户是否允许获取用户信息。如今接口调整为在用户未授权过的情况下调用此接口，将不再出现授权弹窗，会直接进入 fail 回调。在用户已授权的情况下调用此接口，可成功获取用户信息。</p>
-<p>竟然不再出现授权窗口了，那我们就需要使用button进行引导。</p>
-<pre class=" language-bash"><code class="language-bash"><span class="token operator">&lt;</span>button class<span class="token operator">=</span><span class="token string">'wexin-login'</span> open-type<span class="token operator">=</span><span class="token string">"getUserInfo"</span> lang<span class="token operator">=</span><span class="token string">"zh_CN"</span> bindgetuserinfo<span class="token operator">=</span><span class="token string">"onGotUserInfo"</span><span class="token operator">></span>
-  <span class="token operator">&lt;</span>image class<span class="token operator">=</span><span class="token string">'wexin-icon'</span> src<span class="token operator">=</span><span class="token string">'/assets/images/content/share_wechat.png'</span> /<span class="token operator">></span>
-  <span class="token operator">&lt;</span>text class<span class="token operator">=</span><span class="token string">'wexin-text'</span> open-type<span class="token operator">=</span><span class="token string">"getUserInfo"</span> bindgetuserinfo<span class="token operator">=</span><span class="token string">"onGotUserInfo"</span> lang<span class="token operator">=</span><span class="token string">"zh_CN"</span><span class="token operator">></span>微信登录<span class="token operator">&lt;</span>/text<span class="token operator">></span>
-<span class="token operator">&lt;</span>/button<span class="token operator">></span>
-</code></pre>
-<p>逻辑部分处理为:</p>
-<pre class=" language-bash"><code class="language-bash">  getWXCode: function<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    var that <span class="token operator">=</span> this<span class="token punctuation">;</span>
-    wx.login<span class="token punctuation">(</span><span class="token punctuation">{</span>
-      success: function<span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        api.post<span class="token punctuation">(</span><span class="token string">'/edu/user/WechatAPPLogin'</span>, <span class="token punctuation">{</span>
-            encryptedData: that.data.userInfo.encryptedData,
-            iv: that.data.userInfo.iv,
-            code: res.code
-          <span class="token punctuation">}</span>,
-          function<span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            that.onBack<span class="token punctuation">(</span><span class="token punctuation">)</span>
-            getApp<span class="token punctuation">(</span><span class="token punctuation">)</span>.globalData.userId <span class="token operator">=</span> res.content.userInfo.id
-          <span class="token punctuation">}</span>.bind<span class="token punctuation">(</span>this<span class="token punctuation">)</span>,
-          function<span class="token punctuation">(</span>res<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            wx.showToast<span class="token punctuation">(</span><span class="token punctuation">{</span>
-              title: res.msg,
-              icon: <span class="token string">'none'</span>,
-              duration: 2000
-            <span class="token punctuation">}</span><span class="token punctuation">)</span>
-          <span class="token punctuation">}</span><span class="token punctuation">)</span>
-      <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span>
-  <span class="token punctuation">}</span>
-</code></pre>
-
+           <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>做微信小程序也有小一个月了，整体来说，做的比较顺利，没有遇到特别难搞的坑，这里还是得感谢腾讯为开发者提供资料齐全的开发文档。想速度上手微信小程序的小伙伴们，戳这里，<a href="https://developers.weixin.qq.com/miniprogram/dev/api/" target="_blank" rel="noopener">微信小程序开发者文档</a></p>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -441,58 +383,37 @@
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <p>前几天给一个app做项目经验添加功能时，自己犯了几个错误，于是决定总结一下，算是写成一个demo，给大家参考一下吧。</p>
-<p><img src="../article6/1.png" alt><br>添加工作经验的页面如图1，这是一个用户的详情页面，每条工作经验的右上角，添加了删除按钮，区域的下方有继续添加经历的按钮。说白了，这个功能就是实现对表单数据的增、删、改功能。首先，我从后端接口中获取到用户的工作经验数据（也可能是一个空数组），这块的逻辑我们很容易写出来，就是根据获取到的值进行遍历即可。</p>
-<pre class=" language-bash"><code class="language-bash">    <span class="token operator">&lt;</span>div v-for<span class="token operator">=</span><span class="token string">"(item, index) in experiences"</span> :key<span class="token operator">=</span><span class="token string">"item.id"</span><span class="token operator">></span>
-        <span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">"detail"</span><span class="token operator">></span>
-            <span class="token operator">&lt;</span>image class<span class="token operator">=</span><span class="token string">"closeIcon"</span> :src<span class="token operator">=</span><span class="token string">"iconPath('icon_gb_small')"</span>
-                   @click<span class="token operator">=</span><span class="token string">"removeExperience(item.id)"</span><span class="token operator">></span><span class="token operator">&lt;</span>/image<span class="token operator">></span>
-            <span class="token operator">&lt;</span>text class<span class="token operator">=</span><span class="token string">"unselect-txt"</span><span class="token operator">></span>开始时间<span class="token operator">&lt;</span>/text<span class="token operator">></span>
-            <span class="token operator">&lt;</span>input class<span class="token operator">=</span><span class="token string">"input"</span> type<span class="token operator">=</span><span class="token string">"date"</span>
-                   v-model<span class="token operator">=</span><span class="token string">"item.startDate"</span><span class="token operator">></span><span class="token operator">&lt;</span>/input<span class="token operator">></span>
-            <span class="token operator">&lt;</span>image class<span class="token operator">=</span><span class="token string">"icon"</span> :src<span class="token operator">=</span><span class="token string">"iconPath('icon_pen')"</span><span class="token operator">></span><span class="token operator">&lt;</span>/image<span class="token operator">></span>
-        <span class="token operator">&lt;</span>/div<span class="token operator">></span>
-        <span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">"detail"</span><span class="token operator">></span>
-            <span class="token operator">&lt;</span>text class<span class="token operator">=</span><span class="token string">"unselect-txt"</span><span class="token operator">></span>结束时间<span class="token operator">&lt;</span>/text<span class="token operator">></span>
-            <span class="token operator">&lt;</span>input class<span class="token operator">=</span><span class="token string">"input"</span> type<span class="token operator">=</span><span class="token string">"date"</span>
-                   v-model<span class="token operator">=</span><span class="token string">"item.endDate"</span><span class="token operator">></span><span class="token operator">&lt;</span>/input<span class="token operator">></span>
-            <span class="token operator">&lt;</span>image class<span class="token operator">=</span><span class="token string">"icon"</span> :src<span class="token operator">=</span><span class="token string">"iconPath('icon_pen')"</span><span class="token operator">></span><span class="token operator">&lt;</span>/image<span class="token operator">></span>
-        <span class="token operator">&lt;</span>/div<span class="token operator">></span>
-        <span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">"detail2"</span><span class="token operator">></span>
-            <span class="token operator">&lt;</span>text class<span class="token operator">=</span><span class="token string">"unselect-txt"</span><span class="token operator">></span>从业说明：<span class="token operator">&lt;</span>/text<span class="token operator">></span>
-            <span class="token operator">&lt;</span>textarea  v-model<span class="token operator">=</span><span class="token string">"item.introduction"</span> class<span class="token operator">=</span><span class="token string">"textarea"</span><span class="token operator">></span><span class="token operator">&lt;</span>/textarea<span class="token operator">></span>
-        <span class="token operator">&lt;</span>/div<span class="token operator">></span>
-        <span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">"list-gap"</span><span class="token operator">></span><span class="token operator">&lt;</span>/div<span class="token operator">></span>
-    <span class="token operator">&lt;</span>/div<span class="token operator">></span>
+           <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前几天给一个app做项目经验添加功能时，自己犯了几个错误，于是决定总结一下，算是写成一个demo，给大家参考一下吧。<br>
+        
+    </p></article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/03/17/article6/">Read More</a>
+    </footer>
+</div>
 
-    <span class="token operator">&lt;</span>div<span class="token operator">></span>
-        <span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">"next-btn"</span> @click<span class="token operator">=</span><span class="token string">"addNextExperience"</span><span class="token operator">></span>
-            <span class="token operator">&lt;</span>text class<span class="token operator">=</span><span class="token string">"next-button"</span><span class="token operator">></span>继续添加经历<span class="token operator">&lt;</span>/text<span class="token operator">></span>
-        <span class="token operator">&lt;</span>/div<span class="token operator">></span>
-    <span class="token operator">&lt;</span>/div<span class="token operator">></span> 
-    <span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">"btn"</span> @click<span class="token operator">=</span><span class="token string">"addUserMaterial"</span><span class="token operator">></span>
-            <span class="token operator">&lt;</span>text style<span class="token operator">=</span><span class="token string">"font-size: 28px;color: #ffffff;"</span><span class="token operator">></span>完成<span class="token operator">&lt;</span>/text<span class="token operator">></span>
-    <span class="token operator">&lt;</span>/div<span class="token operator">></span>                          
-</code></pre>
-<p>我们在<code>input</code>和<code>textarea</code>中使用v-model进行数据的双向绑定。我们都知道，vue实现了一套虚拟的DOM，我们不需要直接操作DOM元素，只需要操作数据就可重新渲染页面。而背后的原理得益于高效的Diff算法，具体的原理我不在这阐述。key的作用是为了高效的更新虚拟DOM。所以为了让vue可以区分他们，我们在做循环或相同标签元素的过渡切换时，都有必要使用到key属性，所以在上述循环中我们指定项目经验的id为key值。下面我们开始写新增事件和删除事件。<br>新增</p>
-<pre class=" language-bash"><code class="language-bash">    addNextExperience<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            this.experienceId++
-            this.experiences.push<span class="token punctuation">(</span><span class="token punctuation">{</span>id: this.experienceId, startDate: <span class="token string">''</span>, endDate: <span class="token string">''</span>, introduction: <span class="token string">''</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-</code></pre>
-<p>删除</p>
-<pre class=" language-bash"><code class="language-bash">        removeExperience<span class="token punctuation">(</span>index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            this.experiences <span class="token operator">=</span> this.experiences.filter<span class="token punctuation">(</span>function <span class="token punctuation">(</span>experience<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">return</span> <span class="token punctuation">(</span>index <span class="token operator">!=</span><span class="token operator">=</span> experience.id<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-</code></pre>
-<p>新增事件我使用了一个全局变量experienceId为id赋值，这个experienceId的值为多少合适呢。我们上面通过接口拿到了当前用户的工作经验值，每条工作经验都有一个id号，我首先想到的就是，在我新增时，这个id号的起始值应该为当前用户的工作经验的id号的最大值+1，这样做的原因是为了保证从后端接口取出的id号和我任意一条新增数据的id号都不会相同，这样一来，每一条工作经验的id号才不会出现重复的情况。</p>
+<div class="cube-excerpt" id="cube-excerpt-ES6常用总结">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/03/16/article5/">ES6常用总结</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-03-16
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>文章参考来源:<a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">[ECMAScript 6 入门]</a>  </p>
 
         
     </article>
     <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2019/03/17/article6/">Read More</a>
+        <a class="cube-excerpt-more" href="/2019/03/16/article5/">Read More</a>
     </footer>
 </div>
 
@@ -539,7 +460,7 @@
     
     <div class="count">
         <a class="count articles"><span>15</span>Article</a>
-        <a class="count tags"><span>1</span>Tags</a>
+        <a class="count tags"><span>2</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
 </div>
@@ -614,7 +535,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article11/" title="我理解的原型链">我理解的原型链</a>
+                    <a href="/2019/03/18/article10/" title="js异步请求总结">js异步请求总结</a>
                 </p>
             </div>
         </li>
@@ -636,6 +557,11 @@
         
         <div class="cube-box ">
             <a href="/tags/内存优化/">#内存优化</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/原型链/">#原型链</a>
         </div>
         
     </div>

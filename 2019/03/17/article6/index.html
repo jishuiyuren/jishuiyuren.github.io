@@ -99,7 +99,7 @@
     <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
     
     <div class="cube-type">
-        <span class="cube-typed-title">吉水于人的博客</span>
+        <span class="cube-typed-title">吉水于人</span>
         <span class="cube-typed-cursor">|</span>
     </div>
     
@@ -135,7 +135,7 @@
     <header class="cube-background cube-header-background">
         
         <div class="cube-type">
-            <span class="cube-typed-title">吉水于人的博客</span>
+            <span class="cube-typed-title">吉水于人</span>
             <span class="cube-typed-cursor">|</span>
         </div>
         
@@ -172,8 +172,9 @@
     
     <div class="cube-article-content cube-markdown">
         
-        <p>前几天给一个app做项目经验添加功能时，自己犯了几个错误，于是决定总结一下，算是写成一个demo，给大家参考一下吧。</p>
-<p><img src="../article6/1.png" alt><br>添加工作经验的页面如图1，这是一个用户的详情页面，每条工作经验的右上角，添加了删除按钮，区域的下方有继续添加经历的按钮。说白了，这个功能就是实现对表单数据的增、删、改功能。首先，我从后端接口中获取到用户的工作经验数据（也可能是一个空数组），这块的逻辑我们很容易写出来，就是根据获取到的值进行遍历即可。</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前几天给一个app做项目经验添加功能时，自己犯了几个错误，于是决定总结一下，算是写成一个demo，给大家参考一下吧。<br><a id="more"></a></p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p><img src="../article6/1.png" alt></p>
+<p>添加工作经验的页面如图1，这是一个用户的详情页面，每条工作经验的右上角，添加了删除按钮，区域的下方有继续添加经历的按钮。说白了，这个功能就是实现对表单数据的增、删、改功能。首先，我从后端接口中获取到用户的工作经验数据（也可能是一个空数组），这块的逻辑我们很容易写出来，就是根据获取到的值进行遍历即可。</p>
 <pre class=" language-bash"><code class="language-bash">    <span class="token operator">&lt;</span>div v-for<span class="token operator">=</span><span class="token string">"(item, index) in experiences"</span> :key<span class="token operator">=</span><span class="token string">"item.id"</span><span class="token operator">></span>
         <span class="token operator">&lt;</span>div class<span class="token operator">=</span><span class="token string">"detail"</span><span class="token operator">></span>
             <span class="token operator">&lt;</span>image class<span class="token operator">=</span><span class="token string">"closeIcon"</span> :src<span class="token operator">=</span><span class="token string">"iconPath('icon_gb_small')"</span>
@@ -260,7 +261,7 @@
     
     <div class="count">
         <a class="count articles"><span>15</span>Article</a>
-        <a class="count tags"><span>1</span>Tags</a>
+        <a class="count tags"><span>2</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
 </div>
@@ -335,7 +336,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article11/" title="我理解的原型链">我理解的原型链</a>
+                    <a href="/2019/03/18/article10/" title="js异步请求总结">js异步请求总结</a>
                 </p>
             </div>
         </li>
@@ -357,6 +358,11 @@
         
         <div class="cube-box ">
             <a href="/tags/内存优化/">#内存优化</a>
+        </div>
+        
+        
+        <div class="cube-box ">
+            <a href="/tags/原型链/">#原型链</a>
         </div>
         
     </div>
