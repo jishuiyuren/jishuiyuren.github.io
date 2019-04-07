@@ -173,6 +173,317 @@
     <div class="cube-article-content cube-markdown">
         
         <p>文章参考来源:<a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">[ECMAScript 6 入门]</a>  </p>
+<p>阮一峰的文档讲的比较的详细，我当时在看的时候，也是没有太多的耐心，加上没有实战的话，忘的很快，所以决定根据每个章节，抽离出重要的知识点，将es6整个过一遍，文章中的示例均来源于文档。</p>
+<a id="more"></a>
+<h3 id="一、let和const"><a href="#一、let和const" class="headerlink" title="一、let和const"></a>一、let和const</h3><ul>
+<li>let：申明一个变量，所申明的变量只在let命令所载代码块内有效。<br>（1）循环中使用，循环体外引用报错</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">for</span> <span class="token punctuation">(</span>let i <span class="token operator">=</span> 0<span class="token punctuation">;</span> i <span class="token operator">&lt;</span> 10<span class="token punctuation">;</span> i++<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+<span class="token punctuation">}</span>
+console.log<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+// ReferenceError: i is not defined
+</code></pre>
+<p>（2）不存在变量提升，即必须声明后才可以使用</p>
+<pre class=" language-bash"><code class="language-bash">// var 的情况
+console.log<span class="token punctuation">(</span>foo<span class="token punctuation">)</span><span class="token punctuation">;</span> // 输出undefined
+var foo <span class="token operator">=</span> 2<span class="token punctuation">;</span>
+
+// <span class="token keyword">let</span> 的情况
+console.log<span class="token punctuation">(</span>bar<span class="token punctuation">)</span><span class="token punctuation">;</span> // 报错ReferenceError
+<span class="token keyword">let</span> bar <span class="token operator">=</span> 2<span class="token punctuation">;</span>
+</code></pre>
+<p>（3）暂时性死区，作用域内存在let命令后，所声明的变量就绑定在该区域内，不再受外界的影响</p>
+<pre class=" language-bash"><code class="language-bash">var tmp <span class="token operator">=</span> 123<span class="token punctuation">;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>true<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  tmp <span class="token operator">=</span> <span class="token string">'abc'</span><span class="token punctuation">;</span> // ReferenceError
+  <span class="token keyword">let</span> tmp<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>（4）不允许重复声明</p>
+<pre class=" language-bash"><code class="language-bash">// 报错
+<span class="token keyword">function</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> a <span class="token operator">=</span> 10<span class="token punctuation">;</span>
+  var a <span class="token operator">=</span> 1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+// 报错
+<span class="token keyword">function</span> func<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> a <span class="token operator">=</span> 10<span class="token punctuation">;</span>
+  <span class="token keyword">let</span> a <span class="token operator">=</span> 1<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<ul>
+<li>const：声明一个只读常数，一旦声明，常量的值不可改变<br>（1）只声明，不赋值，变量报错，与let一致，const只在声明所在的块级作用域内有效。</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash">const foo<span class="token punctuation">;</span>
+// SyntaxError: Missing initializer <span class="token keyword">in</span> const declaration
+
+<span class="token keyword">if</span> <span class="token punctuation">(</span>true<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  const MAX <span class="token operator">=</span> 5<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+MAX // Uncaught ReferenceError: MAX is not defined
+</code></pre>
+<p>（2）和let一致，也存在暂存性死区<br>（3）const保证变量指向的内存地址所保存的值不变，所以对于变量为数值、字符串、布尔值这样的简单数据类型，值直接保存在变量所指向的内存地址中，因此直接等于常量。但对于复合型数据，如对象和数组，变量指向但是内存地址，保存但是一个指向实际数据的指针，<code>const</code>只能保证这个指针是固定的，而它指向的数据结构是否可变是不可控制的。</p>
+<pre class=" language-bash"><code class="language-bash">const foo <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+// 为 foo 添加一个属性，可以成功
+foo.prop <span class="token operator">=</span> 123<span class="token punctuation">;</span>
+foo.prop // 123
+foo.prop <span class="token operator">=</span> 235<span class="token punctuation">;</span>
+foo.prop // 235
+
+// 将 foo 指向另一个对象，就会报错
+foo <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span> // TypeError: <span class="token string">"foo"</span> is read-only
+</code></pre>
+<h3 id="二、变量的解构赋值"><a href="#二、变量的解构赋值" class="headerlink" title="二、变量的解构赋值"></a>二、变量的解构赋值</h3><ul>
+<li>数组的解构赋值<br>（1）解构不成功，变量的值变为undefined。不完全匹配的情况下，解构依然成功。</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">let</span> <span class="token punctuation">[</span>a, b, c<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>1, 2, 3<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">[</span>foo, <span class="token punctuation">[</span><span class="token punctuation">[</span>bar<span class="token punctuation">]</span>, baz<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>1, <span class="token punctuation">[</span><span class="token punctuation">[</span>2<span class="token punctuation">]</span>, 3<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  // foo:1,bar:2,baz:3
+
+<span class="token keyword">let</span> <span class="token punctuation">[</span>head, <span class="token punctuation">..</span>.tail<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>1, 2, 3, 4<span class="token punctuation">]</span><span class="token punctuation">;</span>  // head:1,tail:<span class="token punctuation">[</span>2,3,4<span class="token punctuation">]</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">[</span>x, y, <span class="token punctuation">..</span>.z<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  // x:<span class="token string">'a'</span>,y:undefined,z:<span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">[</span>x, y<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>1, 2, 3<span class="token punctuation">]</span><span class="token punctuation">;</span>  // x:1,y:2
+
+</code></pre>
+<p>（2）等号右边为不可遍历的解构，解构报错</p>
+<pre class=" language-bash"><code class="language-bash">// 报错
+<span class="token keyword">let</span> <span class="token punctuation">[</span>foo<span class="token punctuation">]</span> <span class="token operator">=</span> 1<span class="token punctuation">;</span>
+<span class="token keyword">let</span> <span class="token punctuation">[</span>foo<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> <span class="token punctuation">[</span>foo<span class="token punctuation">]</span> <span class="token operator">=</span> NaN<span class="token punctuation">;</span>
+<span class="token keyword">let</span> <span class="token punctuation">[</span>foo<span class="token punctuation">]</span> <span class="token operator">=</span> undefined<span class="token punctuation">;</span>
+<span class="token keyword">let</span> <span class="token punctuation">[</span>foo<span class="token punctuation">]</span> <span class="token operator">=</span> null<span class="token punctuation">;</span>
+<span class="token keyword">let</span> <span class="token punctuation">[</span>foo<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>（3）对于 Set 结构，也可以使用数组的解构赋值</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">let</span> <span class="token punctuation">[</span>x, y, z<span class="token punctuation">]</span> <span class="token operator">=</span> new Set<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'a'</span>, <span class="token string">'b'</span>, <span class="token string">'c'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+x // <span class="token string">"a"</span>
+</code></pre>
+<p>（4）指定默认值，指定默认值时，如果数组成员是<code>null</code>，默认值不会生效，因为<code>null</code>不严格等于<code>undefined</code>。如果默认值是一个表达式时，这个表达式是惰性的，即只有用到时，才会进行求值。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">let</span> <span class="token punctuation">[</span>foo <span class="token operator">=</span> true<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+foo // <span class="token boolean">true</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">[</span>x, y <span class="token operator">=</span> <span class="token string">'b'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'a'</span><span class="token punctuation">]</span><span class="token punctuation">;</span> // x<span class="token operator">=</span><span class="token string">'a'</span>, y<span class="token operator">=</span><span class="token string">'b'</span>
+<span class="token keyword">let</span> <span class="token punctuation">[</span>x, y <span class="token operator">=</span> <span class="token string">'b'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'a'</span>, undefined<span class="token punctuation">]</span><span class="token punctuation">;</span> // x<span class="token operator">=</span><span class="token string">'a'</span>, y<span class="token operator">=</span><span class="token string">'b'</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">[</span>x <span class="token operator">=</span> 1<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>undefined<span class="token punctuation">]</span><span class="token punctuation">;</span>
+x // 1
+
+<span class="token keyword">let</span> <span class="token punctuation">[</span>x <span class="token operator">=</span> 1<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>null<span class="token punctuation">]</span><span class="token punctuation">;</span>
+x // null
+
+<span class="token keyword">function</span> f<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  console.log<span class="token punctuation">(</span><span class="token string">'aaa'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">[</span>x <span class="token operator">=</span> f<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token punctuation">;</span>
+x // 1
+</code></pre>
+<p>（5）默认值可以引用解构赋值的其他变量，但是该变量必须已经声明</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">let</span> <span class="token punctuation">[</span>x <span class="token operator">=</span> 1, y <span class="token operator">=</span> x<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>     // x<span class="token operator">=</span>1<span class="token punctuation">;</span> y<span class="token operator">=</span>1
+<span class="token keyword">let</span> <span class="token punctuation">[</span>x <span class="token operator">=</span> 1, y <span class="token operator">=</span> x<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>2<span class="token punctuation">]</span><span class="token punctuation">;</span>    // x<span class="token operator">=</span>2<span class="token punctuation">;</span> y<span class="token operator">=</span>2
+<span class="token keyword">let</span> <span class="token punctuation">[</span>x <span class="token operator">=</span> 1, y <span class="token operator">=</span> x<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>1, 2<span class="token punctuation">]</span><span class="token punctuation">;</span> // x<span class="token operator">=</span>1<span class="token punctuation">;</span> y<span class="token operator">=</span>2
+<span class="token keyword">let</span> <span class="token punctuation">[</span>x <span class="token operator">=</span> y, y <span class="token operator">=</span> 1<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>     // ReferenceError: y is not defined
+</code></pre>
+<ul>
+<li>对象的解构赋值<br>（1）对象解构不需要按顺序来取值，变量与属性名相同，即可取到值，解构失败，变量的值等于<code>undefined</code></li>
+</ul>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">let</span> <span class="token punctuation">{</span> bar, foo <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span> foo: <span class="token string">'aaa'</span>, bar: <span class="token string">'bbb'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+foo // <span class="token string">"aaa"</span>
+bar // <span class="token string">"bbb"</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">{</span> baz <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span> foo: <span class="token string">'aaa'</span>, bar: <span class="token string">'bbb'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+baz // undefined
+</code></pre>
+<p>（2）对象解构也可以用于嵌套结构的对象</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">let</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+  p: <span class="token punctuation">[</span>
+    <span class="token string">'Hello'</span>,
+    <span class="token punctuation">{</span> y: <span class="token string">'World'</span> <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">{</span> p: <span class="token punctuation">[</span>x, <span class="token punctuation">{</span> y <span class="token punctuation">}</span><span class="token punctuation">]</span> <span class="token punctuation">}</span> <span class="token operator">=</span> obj<span class="token punctuation">;</span>
+x // <span class="token string">"Hello"</span>
+y // <span class="token string">"World"</span>
+
+</code></pre>
+<p>（3）如果解构模式是嵌套的对象，而子对象的父属性不存在，将会报错</p>
+<pre class=" language-bash"><code class="language-bash">// 报错
+<span class="token keyword">let</span> <span class="token punctuation">{</span>foo: <span class="token punctuation">{</span>bar<span class="token punctuation">}</span><span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span>baz: <span class="token string">'baz'</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>（4）对象的解构赋值可以取到继承的属性</p>
+<pre class=" language-bash"><code class="language-bash">const obj1 <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+const obj2 <span class="token operator">=</span> <span class="token punctuation">{</span> foo: <span class="token string">'bar'</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+Object.setPrototypeOf<span class="token punctuation">(</span>obj1, obj2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+const <span class="token punctuation">{</span> foo <span class="token punctuation">}</span> <span class="token operator">=</span> obj1<span class="token punctuation">;</span>
+foo // <span class="token string">"bar"</span>
+</code></pre>
+<p>（5）对象的解构也可以指定默认值，默认值生效的条件是，对象的属性严格等于<code>undefined</code></p>
+<pre class=" language-bash"><code class="language-bash">var <span class="token punctuation">{</span>x <span class="token operator">=</span> 3<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span>x: undefined<span class="token punctuation">}</span><span class="token punctuation">;</span>
+x // 3
+
+var <span class="token punctuation">{</span>x <span class="token operator">=</span> 3<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span>x: null<span class="token punctuation">}</span><span class="token punctuation">;</span>
+x // null
+</code></pre>
+<p>（6）对数组进行对象属性解构</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">let</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span>1, 2, 3<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> <span class="token punctuation">{</span>0 <span class="token keyword">:</span> first, <span class="token punctuation">[</span>arr.length - 1<span class="token punctuation">]</span> <span class="token keyword">:</span> last<span class="token punctuation">}</span> <span class="token operator">=</span> arr<span class="token punctuation">;</span>
+first // 1
+last // 3
+</code></pre>
+<ul>
+<li>字符串解构赋值</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash">const <span class="token punctuation">[</span>a, b, c, d, e<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">;</span>
+a // <span class="token string">"h"</span>
+b // <span class="token string">"e"</span>
+c // <span class="token string">"l"</span>
+d // <span class="token string">"l"</span>
+e // <span class="token string">"o"</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">{</span>length <span class="token keyword">:</span> len<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">;</span>
+len // 5
+</code></pre>
+<ul>
+<li>数值和布尔值的解构赋值<br>解构赋值时，如果等号右边是数值和布尔值，则会先转为对象，由于<code>undefined</code>和<code>null</code>无法转为对象，所以对它们进行解构赋值，都会报错。</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">let</span> <span class="token punctuation">{</span>toString: s<span class="token punctuation">}</span> <span class="token operator">=</span> 123<span class="token punctuation">;</span>
+s <span class="token operator">==</span><span class="token operator">=</span> Number.prototype.toString // <span class="token boolean">true</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">{</span> prop: x <span class="token punctuation">}</span> <span class="token operator">=</span> undefined<span class="token punctuation">;</span> // TypeError
+<span class="token keyword">let</span> <span class="token punctuation">{</span> prop: y <span class="token punctuation">}</span> <span class="token operator">=</span> null<span class="token punctuation">;</span> // TypeError
+</code></pre>
+<p>*函数参数解构赋值</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token punctuation">[</span><span class="token punctuation">[</span>1, 2<span class="token punctuation">]</span>, <span class="token punctuation">[</span>3, 4<span class="token punctuation">]</span><span class="token punctuation">]</span>.map<span class="token punctuation">((</span><span class="token punctuation">[</span>a, b<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> a + b<span class="token punctuation">)</span><span class="token punctuation">;</span>  // <span class="token punctuation">[</span> 3, 7 <span class="token punctuation">]</span>
+</code></pre>
+<p>函数参数的解构也可以使用默认值，如果解构失败，参数值等于默认值，如果参数是一个对象，对这个对象进行解构，得到参数的值</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">function</span> move<span class="token punctuation">(</span><span class="token punctuation">{</span>x, y<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span> x: 0, y: 0 <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token punctuation">[</span>x, y<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+move<span class="token punctuation">(</span><span class="token punctuation">{</span>x: 3, y: 8<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> // <span class="token punctuation">[</span>3, 8<span class="token punctuation">]</span>
+move<span class="token punctuation">(</span><span class="token punctuation">{</span>x: 3<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> // <span class="token punctuation">[</span>3, undefined<span class="token punctuation">]</span>
+move<span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> // <span class="token punctuation">[</span>undefined, undefined<span class="token punctuation">]</span>
+move<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> // <span class="token punctuation">[</span>0, 0<span class="token punctuation">]</span>
+
+// undefined就会触发函数参数的默认值
+<span class="token punctuation">[</span>1, undefined, 3<span class="token punctuation">]</span>.map<span class="token punctuation">((</span>x <span class="token operator">=</span> <span class="token string">'yes'</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> x<span class="token punctuation">)</span><span class="token punctuation">;</span> // <span class="token punctuation">[</span> 1, <span class="token string">'yes'</span>, 3 <span class="token punctuation">]</span>
+
+</code></pre>
+<ul>
+<li>不能使用圆括号<br>（1）变量声明语句</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash">// 全部报错
+<span class="token keyword">let</span> <span class="token punctuation">[</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">{</span>x: <span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>x: c<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">{</span><span class="token punctuation">(</span>x: c<span class="token punctuation">)</span><span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">{</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>: c<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> <span class="token punctuation">{</span> o: <span class="token punctuation">(</span><span class="token punctuation">{</span> p: p <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span> o: <span class="token punctuation">{</span> p: 2 <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>（2）函数参数声明</p>
+<pre class=" language-bash"><code class="language-bash">// 报错
+<span class="token keyword">function</span> f<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">(</span>z<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> z<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+// 报错
+<span class="token keyword">function</span> f<span class="token punctuation">(</span><span class="token punctuation">[</span>z,<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> x<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</code></pre>
+<p>（3）赋值语句模式</p>
+<pre class=" language-bash"><code class="language-bash">// 全部报错
+<span class="token punctuation">(</span><span class="token punctuation">{</span> p: a <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">{</span> p: 42 <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">(</span><span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token punctuation">[</span>5<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">[</span><span class="token punctuation">(</span><span class="token punctuation">{</span> p: a <span class="token punctuation">}</span><span class="token punctuation">)</span>, <span class="token punctuation">{</span> x: c <span class="token punctuation">}</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token punctuation">}</span>, <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>可使用圆括号<br>赋值语句非模式部分，可使用圆括号</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash"><span class="token punctuation">[</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>3<span class="token punctuation">]</span><span class="token punctuation">;</span> // 正确
+<span class="token punctuation">(</span><span class="token punctuation">{</span> p: <span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span> // 正确
+<span class="token punctuation">[</span><span class="token punctuation">(</span>parseInt.prop<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>3<span class="token punctuation">]</span><span class="token punctuation">;</span> // 正确
+</code></pre>
+<h3 id="三、Set和Map数据结构"><a href="#三、Set和Map数据结构" class="headerlink" title="三、Set和Map数据结构"></a>三、Set和Map数据结构</h3><ul>
+<li>set：set数据结构类似于数组，但是成员的值是唯一的，没有重复值；set本身是一个构造函数，用来生成set数据结构</li>
+</ul>
+<p>（1）去除数组重复成员</p>
+<pre class=" language-bash"><code class="language-bash">const <span class="token keyword">set</span> <span class="token operator">=</span> new Set<span class="token punctuation">(</span><span class="token punctuation">[</span>1, 2, 3, 4, 4<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span><span class="token punctuation">..</span>.set<span class="token punctuation">]</span>  // <span class="token punctuation">[</span>1, 2, 3, 4<span class="token punctuation">]</span>
+</code></pre>
+<p>（2）set四个方法</p>
+<ul>
+<li>add(value)：添加某个值，返回 Set 结构本身。</li>
+<li>delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。</li>
+<li>has(value)：返回一个布尔值，表示该值是否为Set的成员。</li>
+<li>clear()：清除所有成员，没有返回值。</li>
+</ul>
+<p>（3）Array.from方法可以将 Set 结构转为数组</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">function</span> dedupe<span class="token punctuation">(</span>array<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> Array.from<span class="token punctuation">(</span>new Set<span class="token punctuation">(</span>array<span class="token punctuation">))</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+dedupe<span class="token punctuation">(</span><span class="token punctuation">[</span>1, 1, 2, 3<span class="token punctuation">]</span><span class="token punctuation">)</span> // <span class="token punctuation">[</span>1, 2, 3<span class="token punctuation">]</span>
+</code></pre>
+<p>（4）遍历操作，set结构没有键名，只有键值，所以<code>keys</code>和<code>values</code>方法得到的值是相同的</p>
+<ul>
+<li>keys()：返回键名的遍历器</li>
+<li>values()：返回键值的遍历器</li>
+<li>entries()：返回键值对的遍历器</li>
+<li>forEach()：使用回调函数遍历每个成员</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">let</span> <span class="token keyword">set</span> <span class="token operator">=</span> new Set<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'red'</span>, <span class="token string">'green'</span>, <span class="token string">'blue'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span>let item of set.keys<span class="token punctuation">(</span><span class="token punctuation">))</span> <span class="token punctuation">{</span>
+  console.log<span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+// red
+// green
+// blue
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span>let item of set.values<span class="token punctuation">(</span><span class="token punctuation">))</span> <span class="token punctuation">{</span>
+  console.log<span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+// red
+// green
+// blue
+
+<span class="token keyword">for</span> <span class="token punctuation">(</span>let item of set.entries<span class="token punctuation">(</span><span class="token punctuation">))</span> <span class="token punctuation">{</span>
+  console.log<span class="token punctuation">(</span>item<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+// <span class="token punctuation">[</span><span class="token string">"red"</span>, <span class="token string">"red"</span><span class="token punctuation">]</span>
+// <span class="token punctuation">[</span><span class="token string">"green"</span>, <span class="token string">"green"</span><span class="token punctuation">]</span>
+// <span class="token punctuation">[</span><span class="token string">"blue"</span>, <span class="token string">"blue"</span><span class="token punctuation">]</span>
+</code></pre>
+<p>（5）数组的map和filter方法用于 Set</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">let</span> a <span class="token operator">=</span> new Set<span class="token punctuation">(</span><span class="token punctuation">[</span>1, 2, 3<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">let</span> b <span class="token operator">=</span> new Set<span class="token punctuation">(</span><span class="token punctuation">[</span>4, 3, 2<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+// 并集
+<span class="token keyword">let</span> union <span class="token operator">=</span> new Set<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">..</span>.a, <span class="token punctuation">..</span>.b<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+// Set <span class="token punctuation">{</span>1, 2, 3, 4<span class="token punctuation">}</span>
+
+// 交集
+<span class="token keyword">let</span> intersect <span class="token operator">=</span> new Set<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">..</span>.a<span class="token punctuation">]</span>.filter<span class="token punctuation">(</span>x <span class="token operator">=</span><span class="token operator">></span> b.has<span class="token punctuation">(</span>x<span class="token punctuation">))</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+// <span class="token keyword">set</span> <span class="token punctuation">{</span>2, 3<span class="token punctuation">}</span>
+
+// 差集
+<span class="token keyword">let</span> difference <span class="token operator">=</span> new Set<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">..</span>.a<span class="token punctuation">]</span>.filter<span class="token punctuation">(</span>x <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">!</span>b.has<span class="token punctuation">(</span>x<span class="token punctuation">))</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+// Set <span class="token punctuation">{</span>1<span class="token punctuation">}</span>
+</code></pre>
 
     </div>
 </div>
@@ -214,7 +525,7 @@
     
     <div class="count">
         <a class="count articles"><span>15</span>Article</a>
-        <a class="count tags"><span>2</span>Tags</a>
+        <a class="count tags"><span>3</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
 </div>
@@ -263,7 +574,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article13/" title="article13">article13</a>
+                    <a href="/2019/03/18/article13/" title="搭建一个weex项目">搭建一个weex项目</a>
                 </p>
             </div>
         </li>
@@ -310,12 +621,17 @@
         
         
         <div class="cube-box ">
-            <a href="/tags/内存优化/">#内存优化</a>
+            <a href="/tags/原型链/">#原型链</a>
         </div>
         
         
         <div class="cube-box ">
-            <a href="/tags/原型链/">#原型链</a>
+            <a href="/tags/内存优化/">#内存优化</a>
+        </div>
+        
+        
+        <div class="cube-box-bg ">
+            <a href="/tags/weex/">#weex</a>
         </div>
         
     </div>
