@@ -63,22 +63,12 @@
         
         <li>
             <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
-            <a href="/">首页</a>
+            <a href="/">主页</a>
         </li>
         
         <li>
             <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
             <a href="/archives">归档</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
-            <a href="/categories">分类</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
-            <a href="/about-me">关于我</a>
         </li>
         
     </ul>
@@ -99,7 +89,7 @@
     <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
     
     <div class="cube-type">
-        <span class="cube-typed-title">吉水于人</span>
+        <span class="cube-typed-title">吉水于人的笔记</span>
         <span class="cube-typed-cursor">|</span>
     </div>
     
@@ -135,7 +125,7 @@
     <header class="cube-background cube-header-background">
         
         <div class="cube-type">
-            <span class="cube-typed-title">吉水于人</span>
+            <span class="cube-typed-title">吉水于人的笔记</span>
             <span class="cube-typed-cursor">|</span>
         </div>
         
@@ -156,6 +146,32 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-ES6常用总结">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/03/16/article5/">ES6常用总结</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-03-16
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <p>文章参考来源:<a href="http://es6.ruanyifeng.com/" target="_blank" rel="noopener">[ECMAScript 6 入门]</a>  </p>
+<p>阮一峰的文档讲的比较的详细，我当时在看的时候，也是没有太多的耐心，加上没有实战的话，忘的很快，所以决定根据每个章节，抽离出重要的知识点，将es6整个过一遍，文章中的示例均来源于文档。</p>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/03/16/article5/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-正则表达式化整为零">
     <header class="cube-excerpt-header">
         <h1><a href="/2019/03/15/article4/">正则表达式化整为零</a></h1>
@@ -209,86 +225,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-地图出图/打印">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2019/03/15/article/">地图出图/打印</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2019-03-15
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <p>地图打印输出作为webgis较为常用的一个模块，由于其实现过程和参数较为复杂，对其功能的调整和扩展，通常是前端开发中一个较为头疼的事情 。本文将结合项目经验介绍前端实现地图导出三个主要途径的实现过程及注意事项。功能有限，内容不全面，如有错误和不足请指出。</p>
-<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><h3 id="纯前端"><a href="#纯前端" class="headerlink" title="纯前端"></a>纯前端</h3><p>支持wmts服务（1）、arcgis服务（2）和GraphicLayer（3）三种类型组合导出图片。<br>当系统中接入wmts服务时，ArcgisServer自带的打印服务和前端截图插件不能满足需求（截图wmts图层为空白），具体原因就未做深入；刚好项目碰到这个问题，好几个重要功能都受到影响,因此有了这个解决方案</p>
-<p>wmts服务添加到map后arcgisapi会根据当前视图计算用于显示瓦片，并通过二维变换让所有图片拼接显示。这些变换的参数在图层对象中都能获取到，根据这些变换参数可以将瓦片手动拼成‘一张图片’。功能主要解决的问题还是资源跨域问题，瓦片要转换为base64编码的图片，然后拼合成一张图片，最后在使用前端截图插件<code>dom-to-image</code>或<code>html2canvas</code>进行图片生成。</p>
-<p>1.初始化map对象，div显示层级为负，设置map的<code>中心点</code>和<code>比例尺</code><br>2.添加底图和要素图形<br>(1)有wmts:<br>为保证wmts服务的瓦片获取正确无误，必须全部添加到map上，监听每个服务的<code>update-end</code>事件，不添加arcgis服务<br>(2)无wmts:<br>arcgis服务只需添加一个即可，我们只是需要map初始化完成后的extent，监听服务的<code>load</code>事件<br>3.待上述事件全部抛出，开始打印准备，创建打印根节点元素(层级设为负)<br>  (1)wmts服务瓦片获取并转为base64，拼合做位置变换，完成后返回服务图片容器的元素节点<br>  (2)arcgis服务export图片，dpi、bbox、height、width、sr、visibleLayers，每个服务都要进行请求，都完成后返回服务图片容器的元素节点（因为gp服务导出的图片不透明，所以每个服务都要请求）<br>4、将3中返回的元素加入打印根结点元素，克隆map中要素图层的svg元素，加入打印根节点元素<br>5、使用截图插件出图，让完成事件抛出</p>
-<pre class=" language-bash"><code class="language-bash">var exportImg <span class="token operator">=</span> new ExportMapImg<span class="token punctuation">(</span><span class="token punctuation">{</span>
-        center: this.map.extent.getCenter<span class="token punctuation">(</span><span class="token punctuation">)</span>,
-        scale: this.map.getScale<span class="token punctuation">(</span><span class="token punctuation">)</span>,
-        WMTSLayers: <span class="token punctuation">[</span>new WMTS<span class="token punctuation">(</span>url,<span class="token punctuation">..</span>.<span class="token punctuation">)</span>,new WMTS<span class="token punctuation">(</span>url,<span class="token punctuation">..</span>.<span class="token punctuation">)</span><span class="token punctuation">]</span>,
-        ArcLayers: <span class="token punctuation">[</span><span class="token punctuation">{</span>url:<span class="token string">'http://192.168.200.113:6080/arcgis/rest/services/CDYZT/CHDZTGH/MapServer'</span>,visibleLayers:<span class="token punctuation">[</span>101<span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">]</span>,
-        dpi: this.dpi,
-        width: width,
-        height: height    
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    on.once<span class="token punctuation">(</span>exportImg, <span class="token string">'export-success'</span>, <span class="token keyword">function</span> <span class="token punctuation">(</span>url<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        exportImg.downLoad<span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        exportImg <span class="token operator">=</span> null<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<p>IE支持GraphicLayer导出<br>html2canvas在ie中使用不支持svg的输出；<br>将svg输出为Blob地址和svgbase64地址赋给img，然后绘制在canvas会出现跨域而污染画布不能使用<code>toBlob()、toDataURL()、getImageData()</code>；<br>IE报‘SCRIPT5022: SecurityError’错误：网上说的是跨域原因，解决方案有3个：<br>img. crossOrigin设置 、插件和ajax从后台获取<br>1.插件：<code>canvg.js</code>，以及canvg的依赖<code>rgbcolor.js、stackblur-canvas.js</code>，在plugins目录下，请在项目中引用，本人的引入位置：成功(只需要引入插件依赖即可，处理部分已经封装)<br>2.后台（一个传入什么返回什么的接口）：失败(SCRIPT5022: SecurityError)<br>从使用了后台测试后基本排除了跨域的原因，因为直接使用base64Png图片不设置图片跨域绘制到canvas里，canvas的像素操作不受影响，这也就说明问题可能出在IE的canvas对象对svg图片的支持上<br>所以目前不考虑后台转化支持的话，前端只能通过canvg.js将svg绘制在canvas里（个人见解，如果大家有更好的方式请务必告知一下）</p>
-<p>DPI相关内容<br>dpi=96:每英寸点数<br>1in=2.54cm<br>一般情况下，提高export接口导出图片的精度，如下图：（地址）单纯提高dpi。从结果来看范围是一致了，但是出图的比例尺变化了<br><img src="../article/1.png" alt><br>将dpi和尺寸乘以相同倍数，如下图：导出范围一致，比例尺一致<br><img src="../article/2.png" alt><br>举例：假如需要打印一张照片2inX2in（dpi=100）这时像素尺寸应为200pxX200px<br>    假如还需要打印一张照片2inX2in (dpi=300) 这时像素尺寸应为600pxX600px<br>当只有像素尺寸200pxX200px图片，打印一张2inX2in的照片dpi=300，打印机会进行栅格化处理，将（200px→600px）X (200px→600px)输出打印，这种情况下打印的照片应该会出现平时所说的马赛克<br>以上内容个人见解，正确性未知；为什么要讲这个内容？<br>因为wmts服务切片一般都是默认的dpi=96，所以想要输出更高精度的图片，也就和上面例子中一样，要将切片栅格化放大处理后，在输出，结果就是严重失真<br>因此对更高dpi未做支持，初始化参数中有这个内容，那只有arcgis服务export接口会使用到，传高了服务返回还会变慢，所以默认96；</p>
-<h3 id="GP-服务"><a href="#GP-服务" class="headerlink" title="GP 服务"></a>GP 服务</h3><p>GP服务图片导出：一张图和多规基线用的就是这个方式，但是很多项目都接入的wmts服务，导出的图片没有wmts图层的内容，也就有了前面的前端解决方案<br>为了对照，我们还是说一下GP服务的使用：（地址）<br>打印模板可配置的内容还有很多详见(api)</p>
-<pre class=" language-bash"><code class="language-bash">//创建地图打印对象
-var printMap <span class="token operator">=</span> new PrintTask<span class="token punctuation">(</span>this.config.serviceUrl<span class="token punctuation">)</span><span class="token punctuation">;</span>
-//创建地图打印模版
-var template <span class="token operator">=</span> new PrintTemplate<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-//创建地图的打印参数，参数里面包括：模版和地图
-var params <span class="token operator">=</span> new PrintParameters<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-//输出图片的空间参考
-printMap.outSpatialReference <span class="token operator">=</span> this.map.spatialReference<span class="token punctuation">;</span>
-//打印图片的各种参数
-template.exportOptions <span class="token operator">=</span> <span class="token punctuation">{</span>
-    width: this.map.width,
-    height: this.map.height,
-    dpi: 96
-    <span class="token punctuation">}</span><span class="token punctuation">;</span>
-//打印输出的格式
-template.format <span class="token operator">=</span> <span class="token string">'JPG'</span><span class="token punctuation">;</span>
-//输出地图的布局
-template.layout <span class="token operator">=</span> <span class="token string">'MAP_ONLY'</span><span class="token punctuation">;</span>
-// PrintTemplate
-//设置参数地图
-params.map <span class="token operator">=</span> this.map<span class="token punctuation">;</span>
-//设置参数模版
-params.template <span class="token operator">=</span> template<span class="token punctuation">;</span>
-//运行结果
-printMap.execute<span class="token punctuation">(</span>params, lang.hitch<span class="token punctuation">(</span>this, <span class="token keyword">function</span> <span class="token punctuation">(</span>result<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>result<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        console.log<span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span><span class="token punctuation">)</span>, lang.hitch<span class="token punctuation">(</span>this, <span class="token keyword">function</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        console.log<span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span><span class="token punctuation">))</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-</code></pre>
-
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2019/03/15/article/">Read More</a>
-    </footer>
-</div>
-
 <div class="cube-excerpt" id="cube-excerpt-多坐标系下地图面积测量">
     <header class="cube-excerpt-header">
         <h1><a href="/2019/03/13/article2/">多坐标系下地图面积测量</a></h1>
@@ -306,17 +242,7 @@ printMap.execute<span class="token punctuation">(</span>params, lang.hitch<span 
     <article class="cube-excerpt-entry cube-markdown">
         
         
-           <pre class=" language-bash"><code class="language-bash">    <span class="token keyword">function</span> calArea<span class="token punctuation">(</span>polygon, spatialReference<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>spatialReference.isWebMercator<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">||</span> spatialReference.wkid <span class="token operator">==</span> <span class="token string">"4326"</span> <span class="token operator">||</span> spatialReference.wkid <span class="token operator">==</span> <span class="token string">"4490"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> geometryEngine.geodesicArea<span class="token punctuation">(</span>polygon, <span class="token string">"square-meters"</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>spatialReference.wkid <span class="token operator">==</span> <span class="token string">"4610"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> geodesicUtils.geodesicAreas<span class="token punctuation">(</span><span class="token punctuation">[</span>polygon<span class="token punctuation">]</span>, esriUnits.SQUARE_METERS<span class="token punctuation">)</span><span class="token punctuation">[</span>0<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> geometryEngine.planarArea<span class="token punctuation">(</span>polygon, <span class="token string">"square-meters"</span><span class="token punctuation">)</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-</code></pre>
-
+           <h3 id="关于坐标系"><a href="#关于坐标系" class="headerlink" title="关于坐标系"></a>关于坐标系</h3><p>说到坐标系，作为一个地理信息系统专业的学生，我也一度比较的糊涂，今天，既然要做这样一个需求，那正好趁这个机会把坐标系这块整理一下。我们常用的坐标系有：2000中国大地坐标系（CGCS2000）、1980西安坐标系、1954北京坐标系统、WGS84坐标系（GPS数据所采用的坐标系统），在编程中也会遇到不同坐标系、不同的投影方式、不同的投影分带，需要进行转换、投影等，所以有必要认识一下WKID。</p>
         
     </article>
     <footer class="cube-excerpt-footer">
@@ -326,11 +252,11 @@ printMap.execute<span class="token punctuation">(</span>params, lang.hitch<span 
 
 <div class="cube-excerpt" id="cube-excerpt-我理解的原型链">
     <header class="cube-excerpt-header">
-        <h1><a href="/2018/03/18/article11/">我理解的原型链</a></h1>
+        <h1><a href="/2018/11/22/article11/">我理解的原型链</a></h1>
         <div class="cube-excerpt-header-msg">
             <div class="cube-excerpt-date">
                 <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2018-03-18
+                2018-11-22
             </div>
             <div class="cube-excerpt-tags">
                 <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
@@ -353,7 +279,7 @@ printMap.execute<span class="token punctuation">(</span>params, lang.hitch<span 
         
     </article>
     <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2018/03/18/article11/">Read More</a>
+        <a class="cube-excerpt-more" href="/2018/11/22/article11/">Read More</a>
     </footer>
 </div>
 
@@ -422,7 +348,7 @@ printMap.execute<span class="token punctuation">(</span>params, lang.hitch<span 
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/04/02/article15/" title="视频播放进度记录">视频播放进度记录</a>
+                    <a href="/2019/04/09/article/" title="地图出图/打印">地图出图/打印</a>
                 </p>
             </div>
             
@@ -436,7 +362,7 @@ printMap.execute<span class="token punctuation">(</span>params, lang.hitch<span 
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/04/02/article14/" title="微信小程序的上拉加载功能">微信小程序的上拉加载功能</a>
+                    <a href="/2019/04/02/article15/" title="视频播放进度记录">视频播放进度记录</a>
                 </p>
             </div>
         </li>
@@ -449,7 +375,7 @@ printMap.execute<span class="token punctuation">(</span>params, lang.hitch<span 
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article13/" title="搭建一个weex项目">搭建一个weex项目</a>
+                    <a href="/2019/04/02/article14/" title="微信小程序的上拉加载功能">微信小程序的上拉加载功能</a>
                 </p>
             </div>
         </li>
@@ -462,7 +388,7 @@ printMap.execute<span class="token punctuation">(</span>params, lang.hitch<span 
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article12/" title="arcgis api + webpack前端工程化开发">arcgis api + webpack前端工程化开发</a>
+                    <a href="/2019/03/18/article13/" title="搭建一个weex项目">搭建一个weex项目</a>
                 </p>
             </div>
         </li>
@@ -475,7 +401,7 @@ printMap.execute<span class="token punctuation">(</span>params, lang.hitch<span 
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article10/" title="js异步请求总结">js异步请求总结</a>
+                    <a href="/2019/03/18/article12/" title="arcgis api + webpack前端工程化开发">arcgis api + webpack前端工程化开发</a>
                 </p>
             </div>
         </li>
@@ -485,32 +411,6 @@ printMap.execute<span class="token punctuation">(</span>params, lang.hitch<span 
 </div>
 
 
-
-
-
-<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
-    <div class="title">
-        <a href="/tags">Tagcloud</a>
-    </div>
-    <div class="cube-boxs">
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/原型链/">#原型链</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/内存优化/">#内存优化</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/tags/weex/">#weex</a>
-        </div>
-        
-    </div>
-</div>
 
 
 

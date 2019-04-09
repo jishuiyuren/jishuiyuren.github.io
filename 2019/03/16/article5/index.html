@@ -63,22 +63,12 @@
         
         <li>
             <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
-            <a href="/">首页</a>
+            <a href="/">主页</a>
         </li>
         
         <li>
             <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
             <a href="/archives">归档</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
-            <a href="/categories">分类</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
-            <a href="/about-me">关于我</a>
         </li>
         
     </ul>
@@ -99,7 +89,7 @@
     <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
     
     <div class="cube-type">
-        <span class="cube-typed-title">吉水于人</span>
+        <span class="cube-typed-title">吉水于人的笔记</span>
         <span class="cube-typed-cursor">|</span>
     </div>
     
@@ -135,7 +125,7 @@
     <header class="cube-background cube-header-background">
         
         <div class="cube-type">
-            <span class="cube-typed-title">吉水于人</span>
+            <span class="cube-typed-title">吉水于人的笔记</span>
             <span class="cube-typed-cursor">|</span>
         </div>
         
@@ -484,6 +474,13 @@ dedupe<span class="token punctuation">(</span><span class="token punctuation">[<
 <span class="token keyword">let</span> difference <span class="token operator">=</span> new Set<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">..</span>.a<span class="token punctuation">]</span>.filter<span class="token punctuation">(</span>x <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">!</span>b.has<span class="token punctuation">(</span>x<span class="token punctuation">))</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 // Set <span class="token punctuation">{</span>1<span class="token punctuation">}</span>
 </code></pre>
+<ul>
+<li><p>WeakSet<br>（1）WeakSet的成员只能是对象，不能是任何其他类型的值<br>（2）WeakSet中的对象是弱引用，如果其他对象不再引用该对象，则垃圾回收机制会自动将该变量所占的内存进行回收，所以WeakSet只适合临时存储对象。WeakSet中对象拥有数量多少个，取决于垃圾回收机制什么时候运行，所以WeakSet的对象个数是不确定的，所以WeakSet不能进行遍历。<br>（3）WeakSet是一个构造函数，可以使用<code>new</code>命令，创建WeakSet数据结构</p>
+</li>
+<li><p>Map<br>（1）类似数组，键值对的集合，键的范围不局限于字符串，各种类型的值都可以做键。<br>（2）Map如果对同一个键多次赋值，后面的值将覆盖前面的值</p>
+</li>
+</ul>
+<h3 id="四、Promise-对象"><a href="#四、Promise-对象" class="headerlink" title="四、Promise 对象"></a>四、Promise 对象</h3><p>Promise 是一种异步编程的解决方案。<br>（1）对象的状态不受外界影响。Promise对象代表一个异步操作，有三种状态：<code>pending</code>（进行中）、<code>fullfilled</code>（已成功）和<code>rejected</code>（已失败）<br>（2）一旦状态改变，就不会再变，任何时候都可以得到这个结果。对象状态的改变只能从pending到fullfilled或pending 到rejected。一旦情况发生了，其状态就已凝固，不会再发生改变。</p>
 
     </div>
 </div>
@@ -547,7 +544,7 @@ dedupe<span class="token punctuation">(</span><span class="token punctuation">[<
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/04/02/article15/" title="视频播放进度记录">视频播放进度记录</a>
+                    <a href="/2019/04/09/article/" title="地图出图/打印">地图出图/打印</a>
                 </p>
             </div>
             
@@ -561,7 +558,7 @@ dedupe<span class="token punctuation">(</span><span class="token punctuation">[<
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/04/02/article14/" title="微信小程序的上拉加载功能">微信小程序的上拉加载功能</a>
+                    <a href="/2019/04/02/article15/" title="视频播放进度记录">视频播放进度记录</a>
                 </p>
             </div>
         </li>
@@ -574,7 +571,7 @@ dedupe<span class="token punctuation">(</span><span class="token punctuation">[<
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article13/" title="搭建一个weex项目">搭建一个weex项目</a>
+                    <a href="/2019/04/02/article14/" title="微信小程序的上拉加载功能">微信小程序的上拉加载功能</a>
                 </p>
             </div>
         </li>
@@ -587,7 +584,7 @@ dedupe<span class="token punctuation">(</span><span class="token punctuation">[<
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article12/" title="arcgis api + webpack前端工程化开发">arcgis api + webpack前端工程化开发</a>
+                    <a href="/2019/03/18/article13/" title="搭建一个weex项目">搭建一个weex项目</a>
                 </p>
             </div>
         </li>
@@ -600,7 +597,7 @@ dedupe<span class="token punctuation">(</span><span class="token punctuation">[<
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article10/" title="js异步请求总结">js异步请求总结</a>
+                    <a href="/2019/03/18/article12/" title="arcgis api + webpack前端工程化开发">arcgis api + webpack前端工程化开发</a>
                 </p>
             </div>
         </li>
@@ -610,32 +607,6 @@ dedupe<span class="token punctuation">(</span><span class="token punctuation">[<
 </div>
 
 
-
-
-
-<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
-    <div class="title">
-        <a href="/tags">Tagcloud</a>
-    </div>
-    <div class="cube-boxs">
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/原型链/">#原型链</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/内存优化/">#内存优化</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/tags/weex/">#weex</a>
-        </div>
-        
-    </div>
-</div>
 
 
 

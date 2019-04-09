@@ -63,22 +63,12 @@
         
         <li>
             <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
-            <a href="/">首页</a>
+            <a href="/">主页</a>
         </li>
         
         <li>
             <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
             <a href="/archives">归档</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
-            <a href="/categories">分类</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
-            <a href="/about-me">关于我</a>
         </li>
         
     </ul>
@@ -99,7 +89,7 @@
     <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
     
     <div class="cube-type">
-        <span class="cube-typed-title">吉水于人</span>
+        <span class="cube-typed-title">吉水于人的笔记</span>
         <span class="cube-typed-cursor">|</span>
     </div>
     
@@ -135,7 +125,7 @@
     <header class="cube-background cube-header-background">
         
         <div class="cube-type">
-            <span class="cube-typed-title">吉水于人</span>
+            <span class="cube-typed-title">吉水于人的笔记</span>
             <span class="cube-typed-cursor">|</span>
         </div>
         
@@ -172,7 +162,1217 @@
     
     <div class="cube-article-content cube-markdown">
         
-        <pre class=" language-bash"><code class="language-bash">    <span class="token keyword">function</span> calArea<span class="token punctuation">(</span>polygon, spatialReference<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <h3 id="关于坐标系"><a href="#关于坐标系" class="headerlink" title="关于坐标系"></a>关于坐标系</h3><p>说到坐标系，作为一个地理信息系统专业的学生，我也一度比较的糊涂，今天，既然要做这样一个需求，那正好趁这个机会把坐标系这块整理一下。我们常用的坐标系有：2000中国大地坐标系（CGCS2000）、1980西安坐标系、1954北京坐标系统、WGS84坐标系（GPS数据所采用的坐标系统），在编程中也会遇到不同坐标系、不同的投影方式、不同的投影分带，需要进行转换、投影等，所以有必要认识一下WKID。</p>
+<a id="more"></a>
+<h3 id="wkid"><a href="#wkid" class="headerlink" title="wkid"></a>wkid</h3><p>WKID的英文全称是Well Known ID，即众所周知的编号，下面列举我国常用的地理和投影坐标系的WKID：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>wkid</th>
+<th>坐标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>地理坐标</td>
+<td>4214</td>
+<td>GCS_Beijing_1954 </td>
+</tr>
+<tr>
+<td>地理坐标</td>
+<td>4326</td>
+<td>GCS_WGS_1984 </td>
+</tr>
+<tr>
+<td>地理坐标</td>
+<td>4490</td>
+<td>GCS_China_Geodetic_Coordinate_System_2000 </td>
+</tr>
+<tr>
+<td>地理坐标</td>
+<td>4555</td>
+<td>GCS_New_Beijing </td>
+</tr>
+<tr>
+<td>地理坐标</td>
+<td>4610</td>
+<td>GCS_Xian_1980 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2327</td>
+<td>Xian_1980_GK_Zone_13 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2328</td>
+<td>Xian_1980_GK_Zone_14</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2329</td>
+<td>Xian_1980_GK_Zone_15 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2330</td>
+<td>Xian_1980_GK_Zone_16 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2331</td>
+<td>Xian_1980_GK_Zone_17 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2332</td>
+<td>Xian_1980_GK_Zone_18 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2333</td>
+<td>Xian_1980_GK_Zone_19 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2334</td>
+<td>Xian_1980_GK_Zone_20 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2335</td>
+<td>Xian_1980_GK_Zone_21 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2336</td>
+<td>Xian_1980_GK_Zone_22</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2337</td>
+<td>Xian_1980_GK_Zone_23 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2338</td>
+<td>Xian_1980_GK_CM_75E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2339</td>
+<td>Xian_1980_GK_CM_81E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2340</td>
+<td>Xian_1980_GK_CM_87E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2341</td>
+<td>Xian_1980_GK_CM_93E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2342</td>
+<td>Xian_1980_GK_CM_99E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2343</td>
+<td>Xian_1980_GK_CM_105E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2344</td>
+<td>Xian_1980_GK_CM_111E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2345</td>
+<td>Xian_1980_GK_CM_117E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2346</td>
+<td>Xian_1980_GK_CM_123E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2347</td>
+<td>Xian_1980_GK_CM_129E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2348</td>
+<td>Xian_1980_GK_CM_135E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2349</td>
+<td>Xian_1980_3_Degree_GK_Zone_25 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2350</td>
+<td>Xian_1980_3_Degree_GK_Zone_26 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2351</td>
+<td>Xian_1980_3_Degree_GK_Zone_27 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2352</td>
+<td>Xian_1980_3_Degree_GK_Zone_28 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2353</td>
+<td>Xian_1980_3_Degree_GK_Zone_29 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2354</td>
+<td>Xian_1980_3_Degree_GK_Zone_30 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2355</td>
+<td>Xian_1980_3_Degree_GK_Zone_31 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2356</td>
+<td>Xian_1980_3_Degree_GK_Zone_32 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2357</td>
+<td>Xian_1980_3_Degree_GK_Zone_33 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2358</td>
+<td>Xian_1980_3_Degree_GK_Zone_34</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2359</td>
+<td>Xian_1980_3_Degree_GK_Zone_35 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2360</td>
+<td>Xian_1980_3_Degree_GK_Zone_36 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2361</td>
+<td>Xian_1980_3_Degree_GK_Zone_37 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2362</td>
+<td>Xian_1980_3_Degree_GK_Zone_38 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2363</td>
+<td>Xian_1980_3_Degree_GK_Zone_39 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2364</td>
+<td>Xian_1980_3_Degree_GK_Zone_40</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2365</td>
+<td>Xian_1980_3_Degree_GK_Zone_41 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2366</td>
+<td>Xian_1980_3_Degree_GK_Zone_42 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2367</td>
+<td>Xian_1980_3_Degree_GK_Zone_43 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2368</td>
+<td>Xian_1980_3_Degree_GK_Zone_44 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2369</td>
+<td>Xian_1980_3_Degree_GK_Zone_45 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2370</td>
+<td>Xian_1980_3_Degree_GK_CM_75E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2371</td>
+<td>Xian_1980_3_Degree_GK_CM_78E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2372</td>
+<td>Xian_1980_3_Degree_GK_CM_81E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2373</td>
+<td>Xian_1980_3_Degree_GK_CM_84E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2374</td>
+<td>Xian_1980_3_Degree_GK_CM_87E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2375</td>
+<td>Xian_1980_3_Degree_GK_CM_90E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2376</td>
+<td>Xian_1980_3_Degree_GK_CM_93E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2377</td>
+<td>Xian_1980_3_Degree_GK_CM_96E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2378</td>
+<td>Xian_1980_3_Degree_GK_CM_99E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2379</td>
+<td>Xian_1980_3_Degree_GK_CM_102E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2380</td>
+<td>Xian_1980_3_Degree_GK_CM_105E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2381</td>
+<td>Xian_1980_3_Degree_GK_CM_108E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2382</td>
+<td>Xian_1980_3_Degree_GK_CM_111E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2383</td>
+<td>Xian_1980_3_Degree_GK_CM_114E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2384</td>
+<td>Xian_1980_3_Degree_GK_CM_117E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2385</td>
+<td>Xian_1980_3_Degree_GK_CM_120E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2386</td>
+<td>Xian_1980_3_Degree_GK_CM_123E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2387</td>
+<td>Xian_1980_3_Degree_GK_CM_126E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2388</td>
+<td>Xian_1980_3_Degree_GK_CM_129E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2389</td>
+<td>Xian_1980_3_Degree_GK_CM_132E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2390</td>
+<td>Xian_1980_3_Degree_GK_CM_135E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2401</td>
+<td>Beijing_1954_3_Degree_GK_Zone_25 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2402</td>
+<td>Beijing_1954_3_Degree_GK_Zone_26 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2403</td>
+<td>Beijing_1954_3_Degree_GK_Zone_27 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2404</td>
+<td>Beijing_1954_3_Degree_GK_Zone_28 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2405</td>
+<td>Beijing_1954_3_Degree_GK_Zone_29</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2406</td>
+<td>Beijing_1954_3_Degree_GK_Zone_30 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2407</td>
+<td>Beijing_1954_3_Degree_GK_Zone_31 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2408</td>
+<td>Beijing_1954_3_Degree_GK_Zone_32 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2409</td>
+<td>Beijing_1954_3_Degree_GK_Zone_33 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2410</td>
+<td>Beijing_1954_3_Degree_GK_Zone_34 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2411</td>
+<td>Beijing_1954_3_Degree_GK_Zone_35</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2412</td>
+<td>Beijing_1954_3_Degree_GK_Zone_36 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2413</td>
+<td>Beijing_1954_3_Degree_GK_Zone_37 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2414</td>
+<td>Beijing_1954_3_Degree_GK_Zone_38 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2415</td>
+<td>Beijing_1954_3_Degree_GK_Zone_39 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2416</td>
+<td>Beijing_1954_3_Degree_GK_Zone_40 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2417</td>
+<td>Beijing_1954_3_Degree_GK_Zone_41</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2418</td>
+<td>Beijing_1954_3_Degree_GK_Zone_42 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2419</td>
+<td>Beijing_1954_3_Degree_GK_Zone_43 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2420</td>
+<td>Beijing_1954_3_Degree_GK_Zone_44 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2421</td>
+<td>Beijing_1954_3_Degree_GK_Zone_45 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2422</td>
+<td>Beijing_1954_3_Degree_GK_CM_75E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2423</td>
+<td>Beijing_1954_3_Degree_GK_CM_78E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2424</td>
+<td>Beijing_1954_3_Degree_GK_CM_81E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2425</td>
+<td>Beijing_1954_3_Degree_GK_CM_84E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2426</td>
+<td>Beijing_1954_3_Degree_GK_CM_87E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2427</td>
+<td>Beijing_1954_3_Degree_GK_CM_90E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2428</td>
+<td>Beijing_1954_3_Degree_GK_CM_93E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2429</td>
+<td>Beijing_1954_3_Degree_GK_CM_96E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2430</td>
+<td>Beijing_1954_3_Degree_GK_CM_99E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2431</td>
+<td>Beijing_1954_3_Degree_GK_CM_102E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2432</td>
+<td>Beijing_1954_3_Degree_GK_CM_105E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2433</td>
+<td>Beijing_1954_3_Degree_GK_CM_108E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2434</td>
+<td>Beijing_1954_3_Degree_GK_CM_111E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2435</td>
+<td>Beijing_1954_3_Degree_GK_CM_114E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2436</td>
+<td>Beijing_1954_3_Degree_GK_CM_117E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2437</td>
+<td>Beijing_1954_3_Degree_GK_CM_120E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2438</td>
+<td>Beijing_1954_3_Degree_GK_CM_123E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2439</td>
+<td>Beijing_1954_3_Degree_GK_CM_126E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2440</td>
+<td>Beijing_1954_3_Degree_GK_CM_129E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2441</td>
+<td>Beijing_1954_3_Degree_GK_CM_132E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>2442</td>
+<td>Beijing_1954_3_Degree_GK_CM_135E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>3395</td>
+<td>WGS_1984_World_Mercator </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4491</td>
+<td>CGCS2000_GK_Zone_13 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4492</td>
+<td>CGCS2000_GK_Zone_14 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4493</td>
+<td>CGCS2000_GK_Zone_15 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4494</td>
+<td>CGCS2000_GK_Zone_16</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4495</td>
+<td>CGCS2000_GK_Zone_17 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4496</td>
+<td>CGCS2000_GK_Zone_18 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4497</td>
+<td>CGCS2000_GK_Zone_19 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4498</td>
+<td>CGCS2000_GK_Zone_20 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4499</td>
+<td>CGCS2000_GK_Zone_21 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4500</td>
+<td>CGCS2000_GK_Zone_22 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4501</td>
+<td>CGCS2000_GK_Zone_23 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4502</td>
+<td>CGCS2000_GK_CM_75E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4503</td>
+<td>CGCS2000_GK_CM_81E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4504</td>
+<td>CGCS2000_GK_CM_87E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4505</td>
+<td>CGCS2000_GK_CM_93E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4506</td>
+<td>CGCS2000_GK_CM_99E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4507</td>
+<td>CGCS2000_GK_CM_105E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4508</td>
+<td>CGCS2000_GK_CM_111E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4509</td>
+<td>CGCS2000_GK_CM_117E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4510</td>
+<td>CGCS2000_GK_CM_123E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4511</td>
+<td>CGCS2000_GK_CM_129E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4512</td>
+<td>CGCS2000_GK_CM_135E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4513</td>
+<td>CGCS2000_3_Degree_GK_Zone_25 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4514</td>
+<td>CGCS2000_3_Degree_GK_Zone_26 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4515</td>
+<td>CGCS2000_3_Degree_GK_Zone_27 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4516</td>
+<td>CGCS2000_3_Degree_GK_Zone_28 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4517</td>
+<td>CGCS2000_3_Degree_GK_Zone_29 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4518</td>
+<td>CGCS2000_3_Degree_GK_Zone_30 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4519</td>
+<td>CGCS2000_3_Degree_GK_Zone_31 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4520</td>
+<td>CGCS2000_3_Degree_GK_Zone_32 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4521</td>
+<td>CGCS2000_3_Degree_GK_Zone_33 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4522</td>
+<td>CGCS2000_3_Degree_GK_Zone_34 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4523</td>
+<td>CGCS2000_3_Degree_GK_Zone_35 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4524</td>
+<td>CGCS2000_3_Degree_GK_Zone_36</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4525</td>
+<td>CGCS2000_3_Degree_GK_Zone_37 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4526</td>
+<td>CGCS2000_3_Degree_GK_Zone_38 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4527</td>
+<td>CGCS2000_3_Degree_GK_Zone_39 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4528</td>
+<td>CGCS2000_3_Degree_GK_Zone_40 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4529</td>
+<td>CGCS2000_3_Degree_GK_Zone_41 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4530</td>
+<td>CGCS2000_3_Degree_GK_Zone_42 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4531</td>
+<td>CGCS2000_3_Degree_GK_Zone_43 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4532</td>
+<td>CGCS2000_3_Degree_GK_Zone_44 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4533</td>
+<td>CGCS2000_3_Degree_GK_Zone_45 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4534</td>
+<td>CGCS2000_3_Degree_GK_CM_75E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4535</td>
+<td>CGCS2000_3_Degree_GK_CM_78E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4536</td>
+<td>CGCS2000_3_Degree_GK_CM_81E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4537</td>
+<td>CGCS2000_3_Degree_GK_CM_84E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4538</td>
+<td>CGCS2000_3_Degree_GK_CM_87E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4539</td>
+<td>CGCS2000_3_Degree_GK_CM_90E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4540</td>
+<td>CGCS2000_3_Degree_GK_CM_93E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4541</td>
+<td>CGCS2000_3_Degree_GK_CM_96E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4542</td>
+<td>CGCS2000_3_Degree_GK_CM_99E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4543</td>
+<td>CGCS2000_3_Degree_GK_CM_102E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4544</td>
+<td>CGCS2000_3_Degree_GK_CM_105E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4545</td>
+<td>CGCS2000_3_Degree_GK_CM_108E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4546</td>
+<td>CGCS2000_3_Degree_GK_CM_111E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4547</td>
+<td>CGCS2000_3_Degree_GK_CM_114E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4548</td>
+<td>CGCS2000_3_Degree_GK_CM_117E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4549</td>
+<td>CGCS2000_3_Degree_GK_CM_120E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4550</td>
+<td>CGCS2000_3_Degree_GK_CM_123E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4551</td>
+<td>CGCS2000_3_Degree_GK_CM_126E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4552</td>
+<td>CGCS2000_3_Degree_GK_CM_129E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4553</td>
+<td>CGCS2000_3_Degree_GK_CM_132E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4554</td>
+<td>CGCS2000_3_Degree_GK_CM_135E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4568</td>
+<td>New_Beijing_Gauss_Kruger_Zone_13 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4569</td>
+<td>New_Beijing_Gauss_Kruger_Zone_14</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4570</td>
+<td>New_Beijing_Gauss_Kruger_Zone_15 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4571</td>
+<td>New_Beijing_Gauss_Kruger_Zone_16 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4572</td>
+<td>New_Beijing_Gauss_Kruger_Zone_17 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4573</td>
+<td>New_Beijing_Gauss_Kruger_Zone_18 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4574</td>
+<td>New_Beijing_Gauss_Kruger_Zone_19 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4575</td>
+<td>New_Beijing_Gauss_Kruger_Zone_20</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4576</td>
+<td>New_Beijing_Gauss_Kruger_Zone_21 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4577</td>
+<td>New_Beijing_Gauss_Kruger_Zone_22 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4578</td>
+<td>New_Beijing_Gauss_Kruger_Zone_23 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4579</td>
+<td>New_Beijing_Gauss_Kruger_CM_75E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4580</td>
+<td>New_Beijing_Gauss_Kruger_CM_81E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4581</td>
+<td>New_Beijing_Gauss_Kruger_CM_87E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4582</td>
+<td>New_Beijing_Gauss_Kruger_CM_93E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4583</td>
+<td>New_Beijing_Gauss_Kruger_CM_99E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4584</td>
+<td>New_Beijing_Gauss_Kruger_CM_105E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4585</td>
+<td>New_Beijing_Gauss_Kruger_CM_111E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4586</td>
+<td>New_Beijing_Gauss_Kruger_CM_117E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4587</td>
+<td>New_Beijing_Gauss_Kruger_CM_123E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4588</td>
+<td>New_Beijing_Gauss_Kruger_CM_129E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4589</td>
+<td>New_Beijing_Gauss_Kruger_CM_135E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4652</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_25 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4653</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_26 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4654</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_27</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4655</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_28 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4656</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_29 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4766</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_30 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4767</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_31 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4768</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_32</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4769</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_33 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4770</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_34 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4771</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_35 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4772</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_36 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4773</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_37</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4774</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_38 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4775</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_39 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4776</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_40 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4777</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_41 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4778</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_42 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4779</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_43 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4780</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_44 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4781</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_Zone_45 </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4782</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_75E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4783</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_78E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4784</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_81E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4785</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_84E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4786</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_87E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4787</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_90E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4788</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_93E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4789</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_96E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4790</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_99E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4791</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_102E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4792</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_105E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4793</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_108E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4794</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_111E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4795</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_114E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4796</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_117E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4797</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_120E</td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4798</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_123E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4799</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_126E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4800</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_129E </td>
+</tr>
+<tr>
+<td>投影坐标</td>
+<td>4822</td>
+<td>New_Beijing_3_Degree_Gauss_Kruger_CM_135E</td>
+</tr>
+</tbody>
+</table>
+<h3 id="面积求值"><a href="#面积求值" class="headerlink" title="面积求值"></a>面积求值</h3><p>在求面中，对<code>wkid</code>为4610的值另外做了处理，使用的是<code>geodesicUtils</code>提供的<code>geodesicAreas</code>方法求面积。</p>
+<pre class=" language-bash"><code class="language-bash">    <span class="token keyword">function</span> calArea<span class="token punctuation">(</span>polygon, spatialReference<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>spatialReference.isWebMercator<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">||</span> spatialReference.wkid <span class="token operator">==</span> <span class="token string">"4326"</span> <span class="token operator">||</span> spatialReference.wkid <span class="token operator">==</span> <span class="token string">"4490"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             <span class="token keyword">return</span> geometryEngine.geodesicArea<span class="token punctuation">(</span>polygon, <span class="token string">"square-meters"</span><span class="token punctuation">)</span>
         <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>spatialReference.wkid <span class="token operator">==</span> <span class="token string">"4610"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -190,15 +1390,15 @@
     <ul>
         
         <li class="prev">
-            <a href="/2019/03/15/article/">
+            <a href="/2019/03/15/article3/">
                 <i class="cube-icon cube-prev" aria-hidden="true"></i>
-                地图出图/打印
+                JavaScript内存优化
             </a>
         </li>
         
         
         <li class="next">
-            <a href="/2018/03/18/article11/">
+            <a href="/2018/11/22/article11/">
                 我理解的原型链
                 <i class="cube-icon cube-next" aria-hidden="true"></i>
             </a>
@@ -245,7 +1445,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/04/02/article15/" title="视频播放进度记录">视频播放进度记录</a>
+                    <a href="/2019/04/09/article/" title="地图出图/打印">地图出图/打印</a>
                 </p>
             </div>
             
@@ -259,7 +1459,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/04/02/article14/" title="微信小程序的上拉加载功能">微信小程序的上拉加载功能</a>
+                    <a href="/2019/04/02/article15/" title="视频播放进度记录">视频播放进度记录</a>
                 </p>
             </div>
         </li>
@@ -272,7 +1472,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article13/" title="搭建一个weex项目">搭建一个weex项目</a>
+                    <a href="/2019/04/02/article14/" title="微信小程序的上拉加载功能">微信小程序的上拉加载功能</a>
                 </p>
             </div>
         </li>
@@ -285,7 +1485,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article12/" title="arcgis api + webpack前端工程化开发">arcgis api + webpack前端工程化开发</a>
+                    <a href="/2019/03/18/article13/" title="搭建一个weex项目">搭建一个weex项目</a>
                 </p>
             </div>
         </li>
@@ -298,7 +1498,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article10/" title="js异步请求总结">js异步请求总结</a>
+                    <a href="/2019/03/18/article12/" title="arcgis api + webpack前端工程化开发">arcgis api + webpack前端工程化开发</a>
                 </p>
             </div>
         </li>
@@ -308,32 +1508,6 @@
 </div>
 
 
-
-
-
-<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
-    <div class="title">
-        <a href="/tags">Tagcloud</a>
-    </div>
-    <div class="cube-boxs">
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/原型链/">#原型链</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/内存优化/">#内存优化</a>
-        </div>
-        
-        
-        <div class="cube-box-bg ">
-            <a href="/tags/weex/">#weex</a>
-        </div>
-        
-    </div>
-</div>
 
 
 

@@ -10,7 +10,7 @@
     
     
     
-    <title>js异步请求总结 | 吉水于人随笔</title>
+    <title>js异步编程总结 | 吉水于人随笔</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -63,22 +63,12 @@
         
         <li>
             <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
-            <a href="/">首页</a>
+            <a href="/">主页</a>
         </li>
         
         <li>
             <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
             <a href="/archives">归档</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-categories" aria-hidden="true"></i>
-            <a href="/categories">分类</a>
-        </li>
-        
-        <li>
-            <i class="cube-icon cube-icon-about" aria-hidden="true"></i>
-            <a href="/about-me">关于我</a>
         </li>
         
     </ul>
@@ -99,7 +89,7 @@
     <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
     
     <div class="cube-type">
-        <span class="cube-typed-title">吉水于人</span>
+        <span class="cube-typed-title">吉水于人的笔记</span>
         <span class="cube-typed-cursor">|</span>
     </div>
     
@@ -135,7 +125,7 @@
     <header class="cube-background cube-header-background">
         
         <div class="cube-type">
-            <span class="cube-typed-title">吉水于人</span>
+            <span class="cube-typed-title">吉水于人的笔记</span>
             <span class="cube-typed-cursor">|</span>
         </div>
         
@@ -156,7 +146,7 @@
     <div class="cube-content">
         <div class="cube-left">
             <div class="cube-article">
-    <h1 class="title">js异步请求总结</h1>
+    <h1 class="title">js异步编程总结</h1>
     
     <div class="cube-article-header">
         <div class="cube-article-date">
@@ -172,7 +162,150 @@
     
     <div class="cube-article-content cube-markdown">
         
-        
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Javascript是单线程的，而实现异步编程就显得及其重要。在ES6以前，我们要实现异步编程可通过：（1）回调事件；（2）事件监听（订阅/发布）；（3）Promise对象。ES6中提供了Generator函数(协程coroutine)。ES7中使用了async和await实现。</p>
+<a id="more"></a>
+<h3 id="Javascript异步编程方法"><a href="#Javascript异步编程方法" class="headerlink" title="Javascript异步编程方法"></a>Javascript异步编程方法</h3><ul>
+<li>回调函数<br>回调函数实现异步应该是用的比较频繁的，它是在一个耗时操作之后执行某个操作。</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash">//callback hell
+
+doSomethingAsync1<span class="token punctuation">(</span>function<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    doSomethingAsync2<span class="token punctuation">(</span>function<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        doSomethingAsync3<span class="token punctuation">(</span>function<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            doSomethingAsync4<span class="token punctuation">(</span>function<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                doSomethingAsync5<span class="token punctuation">(</span>function<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+                    // code<span class="token punctuation">..</span>.
+                <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>上面的代码，在业务逻辑逐渐复杂的情况下，层层叠加，这就是典型的”回调地狱”，这种代码维护起来特别痛苦，同时，我们回调函数之外是无法捕获到回调内的异常。</p>
+<ul>
+<li>事件监听</li>
+</ul>
+<p>事件监听也是比较常用的方法，它使用逻辑分离方式，对代码解耦很有用处。我们将不变的部分封装在组件内部，提供外部调用，将变化的部分暴露在外部使用。相当于事件的设计是组件的接口设计。</p>
+<pre class=" language-bash"><code class="language-bash">//发布和订阅事件
+
+var events <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'events'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+var emitter <span class="token operator">=</span> new events.EventEmitter<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+emitter.on<span class="token punctuation">(</span><span class="token string">'event1'</span>, function<span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console.log<span class="token punctuation">(</span>message<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+emitter.emit<span class="token punctuation">(</span><span class="token string">'event1'</span>, <span class="token string">"message for you"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>事件监听的实现方式是，一个订阅方订阅某个事件，在需要触发该事件时让发布方直接使用emit发出一个事件并携带相应的参数，订阅方收到该事件信息并处理。</p>
+<ul>
+<li>Promise</li>
+</ul>
+<p>Promise对象通过同步的写法实现异步的操作，避免层层嵌套的回调，使得代码逻辑清晰，易于维护。</p>
+<p>（1）Promise的链式写法<br>Promise.prototype.then()方法返回一个新的Promise对象，采用这种链式的写法就是，一个then后面可以跟着另一个then。如果前面的回调返回的是一个Promise对象，那么后面的回调会等待前一个Promise对象有了返回结果之后再进一步调用。</p>
+<pre class=" language-bash"><code class="language-bash">//原生Primose顺序嵌套回调示例
+var fs <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span>
+
+var <span class="token function">read</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>filename<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    var promise <span class="token operator">=</span> new Promise<span class="token punctuation">(</span>function<span class="token punctuation">(</span>resolve, reject<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        fs.readFile<span class="token punctuation">(</span>filename, <span class="token string">'utf8'</span>, function<span class="token punctuation">(</span>err, data<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                reject<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            resolve<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> promise<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+read<span class="token punctuation">(</span><span class="token string">'./text1.txt'</span><span class="token punctuation">)</span>
+.then<span class="token punctuation">(</span>function<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console.log<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">return</span> read<span class="token punctuation">(</span><span class="token string">'./text2.txt'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+.then<span class="token punctuation">(</span>function<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console.log<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+.catch<span class="token punctuation">(</span>function<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console.log<span class="token punctuation">(</span><span class="token string">"error caught: "</span> + err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p>在上述代码中，第一个then先输出text1.txt的内容后返回read(‘./text2.txt’)，这里返回了一个新的Promise实例，第二个then里面指定了异步读取text2.txt文件的回调函数。与Promise.prototype.then()对应的还有一个Promise.prototype.catch方法，用于指定发生错误时的回调函数。</p>
+<p>（2）Promise异步并发<br>异步并发是，我们如果不需要某些事件按顺序执行，而是同时执行，就可以使用异步并发执行。Promise.all()用于将多个Promise包装成一个新的Promise实例（var p = Promise.all([p1,p2,p3])）。Promise.all可接受一个数组作为参数，数组中的每个值是Promise对象实例。执行结果的状态由p1,p2,p3决定，可分为两种情况：</p>
+<p>a. 只有p1,p2,p3的状态都变为fullfilled，P的状态才会变成fullfilled，此时p1,p2,p3的返回值组成一个数组，返回给p的回调函数；<br>b. 只要p1,p2,p3中的任何一个被rejected，p的状态就会变成rejected，此时第一个被rejected的实例的返回值，会返回给p的回调函数。</p>
+<pre class=" language-bash"><code class="language-bash">var fs <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span>
+
+var <span class="token function">read</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>filename<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    var promise <span class="token operator">=</span> new Promise<span class="token punctuation">(</span>function<span class="token punctuation">(</span>resolve, reject<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        fs.readFile<span class="token punctuation">(</span>filename, <span class="token string">'utf8'</span>, function<span class="token punctuation">(</span>err, data<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                reject<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            resolve<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> promise<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+var promises <span class="token operator">=</span> <span class="token punctuation">[</span>1, 2<span class="token punctuation">]</span>.map<span class="token punctuation">(</span>function<span class="token punctuation">(</span>fileno<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> read<span class="token punctuation">(</span><span class="token string">'./text'</span> + fileno + <span class="token string">'.txt'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Promise.all<span class="token punctuation">(</span>promises<span class="token punctuation">)</span>
+.then<span class="token punctuation">(</span>function<span class="token punctuation">(</span>contents<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console.log<span class="token punctuation">(</span>contents<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+.catch<span class="token punctuation">(</span>function<span class="token punctuation">(</span>err<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    console.log<span class="token punctuation">(</span><span class="token string">"error caught: "</span> + err<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p>上述代码中会并发执行读取text1.txt和text2.txt的操作，如果两个文件都读取成功的话，输出他们的内容，组成数组（contents）。</p>
+<p>Tips：<br>（1）Promise.race()也是将多个Promise实例包装成一个新的Promise实例（var p = Promise.race([p1,p2,p3])），上述代码中，p1、p2、p3只要有一个实例率先改变状态，p的状态就会跟着改变，那个率先改变的Promise实例的返回值，就传递给p的返回值。</p>
+<p>（2）有时候需将现有对象转换成Promise对象，可以使用Promise.resolve()。</p>
+<p>（3）Promise.reject(reason)方法也会返回一个新的Promise实例，该实例的状态为rejected。Promise.reject方法的参数reason，会被传递给实例的回调函数。</p>
+<ul>
+<li>Generator函数</li>
+</ul>
+<p>Generator函数的函数名前面有一个<code>*</code>，Generator函数封装了一个异步任务，需要异步操作的地方，使用yield标注。yield语句表示，执行到此处执行权就交给其他协程，也就是说，yield是两个阶段的分界线。协程遇到yield语句就暂停执行，直到执行权返回，再从暂停处继续执行。这种写法的优点是，可以把异步代码写得像同步一样。</p>
+<pre class=" language-bash"><code class="language-bash">function* gen<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    var y <span class="token operator">=</span> yield x + 2<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> y<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+var g <span class="token operator">=</span> gen<span class="token punctuation">(</span>1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+var r1 <span class="token operator">=</span> g.next<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> // <span class="token punctuation">{</span> value: 3, done: <span class="token boolean">false</span> <span class="token punctuation">}</span>
+console.log<span class="token punctuation">(</span>r1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+var r2 <span class="token operator">=</span> g.next<span class="token punctuation">(</span><span class="token punctuation">)</span> // <span class="token punctuation">{</span> value: undefined, done: <span class="token boolean">true</span> <span class="token punctuation">}</span>
+console.log<span class="token punctuation">(</span>r2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>ES 7中的async和await<br>async和await是ES 7中的新语法，新到连ES 6都不支持，但是可以通过Babel一类的预编译器处理成ES 5的代码。目前比较一致的看法是async和await是js对异步的终极解决方案。</li>
+</ul>
+<pre class=" language-bash"><code class="language-bash">var fs <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+var readFile <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>fileName<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> new Promise<span class="token punctuation">(</span>function <span class="token punctuation">(</span>resolve, reject<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        fs.readFile<span class="token punctuation">(</span>fileName, function<span class="token punctuation">(</span>error, data<span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">{</span>
+                reject<span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                resolve<span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+var asyncReadFile <span class="token operator">=</span> async <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    var f1 <span class="token operator">=</span> await readFile<span class="token punctuation">(</span><span class="token string">'./text1.txt'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    var f2 <span class="token operator">=</span> await readFile<span class="token punctuation">(</span><span class="token string">'./text2.txt'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console.log<span class="token punctuation">(</span>f1.toString<span class="token punctuation">(</span><span class="token punctuation">))</span><span class="token punctuation">;</span>
+    console.log<span class="token punctuation">(</span>f2.toString<span class="token punctuation">(</span><span class="token punctuation">))</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+asyncReadFile<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+
     </div>
 </div>
 
@@ -235,7 +368,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/04/02/article15/" title="视频播放进度记录">视频播放进度记录</a>
+                    <a href="/2019/04/09/article/" title="地图出图/打印">地图出图/打印</a>
                 </p>
             </div>
             
@@ -249,7 +382,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/04/02/article14/" title="微信小程序的上拉加载功能">微信小程序的上拉加载功能</a>
+                    <a href="/2019/04/02/article15/" title="视频播放进度记录">视频播放进度记录</a>
                 </p>
             </div>
         </li>
@@ -262,7 +395,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article13/" title="搭建一个weex项目">搭建一个weex项目</a>
+                    <a href="/2019/04/02/article14/" title="微信小程序的上拉加载功能">微信小程序的上拉加载功能</a>
                 </p>
             </div>
         </li>
@@ -275,7 +408,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article12/" title="arcgis api + webpack前端工程化开发">arcgis api + webpack前端工程化开发</a>
+                    <a href="/2019/03/18/article13/" title="搭建一个weex项目">搭建一个weex项目</a>
                 </p>
             </div>
         </li>
@@ -288,7 +421,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article10/" title="js异步请求总结">js异步请求总结</a>
+                    <a href="/2019/03/18/article12/" title="arcgis api + webpack前端工程化开发">arcgis api + webpack前端工程化开发</a>
                 </p>
             </div>
         </li>
@@ -298,32 +431,6 @@
 </div>
 
 
-
-
-
-<div class="cube-tagcloud cube-sidebar" id="cube-tagcloud">
-    <div class="title">
-        <a href="/tags">Tagcloud</a>
-    </div>
-    <div class="cube-boxs">
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/原型链/">#原型链</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/内存优化/">#内存优化</a>
-        </div>
-        
-        
-        <div class="cube-box ">
-            <a href="/tags/weex/">#weex</a>
-        </div>
-        
-    </div>
-</div>
 
 
 
