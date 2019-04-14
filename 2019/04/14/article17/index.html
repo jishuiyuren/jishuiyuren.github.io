@@ -162,7 +162,7 @@
     
     <div class="cube-article-content cube-markdown">
         
-        <h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>vue源码中虚拟dom构建过程经历了template编译成AST语法树-&gt;转换为render函数，最终返回一个VNode。</p>
+        <h2 id="模版编译流程"><a href="#模版编译流程" class="headerlink" title="模版编译流程"></a>模版编译流程</h2><p>vue源码中虚拟dom构建过程经历了template编译成AST语法树-&gt;转换为render函数，最终返回一个VNode。</p>
 <p>compile编译过程分为<code>parse</code>、<code>optimize</code>、<code>generate</code>三个阶段，最终得到<code>render function</code></p>
 <ul>
 <li>parse：用正则表达式的方式解析template模版的指令、class、style等数据，形成AST（abstract syntax tree，抽象语法树），是源代码的抽象语法结构的树状表现形式。</li>
