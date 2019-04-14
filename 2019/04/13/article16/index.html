@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="jishuiyuren">
+    
+    
+    
+    
+    
+    
+    <title>vue内部运行机制源码分析——初始化和挂载 | 吉水于人随笔</title>
+    <!-- inject:style -->
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <!-- endinject -->
+    <style>
+        .cube-loading {
+            top: 0;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('/images/lg/loading.gif') no-repeat center center;
+            background-color: rgba(0,0,0,.7);
+        }
+
+        .cube-loading.out {
+            display: none;
+        }
+
+        .cube-loading:before {
+            display: block;
+            content: 'Loading';
+            position: relative;
+            width: 100%;
+            top: 50%;
+            right: -50%;
+            color: #fff;
+        }
+
+        @media(max-width: 768px) {
+            .cube-loading:before {
+                font-size: 1.2em;
+                transform: translate(-24px,20px);
+                -webkit-transform: translate(-24px,20px);
+                -o-transform: translate(-24px,20px);
+                -ms-transform: translate(-24px,20px);
+            }
+        }
+
+        @media(min-width: 768px) {
+            .cube-loading:before {
+
+            }
+        }
+    </style>
+    
+</head></html>
+<body>
+<div class="cube-body">
+    <nav id="cube-top-memu" class="cube-menu">
+    <ul class="cube-menu-collapse">
+        
+        <li>
+            <i class="cube-icon cube-icon-home" aria-hidden="true"></i>
+            <a href="/">主页</a>
+        </li>
+        
+        <li>
+            <i class="cube-icon cube-icon-archive" aria-hidden="true"></i>
+            <a href="/archives">归档</a>
+        </li>
+        
+    </ul>
+</nav>
+<nav class="cube-side-menu" id="cube-side-menu">
+    <ul class="cube-menu-list">
+        
+        <li>
+            <a class="lrc-control">Open Lyrics</a>
+        </li>
+        
+        <li>
+            <a class="scroll-to-top">Top</a>
+        </li>
+    </ul>
+</nav>
+    <header class="cube-header" id="cube-header">
+    <img src=" http://cube-1252774894.cosgz.myqcloud.com/background.png " alt="头部背景图片">
+    
+    <div class="cube-type">
+        <span class="cube-typed-title">吉水于人的笔记</span>
+        <span class="cube-typed-cursor">|</span>
+    </div>
+    
+</header>
+
+    <style>
+        nav.cube-menu:before {
+            content: '';
+            visibility: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 44px;
+        
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        
+            z-index: -1;
+            background-image: url('/images/bg.jpg');
+            background-repeat: no-repeat;
+            background-position: center 44px;
+            background-size: cover;
+            background-color: transparent;
+        }
+
+        header.cube-background.cube-header-background {
+            visibility: hidden;
+            background-image: url('/images/bg.jpg');
+            background-position: center 0;
+        }
+    </style>
+    <header class="cube-background cube-header-background">
+        
+        <div class="cube-type">
+            <span class="cube-typed-title">吉水于人的笔记</span>
+            <span class="cube-typed-cursor">|</span>
+        </div>
+        
+    </header>
+    <div class="load-header-background"></div>
+    <script>
+        (function (window) {
+
+            window.headerModule = {}
+            window.headerModule.image = {
+                width: '2000',
+                height: '1414'
+            }
+
+        })(window)
+    </script>
+    
+    <div class="cube-content">
+        <div class="cube-left">
+            <div class="cube-article">
+    <h1 class="title">vue内部运行机制源码分析——初始化和挂载</h1>
+    
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2019-04-13
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+    
+</div>
+    </div>
+    
+    <div class="cube-article-content cube-markdown">
+        
+        <h3 id="vue全局运行机制"><a href="#vue全局运行机制" class="headerlink" title="vue全局运行机制"></a>vue全局运行机制</h3><p>vue的内部流程分为5个步骤：</p>
+<ol>
+<li>进行初始化和挂载：init及mount</li>
+<li>模版编译：compile，编译成渲染函数render function</li>
+<li>进行响应式依赖收集：render function =&gt; getter、setter =&gt; watcher 进行 update =&gt; patch 的过程以及使用队列异步更新的策略</li>
+<li>依赖收集的同时产生Virtal DOM ，render function 被转为VNode节点</li>
+<li>通过diff算法进行patch更新视图</li>
+</ol>
+<p>博客拆分几篇文章进行归纳，本章讲解一下初始化和挂载。<br><a id="more"></a></p>
+<h2 id="初始化和挂载"><a href="#初始化和挂载" class="headerlink" title="初始化和挂载"></a>初始化和挂载</h2><p>在<code>new Vue()</code>之后，vue 调用 _init函数进行初始化，它会初始化：生命周期、事件、props、methods、data、computed和watch等。</p>
+<p>初始化之后调用$mount挂载组件，如果运行时编译，不存在render function 但是存在template的情况，会进行编译。</p>
+<p>其中最重要的是会通过Object.defineProperty设置getter和setter函数，用来实现<code>响应式</code>和<code>依赖收集</code>。</p>
+<h4 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h4><h4 id="响应式系统基本原则"><a href="#响应式系统基本原则" class="headerlink" title="响应式系统基本原则"></a>响应式系统基本原则</h4><p>vue.js是MMVVM框架，数据结果是JavaScript对象，但是它能通过对这些对象进行操作时，影响对应对视图，其核心实现就是<code>响应式系统</code>。<br>（1）Object.defineProperty<br>讲到响应式系统，不可避免要说到<code>Object.defineProperty</code>，Vue是基于它实现响应式系统的。</p>
+<pre class=" language-bash"><code class="language-bash">
+/*
+    obj: 目标对象
+    prop: 需要操作的目标对象的属性名
+    descriptor: 描述符
+    <span class="token keyword">return</span> value 传入对象
+*/
+Object.defineProperty<span class="token punctuation">(</span>obj, prop, descriptor<span class="token punctuation">)</span>
+
+</code></pre>
+<p>descriptor具有一些属性：</p>
+<ul>
+<li>enumerable，属性是否可以枚举，默认false</li>
+<li>configurable，属性是否可以被修改或删除，默认false</li>
+<li>get，获取属性的方法</li>
+<li>set，设置属性的方法</li>
+</ul>
+<p>（2）observer（可观察的）</p>
+<p>我们知道在init的阶段会进行初始化，从而对数据进行<code>响应化</code>，我们定义一个<code>defineReactive</code>方法，该方法通过<code>Object.defineProperty</code>来实现对对象的<code>响应化</code>，入参是一个<code>obj（需要绑定的对象）</code>，<code>key（obj的某个属性）</code>，<code>val（具体的值）</code>。经过<code>defineReactive</code>方法处理后，obj的属性key在<code>「读」</code>的时候会触发<code>reactiveGetter</code>方法，而属性在「写」的时候会触发<code>reactiveSetter</code>方法。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">function</span> defineReactive <span class="token punctuation">(</span>obj, key, val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    Object.defineProperty<span class="token punctuation">(</span>obj, key, <span class="token punctuation">{</span>
+        enumerable: true,       /* 属性可枚举 */
+        configurable: true,     /* 属性可被修改或删除 */
+        get: <span class="token keyword">function</span> reactiveGetter <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> val<span class="token punctuation">;</span>         /* 实际上会依赖收集，下一小节会讲 */
+        <span class="token punctuation">}</span>,
+        set: <span class="token keyword">function</span> reactiveSetter <span class="token punctuation">(</span>newVal<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>newVal <span class="token operator">==</span><span class="token operator">=</span> val<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+            cb<span class="token punctuation">(</span>newVal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+// 更新视图
+<span class="token keyword">function</span> cb <span class="token punctuation">(</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    /* 渲染视图 */
+    console.log<span class="token punctuation">(</span><span class="token string">"视图更新啦～"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>当然，这只是对一个对象进行该操作，我们需要通过递归的方式对所有的对象进行<code>defineReactive</code>处理。下面的方法，使用循环的方式来实现一个<code>observer</code>的逻辑。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">function</span> observer <span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>value <span class="token operator">||</span> <span class="token punctuation">(</span>typeof value <span class="token operator">!=</span><span class="token operator">=</span> <span class="token string">'object'</span><span class="token punctuation">))</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    Object.keys<span class="token punctuation">(</span>value<span class="token punctuation">)</span>.forEach<span class="token punctuation">((</span>key<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        defineReactive<span class="token punctuation">(</span>value, key, value<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>响应式的一个大致的逻辑已经介绍完成，最后，我们来将<code>observer</code>封装为一个Vue。在Vue的构造函数中，对<code>options</code>的<code>data</code>进行处理，这里的data就是我们平时在vue组件中写的data属性（实际上是一个函数，这里当作一个对象来简单处理）。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token operator">&lt;</span><span class="token operator">!</span>DOCTYPE html<span class="token operator">></span>
+<span class="token operator">&lt;</span>html lang<span class="token operator">=</span><span class="token string">"en"</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>head<span class="token operator">></span>
+    <span class="token operator">&lt;</span>meta charset<span class="token operator">=</span><span class="token string">"UTF-8"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>meta name<span class="token operator">=</span><span class="token string">"viewport"</span> content<span class="token operator">=</span><span class="token string">"width=device-width, initial-scale=1.0"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>meta http-equiv<span class="token operator">=</span><span class="token string">"X-UA-Compatible"</span> content<span class="token operator">=</span><span class="token string">"ie=edge"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>title<span class="token operator">></span>Document<span class="token operator">&lt;</span>/title<span class="token operator">></span>
+<span class="token operator">&lt;</span>/head<span class="token operator">></span>
+<span class="token operator">&lt;</span>body<span class="token operator">></span>
+    <span class="token operator">&lt;</span>script<span class="token operator">></span>
+    <span class="token keyword">function</span> observer <span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>value <span class="token operator">||</span> <span class="token punctuation">(</span>typeof value <span class="token operator">!=</span><span class="token operator">=</span> <span class="token string">'object'</span><span class="token punctuation">))</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+        Object.keys<span class="token punctuation">(</span>value<span class="token punctuation">)</span>.forEach<span class="token punctuation">((</span>key<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            defineReactive<span class="token punctuation">(</span>value, key, value<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> cb <span class="token punctuation">(</span>val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console.log<span class="token punctuation">(</span><span class="token string">"视图更新啦～"</span>, val<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">function</span> defineReactive <span class="token punctuation">(</span>obj, key, val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Object.defineProperty<span class="token punctuation">(</span>obj, key, <span class="token punctuation">{</span>
+            enumerable: true,
+            configurable: true,
+            get: <span class="token keyword">function</span> reactiveGetter <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">return</span> val<span class="token punctuation">;</span>         
+            <span class="token punctuation">}</span>,
+            set: <span class="token keyword">function</span> reactiveSetter <span class="token punctuation">(</span>newVal<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>newVal <span class="token operator">==</span><span class="token operator">=</span> val<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+                val <span class="token operator">=</span> newVal<span class="token punctuation">;</span>
+                cb<span class="token punctuation">(</span>newVal<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    class Vue <span class="token punctuation">{</span>
+        constructor<span class="token punctuation">(</span>options<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            this._data <span class="token operator">=</span> options.data<span class="token punctuation">;</span>
+            observer<span class="token punctuation">(</span>this._data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">let</span> o <span class="token operator">=</span> new Vue<span class="token punctuation">(</span><span class="token punctuation">{</span>
+        data: <span class="token punctuation">{</span>
+            test: <span class="token string">"I am test."</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    o._data.test <span class="token operator">=</span> <span class="token string">"hello,test."</span><span class="token punctuation">;</span>
+    <span class="token operator">&lt;</span>/script<span class="token operator">></span>
+<span class="token operator">&lt;</span>/body<span class="token operator">></span>
+<span class="token operator">&lt;</span>/html<span class="token operator">></span>
+</code></pre>
+<h4 id="依赖收集追踪原理"><a href="#依赖收集追踪原理" class="headerlink" title="依赖收集追踪原理"></a>依赖收集追踪原理</h4><p>（1）为什么要依赖收集？<br>举个🌰<br>我们现在有这样一个对象：</p>
+<pre class=" language-bash"><code class="language-bash">new Vue<span class="token punctuation">(</span><span class="token punctuation">{</span>
+    template: 
+        <span class="token variable"><span class="token variable">`</span><span class="token operator">&lt;</span>div<span class="token operator">></span>
+            <span class="token operator">&lt;</span>span<span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">{</span>text1<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span>/span<span class="token operator">></span> 
+            <span class="token operator">&lt;</span>span<span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">{</span>text2<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span>/span<span class="token operator">></span> 
+        <span class="token operator">&lt;</span>div<span class="token operator">></span><span class="token variable">`</span></span>,
+    data: <span class="token punctuation">{</span>
+        text1: <span class="token string">'text1'</span>,
+        text2: <span class="token string">'text2'</span>,
+        text3: <span class="token string">'text3'</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>我们修改text3的数据</p>
+<pre class=" language-bash"><code class="language-bash">this.text3 <span class="token operator">=</span> <span class="token string">'modify text3'</span><span class="token punctuation">;</span>
+</code></pre>
+<p>但是因为视图中不需要使用到text3，这时，我们不可能去通知上述所讲的cb函数去进行视图的修改。</p>
+<p>再举个🌰</p>
+<p>这时我们拥有一个全局对象，有多个地方使用到该全局对象。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">let</span> globalObj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    text1: <span class="token string">'text1'</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> o1 <span class="token operator">=</span> new Vue<span class="token punctuation">(</span><span class="token punctuation">{</span>
+    template:
+        <span class="token variable"><span class="token variable">`</span><span class="token operator">&lt;</span>div<span class="token operator">></span>
+            <span class="token operator">&lt;</span>span<span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">{</span>text1<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span>/span<span class="token operator">></span> 
+        <span class="token operator">&lt;</span>div<span class="token operator">></span><span class="token variable">`</span></span>,
+    data: globalObj
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">let</span> o2 <span class="token operator">=</span> new Vue<span class="token punctuation">(</span><span class="token punctuation">{</span>
+    template:
+        <span class="token variable"><span class="token variable">`</span><span class="token operator">&lt;</span>div<span class="token operator">></span>
+            <span class="token operator">&lt;</span>span<span class="token operator">></span><span class="token punctuation">{</span><span class="token punctuation">{</span>text1<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token operator">&lt;</span>/span<span class="token operator">></span> 
+        <span class="token operator">&lt;</span>div<span class="token operator">></span><span class="token variable">`</span></span>,
+    data: globalObj
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>如果这时候我们修改<code>gloablObj</code>的text1的内容，就需要同时通知o1和o2两个实例进行视图的更新。这就是我们为什么需要进行依赖收集的原因。</p>
+<p>（2）订阅者<br>我们实现一个订阅者Dep，用来存放watcher观察者对象。</p>
+<pre class=" language-bash"><code class="language-bash">class Dep <span class="token punctuation">{</span>
+    constructor <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        /* 用来存放Watcher对象的数组 */
+        this.subs <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    /* 在subs中添加一个Watcher对象 */
+    addSub <span class="token punctuation">(</span>sub<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        this.subs.push<span class="token punctuation">(</span>sub<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    /* 通知所有Watcher对象更新视图 */
+    notify <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        this.subs.forEach<span class="token punctuation">((</span>sub<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+            sub.update<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>（3）观察者watcher</p>
+<pre class=" language-bash"><code class="language-bash">class Watcher <span class="token punctuation">{</span>
+    constructor <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        /* 在new一个Watcher对象时将该对象赋值给Dep.target，在get中会用到 */
+        Dep.target <span class="token operator">=</span> this<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    /* 更新视图的方法 */
+    update <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console.log<span class="token punctuation">(</span><span class="token string">"视图更新啦～"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+Dep.target <span class="token operator">=</span> null<span class="token punctuation">;</span>
+</code></pre>
+<p>（4）依赖收集<br>我们把上面的<code>defineReactive</code>方法修改，增加一个Dep类对象，用来收集watcher对象。在对象被读的时候，触发<code>reactiveGetter</code>函数，把当前的watcher对象收集到Dep类中，之后当对象被写时触发<code>reactiveSetter</code>方法，通知Dep类调用<code>notify</code>来触发Watcher对象的<code>update</code>方法更新对应的视图。</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token keyword">function</span> defineReactive <span class="token punctuation">(</span>obj, key, val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    /* 一个Dep类对象 */
+    const dep <span class="token operator">=</span> new Dep<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    Object.defineProperty<span class="token punctuation">(</span>obj, key, <span class="token punctuation">{</span>
+        enumerable: true,
+        configurable: true,
+        get: <span class="token keyword">function</span> reactiveGetter <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            /* 将Dep.target（即当前的Watcher对象存入dep的subs中） */
+            dep.addSub<span class="token punctuation">(</span>Dep.target<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> val<span class="token punctuation">;</span>         
+        <span class="token punctuation">}</span>,
+        set: <span class="token keyword">function</span> reactiveSetter <span class="token punctuation">(</span>newVal<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>newVal <span class="token operator">==</span><span class="token operator">=</span> val<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+            /* 在set的时候触发dep的notify来通知所有的Watcher对象更新视图 */
+            dep.notify<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+class Vue <span class="token punctuation">{</span>
+    constructor<span class="token punctuation">(</span>options<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        this._data <span class="token operator">=</span> options.data<span class="token punctuation">;</span>
+        observer<span class="token punctuation">(</span>this._data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        /* 新建一个Watcher观察者对象，这时候Dep.target会指向这个Watcher对象 */
+        new Watcher<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        /* 在这里模拟render的过程，为了触发test属性的get函数 */
+        console.log<span class="token punctuation">(</span><span class="token string">'render~'</span>, this._data.test<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>到这里，响应式系统和依赖收集就讲完了，现在进行总结一下。</p>
+<ul>
+<li>首先在observer的过程中会注册get方法，该方法用来进行「依赖收集」。</li>
+<li>在它的闭包中会有一个Dep对象，用这个对象来存放<code>watcher</code>对象，依赖收集的过程就是将watcher实例存放到对应的Dep对象中去的。</li>
+<li>get方法让当前的watcher对象存放到它的<code>subs</code>（addSub）中。</li>
+<li>在数据更新时，set会调用Dep对象的notify方法，通知它内部的所有<code>watcher</code>对象进行视图更新。</li>
+</ul>
+
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        <li class="prev">
+            <a href="/2019/04/14/article17/">
+                <i class="cube-icon cube-prev" aria-hidden="true"></i>
+                vue内部运行机制源码分析——模版编译
+            </a>
+        </li>
+        
+        
+        <li class="next">
+            <a href="/2019/04/09/article/">
+                地图出图/打印
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+
+        </div>
+        <div class="cube-right">
+            
+<div class="cube-author cube-sidebar" id="cube-author">
+    
+    
+    <span>jishuiyuren</span>
+    
+    
+    <div class="count">
+        <a class="count articles"><span>17</span>Article</a>
+        <a class="count tags"><span>3</span>Tags</a>
+        <a class="count categories"><span>0</span>Categories</a>
+    </div>
+</div>
+
+
+
+<div class="cube-recent-posts cube-sidebar" id="cube-recent-posts">
+    <div class="title">
+        <a>Recent Posts</a>
+    </div>
+    <ul class="list">
+        
+        
+        <li>
+            <!-- TODO 如果文章要显示图片，那么在front-matter上添加preview属性(url or path) -->
+            
+            <div class="normal">
+                <p class="index first">
+                    <span>1</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/04/14/article17/" title="vue内部运行机制源码分析——模版编译">vue内部运行机制源码分析——模版编译</a>
+                </p>
+            </div>
+            
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>2</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/04/13/article16/" title="vue内部运行机制源码分析——初始化和挂载">vue内部运行机制源码分析——初始化和挂载</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>3</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/04/09/article/" title="地图出图/打印">地图出图/打印</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>4</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/04/02/article15/" title="视频播放进度记录">视频播放进度记录</a>
+                </p>
+            </div>
+        </li>
+        
+        
+        
+        <li>
+            <div class="normal">
+                <p class="index">
+                    <span>5</span>
+                </p>
+                <p class="title">
+                    <a href="/2019/04/02/article14/" title="微信小程序的上拉加载功能">微信小程序的上拉加载功能</a>
+                </p>
+            </div>
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+
+
+
+<div class="cube-links cube-sidebar" id="cube-links">
+    <div class="title">
+        <a>Links</a>
+    </div>
+    <ul class="list">
+        
+        <li>
+            
+            
+            <img src="http://cube-1252774894.cosgz.myqcloud.com/links/GitHub.png">
+            
+            <a href="https://github.com/jishuiyuren" target="_blank">吉水于人的GitHub</a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+    </div>
+</div>
+<footer class="cube-footer">
+    
+© 2017 jishuiyuren
+
+<br>
+Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+</footer>
+<!-- inject:script -->
+<script src="/js/script.js"></script>
+<!-- endinject -->
+<div class="cube-loading out"></div>
+</body>
+</html>

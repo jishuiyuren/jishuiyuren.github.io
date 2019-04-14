@@ -146,6 +146,70 @@
     <div class="cube-content">
         <div class="cube-left">
             
+<div class="cube-excerpt" id="cube-excerpt-vue内部运行机制源码分析——模版编译">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/04/14/article17/">vue内部运行机制源码分析——模版编译</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-04-14
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>vue源码中虚拟dom构建过程经历了template编译成AST语法树-&gt;转换为render函数，最终返回一个VNode。</p>
+<p>compile编译过程分为<code>parse</code>、<code>optimize</code>、<code>generate</code>三个阶段，最终得到<code>render function</code></p>
+<ul>
+<li>parse：用正则表达式的方式解析template模版的指令、class、style等数据，形成AST（abstract syntax tree，抽象语法树），是源代码的抽象语法结构的树状表现形式。</li>
+<li>optimize：此步骤主要是优化性能，标记<code>static</code>静态节点，当<code>update</code>更新界面时，会有一个<code>patch</code>的过程，<code>diff</code>算法会直接跳过该<code>静态节点</code>，从而减少比较的过程，优化<code>patch</code>的性能。</li>
+<li>generate：将<code>AST</code>转化为<code>render function</code>字符串的过程，得到的结果是<code>render</code>字符串及<code>staticRenderFns</code>字符串。</li>
+</ul>
+        
+    </article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/04/14/article17/">Read More</a>
+    </footer>
+</div>
+
+<div class="cube-excerpt" id="cube-excerpt-vue内部运行机制源码分析——初始化和挂载">
+    <header class="cube-excerpt-header">
+        <h1><a href="/2019/04/13/article16/">vue内部运行机制源码分析——初始化和挂载</a></h1>
+        <div class="cube-excerpt-header-msg">
+            <div class="cube-excerpt-date">
+                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+                2019-04-13
+            </div>
+            <div class="cube-excerpt-tags">
+                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
+                
+            </div>
+        </div>
+    </header>
+    <article class="cube-excerpt-entry cube-markdown">
+        
+        
+           <h3 id="vue全局运行机制"><a href="#vue全局运行机制" class="headerlink" title="vue全局运行机制"></a>vue全局运行机制</h3><p>vue的内部流程分为5个步骤：</p>
+<ol>
+<li>进行初始化和挂载：init及mount</li>
+<li>模版编译：compile，编译成渲染函数render function</li>
+<li>进行响应式依赖收集：render function =&gt; getter、setter =&gt; watcher 进行 update =&gt; patch 的过程以及使用队列异步更新的策略</li>
+<li>依赖收集的同时产生Virtal DOM ，render function 被转为VNode节点</li>
+<li>通过diff算法进行patch更新视图</li>
+</ol>
+<p>博客拆分几篇文章进行归纳，本章讲解一下初始化和挂载。<br>
+        
+    </p></article>
+    <footer class="cube-excerpt-footer">
+        <a class="cube-excerpt-more" href="/2019/04/13/article16/">Read More</a>
+    </footer>
+</div>
+
 <div class="cube-excerpt" id="cube-excerpt-地图出图/打印">
     <header class="cube-excerpt-header">
         <h1><a href="/2019/04/09/article/">地图出图/打印</a></h1>
@@ -358,56 +422,6 @@
     </footer>
 </div>
 
-<div class="cube-excerpt" id="cube-excerpt-关于微信登录">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2019/03/17/article7/">关于微信登录</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2019-03-17
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>做微信小程序也有小一个月了，整体来说，做的比较顺利，没有遇到特别难搞的坑，这里还是得感谢腾讯为开发者提供资料齐全的开发文档。想速度上手微信小程序的小伙伴们，戳这里，<a href="https://developers.weixin.qq.com/miniprogram/dev/api/" target="_blank" rel="noopener">微信小程序开发者文档</a></p>
-        
-    </article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2019/03/17/article7/">Read More</a>
-    </footer>
-</div>
-
-<div class="cube-excerpt" id="cube-excerpt-制作一个添加工作经验的功能">
-    <header class="cube-excerpt-header">
-        <h1><a href="/2019/03/17/article6/">制作一个添加工作经验的功能</a></h1>
-        <div class="cube-excerpt-header-msg">
-            <div class="cube-excerpt-date">
-                <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
-                2019-03-17
-            </div>
-            <div class="cube-excerpt-tags">
-                <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
-                
-            </div>
-        </div>
-    </header>
-    <article class="cube-excerpt-entry cube-markdown">
-        
-        
-           <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>前几天给一个app做项目经验添加功能时，自己犯了几个错误，于是决定总结一下，算是写成一个demo，给大家参考一下吧。<br>
-        
-    </p></article>
-    <footer class="cube-excerpt-footer">
-        <a class="cube-excerpt-more" href="/2019/03/17/article6/">Read More</a>
-    </footer>
-</div>
-
 
 
 <ul class="cube-pagination cube-pagination-6">
@@ -450,7 +464,7 @@
     
     
     <div class="count">
-        <a class="count articles"><span>15</span>Article</a>
+        <a class="count articles"><span>17</span>Article</a>
         <a class="count tags"><span>3</span>Tags</a>
         <a class="count categories"><span>0</span>Categories</a>
     </div>
@@ -473,7 +487,7 @@
                     <span>1</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/04/09/article/" title="地图出图/打印">地图出图/打印</a>
+                    <a href="/2019/04/14/article17/" title="vue内部运行机制源码分析——模版编译">vue内部运行机制源码分析——模版编译</a>
                 </p>
             </div>
             
@@ -487,7 +501,7 @@
                     <span>2</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/04/02/article15/" title="视频播放进度记录">视频播放进度记录</a>
+                    <a href="/2019/04/13/article16/" title="vue内部运行机制源码分析——初始化和挂载">vue内部运行机制源码分析——初始化和挂载</a>
                 </p>
             </div>
         </li>
@@ -500,7 +514,7 @@
                     <span>3</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/04/02/article14/" title="微信小程序的上拉加载功能">微信小程序的上拉加载功能</a>
+                    <a href="/2019/04/09/article/" title="地图出图/打印">地图出图/打印</a>
                 </p>
             </div>
         </li>
@@ -513,7 +527,7 @@
                     <span>4</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article13/" title="搭建一个weex项目">搭建一个weex项目</a>
+                    <a href="/2019/04/02/article15/" title="视频播放进度记录">视频播放进度记录</a>
                 </p>
             </div>
         </li>
@@ -526,7 +540,7 @@
                     <span>5</span>
                 </p>
                 <p class="title">
-                    <a href="/2019/03/18/article12/" title="arcgis api + webpack前端工程化开发">arcgis api + webpack前端工程化开发</a>
+                    <a href="/2019/04/02/article14/" title="微信小程序的上拉加载功能">微信小程序的上拉加载功能</a>
                 </p>
             </div>
         </li>
