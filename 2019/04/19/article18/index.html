@@ -10,7 +10,7 @@
     
     
     
-    <title>Archives | 吉水于人随笔</title>
+    <title>使用yaf-cg新建一个项目 | 吉水于人随笔</title>
     <!-- inject:style -->
     <link href="/css/style.css" rel="stylesheet" type="text/css">
     <!-- endinject -->
@@ -145,159 +145,79 @@
     
     <div class="cube-content">
         <div class="cube-left">
-            <style>
-    @media(max-width: 768px) {
-        body {
-            background-color: #fff!important;
-        }
-    }
-</style>
-<div class="cube-archives">
+            <div class="cube-article">
+    <h1 class="title">使用yaf-cg新建一个项目</h1>
     
-        
-        <div class="cube-archive" style="margin-top: 0;">
-            
-                
-                   
-                            <h1 class="title">2019</h1>
-                            <ul class="posts">
-                   
-                            <li class="post">
-                                <a href="/2019/04/19/article18/">使用yaf-cg新建一个项目</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/04/14/article17/">vue内部运行机制源码分析——模版编译</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/04/13/article16/">vue内部运行机制源码分析——初始化和挂载</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/04/09/article/">地图出图/打印</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/04/02/article15/">视频播放进度记录</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/04/02/article14/">微信小程序的上拉加载功能</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/03/18/article13/">搭建一个weex项目</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/03/18/article12/">arcgis api + webpack前端工程化开发</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/03/18/article10/">js异步编程总结</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/03/18/article9/">http请求</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/03/18/article8/">地图导出</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/03/17/article7/">关于微信登录</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/03/17/article6/">制作一个添加工作经验的功能</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/03/16/article5/">ES6常用总结</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/03/15/article4/">正则表达式化整为零</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/03/15/article3/">JavaScript内存优化</a>
-                            </li>
-                
-            
-                
-                   
-                            <li class="post">
-                                <a href="/2019/03/13/article2/">多坐标系下地图面积测量</a>
-                            </li>
-                
-            
-                
-                   
-                                </ul>
-                            </div>
-                        <div class="cube-archive">
-                        
-                            <h1 class="title">2018</h1>
-                            <ul class="posts">
-                   
-                            <li class="post">
-                                <a href="/2018/11/22/article11/">我理解的原型链</a>
-                            </li>
-                
-            
-                    </ul>
-                        </div>
-        
+    <div class="cube-article-header">
+        <div class="cube-article-date">
+            <i class="cube-icon cube-icon-date" aria-hidden="true"></i>
+            <!-- moment.js对象 -->
+            2019-04-19
+        </div>
+        <div class="cube-article-tags">
+    <i class="cube-icon cube-icon-tag" aria-hidden="true"></i>
     
 </div>
+    </div>
+    
+    <div class="cube-article-content cube-markdown">
+        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我这边用yaf框架进行开发，对于第一次使用该框架新建项目的童鞋会有些迷茫，所以这次总结一下，也因为自己很久没有php语言了，其实也有一些忘了，这次趁有一个简单的系统的需求，我想还是用php来写，所以重新温故一下。</p>
+<a id="more"></a>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><h4 id="1-使用yaf-cg新建一个项目"><a href="#1-使用yaf-cg新建一个项目" class="headerlink" title="1.    使用yaf-cg新建一个项目"></a>1.    使用yaf-cg新建一个项目</h4><p>在搭建好的网页开发环境下，利用yaf-cg这个包新建项目，命令为php yaf_cg加你想要建的项目名称（图1），当显示为DONE时，则新建成功。在yaf-cg的文件下出现该项目，如图2，将该项目拷出来，放在windows下是wamp环境下www的路径下，mac是lamp的htdocs路径下，就可以进行开发了。</p>
+<ul>
+<li><p>图1<br><img src="../article18/1.png" alt></p>
+</li>
+<li><p>图2<br>​​​​<img src="../article18/2.png" alt></p>
+</li>
+</ul>
+<h4 id="2-配置数据库"><a href="#2-配置数据库" class="headerlink" title="2.    配置数据库"></a>2.    配置数据库</h4><p>数据库的配置有两个文件，这两个文件内的数据库都需要配置好数据库的用户名和密码（图3），框架内已经写好了连接数据库的逻辑，他会直接从这个文件中读取，实现数据库的连接。<br>​​​​* 图3<br><img src="../article18/3.png" alt></p>
+<p>yaf在实例化应用的传递该配置文件路径和运行环境。<br>​​​​* 图4<br><img src="../article18/4.png" alt></p>
+<h4 id="3-建数据库"><a href="#3-建数据库" class="headerlink" title="3.    建数据库"></a>3.    建数据库</h4><p>先新建一个本项目使用的数据库，记得要修改application.cli.ini和application. ini里的数据库名称（图5，图6），为保证线上不手动建表，我们采用命令建表。（注：这部分演示我用自己在做的一个项目进行展示）（图7）。<br>​​​​</p>
+<ul>
+<li><p>图5<br><img src="../article18/5.png" alt></p>
+</li>
+<li><p>图6<br>​​​​<img src="../article18/6.png" alt></p>
+</li>
+<li><p>图7<br>​​​​<img src="../article18/7.png" alt></p>
+</li>
+</ul>
+<p>在migrations下就出现刚刚新建的文件（图8），在这个文件内写操作表的sql语句（图9）。完成后跑一下migrate命令，命令会根据migrations文件从下到上的顺序依次执行文件内的sql语句，完成表新建/更新/删除等操作（图10）。<br>​​​​</p>
+<ul>
+<li>图8<br><img src="../article18/8.png" alt></li>
+<li>图9<br>​​​​<img src="../article18/9.png" alt></li>
+<li>图10<br>​​​​<img src="../article18/10.png" alt></li>
+<li>图11<br>​​​​<img src="../article18/11.png" alt></li>
+</ul>
+<ol start="4">
+<li>MVC架构<br>MVC中整个项目前后端实现过程如图12，yaf提供$this-&gt;getView()-&gt;assign(“models”,$models)将后台变量传给view中对应名称的页面。<br>​​​​</li>
+</ol>
+<ul>
+<li>图12<br><img src="../article18/12.png" alt></li>
+</ul>
+
+    </div>
+</div>
+
+<div class="cube-article-nav">
+    <ul>
+        
+        
+        <li class="next">
+            <a href="/2019/04/14/article17/">
+                vue内部运行机制源码分析——模版编译
+                <i class="cube-icon cube-next" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+<!-- TODO 根据theme.comment的内容进行入口选择 -->
+
+
+
         </div>
         <div class="cube-right">
             
